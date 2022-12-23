@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ctfd-redis-deployment
+  labels:
+    ctfd.redis.deployment: ctfd-redis-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ctfd.redis.pod: ctfd-redis-pod
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        #        io.kompose.network/convert-internal: 'true'
+        ctfd.redis.pod: ctfd-redis-pod
+    spec:
+      containers:
+      - image: redis:4
+        name: redis
+        resources: {}
+        volumeMounts:
+        - mountPath: /data
+          name: redis-pvc
+      restartPolicy: Always
+      volumes:
+        - name: redis-pvc
+          persistentVolumeClaim:
+            claimName: redis-pvc
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ctfd-redis-service
+  labels:
+    ctfd.redis.service: ctfd-redis-service
+spec:
+  ports:
+  - name: 'redis'
+    port: 6379
+    targetPort: 6379
+  selector:
+    ctfd.redis.pod: ctfd-redis-pod
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-pvc
+  labels:
+    ctfd.redis.deployment: ctfd-redis-deployment
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi

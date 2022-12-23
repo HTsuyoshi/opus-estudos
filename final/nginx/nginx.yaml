@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ctfd-nginx-deployment
+  labels:
+    ctfd.nginx.service: ctfd-nginx-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ctfd.nginx.service: ctfd-nginx-service
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        ctfd.nginx.service: ctfd-nginx-service
+    spec:
+      containers:
+      - image: doombringerazurai/ctfd-nginx:1.0
+        name: ctfd-nginx
+        ports:
+        - containerPort: 80
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ctfd-nginx-service
+  labels:
+    ctfd.nginx.service: ctfd-nginx-service
+spec:
+  selector:
+    ctfd.nginx.service: ctfd-nginx-service
+  type: LoadBalancer
+  ports:
+  - name: 'http'
+    port: 80
+    targetPort: 80
+    nodePort: 30000
+status:
+  loadBalancer: {}

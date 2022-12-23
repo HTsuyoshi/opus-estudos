@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ctfd-2022-chall-uccdi-deployment
+  labels:
+    ctfd.chall.deployment: ctfd-2022-chall-uccdi-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ctfd.chall.pod: ctfd-2022-uccdi-pod
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        ctfd.chall.pod: ctfd-2022-uccdi-pod
+    spec:
+      containers:
+      - image: doombringerazurai/chall-uccdi:1.0
+        name: chall-uccdi
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "1Gi"
+          requests:
+            memory: "1Ki"
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ctfd-2022-chall-uccdi-service
+  labels:
+    ctfd.chall.service: ctfd-2022-chall-uccdi-service
+spec:
+  selector:
+    ctfd.chall.pod: ctfd-2022-uccdi-pod
+  type: LoadBalancer
+  ports:
+  - name: 'http'
+    port: 80
+    targetPort: 80
+    nodePort: 30001
+status:
+  loadBalancer: {}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: ctfd-2022-chall-uccdi-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: ctfd-2022-chall-uccdi-deployment
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 1
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageValue: 500Mi
+          #status:
+          #  observedGeneration: 1
+          #  lastScaleTime: <some-time>
+          #  currentReplicas: 1
+          #  desiredReplicas: 1
+          #  currentMetrics:
+          #  - type: Resource
+          #    resource:
+          #      name: cpu
+          #      current:
+          #        averageUtilization: 0
+          #        averageValue: 0
