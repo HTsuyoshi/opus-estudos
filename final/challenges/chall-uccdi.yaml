@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ctfd-2022-chall-uccdi-deployment
+  namespace: challs
   labels:
     ctfd.chall.deployment: ctfd-2022-chall-uccdi-deployment
 spec:
@@ -22,11 +23,25 @@ spec:
         ports:
         - containerPort: 80
         resources:
-          limits:
-            memory: "1Gi"
           requests:
-            memory: "1Ki"
+            cpu: "30m"
+          limits:
+            cpu: "100m"
       restartPolicy: Always
+      tolerations:
+        - key: "type"
+          operator: "Equal"
+          value: "site"
+          effect: "NoSchedule"
+#      affinity:
+#        nodeaffinity:
+#          requiredduringschedulingignoredduringexecution:
+#            nodeselectorterms:
+#            - matchexpressions:
+#              - key: type
+#                operator: in
+#                values:
+#                -  chall-node
 ---
 apiVersion: v1
 kind: Service
@@ -43,42 +58,38 @@ spec:
     port: 80
     targetPort: 80
     nodePort: 30001
-status:
-  loadBalancer: {}
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: ctfd-2022-chall-uccdi-hpa
+  labels:
+    ctfd.chall.pod: ctfd-2022-uccdi-pod
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: ctfd-2022-chall-uccdi-deployment
   minReplicas: 1
-  maxReplicas: 10
+  maxReplicas: 2
   metrics:
   - type: Resource
     resource:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 1
+        averageUtilization: 80
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 10
+status:
+  observedGeneration: 1
+  currentReplicas: 1
+  desiredReplicas: 1
+  currentMetrics:
   - type: Resource
     resource:
-      name: memory
-      target:
-        type: Utilization
-        averageValue: 500Mi
-          #status:
-          #  observedGeneration: 1
-          #  lastScaleTime: <some-time>
-          #  currentReplicas: 1
-          #  desiredReplicas: 1
-          #  currentMetrics:
-          #  - type: Resource
-          #    resource:
-          #      name: cpu
-          #      current:
-          #        averageUtilization: 0
-          #        averageValue: 0
+      name: cpu
+      current:
+        averageUtilization: 0
+        averageValue: 0

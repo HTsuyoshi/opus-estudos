@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ctfd-2022-deployment
+  namespace: website
   labels:
     ctfd.2022.deployment: ctfd-2022-deployment
 spec:
@@ -20,37 +21,24 @@ spec:
       containers:
       - image: doombringerazurai/ctfd:1.0
         name: ctfd-2022
-        env:
-        - name: ACCESS_LOG
-          value: '-'
-        - name: DB_FILE
-          value: '/etc/ctfd-db-2022/database'
-        - name: DB_USER_FILE
-          value: '/etc/ctfd-db-2022/username'
-        - name: DB_PASS_FILE
-          value: '/etc/ctfd-db-2022/password'
-        - name: ERROR_LOG
-          value: '-'
-        - name: REDIS_URL
-          value: 'redis://ctfd-redis-service:6379'
-        - name: REVERSE_PROXY
-          value: 'true'
-        - name: WORKERS
-          value: '1'
-        - name: UPLOAD_FOLDER
-          value: '/var/uploads'
-        - name: LOG_FOLDER
-          value: '/var/log/CTFd'
         ports:
         - containerPort: 8000
+        envFrom:
+        - configMapRef:
+            name: ctfd-env-configmap
         volumeMounts:
         - name: ctfd-2022-log-pvc
           mountPath: '/var/log/CTFd'
         - name: ctfd-2022-uploads-pvc
           mountPath: '/var/uploads'
         - name: ctfd-db-2022-secret
-          mountPath: '/etc/ctfd-db-2022'
+          mountPath: '/etc/ctfd-db'
       restartPolicy: Always
+      tolerations:
+        - key: "type"
+          operator: "Equal"
+          value: "challs"
+          effect: "NoSchedule"
       volumes:
       - name: ctfd-2022-log-pvc
         persistentVolumeClaim:
@@ -66,6 +54,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ctfd-2022-service
+  namespace: website
   labels:
     ctfd.2022.service: ctfd-2022-service
 spec:
@@ -81,6 +70,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: ctfd-2022-log-pvc
+  namespace: website
   labels:
     io.kompose.pvc: ctfd-2022-log-pvc
 spec:
@@ -94,6 +84,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: ctfd-2022-opt-pvc
+  namespace: website
   labels:
     io.kompose.pvc: ctfd-2022-opt-pvc
 spec:
@@ -107,6 +98,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: ctfd-2022-uploads-pvc
+  namespace: website
   labels:
     io.kompose.pvc: ctfd-2022-uploads-pvc
 spec:
@@ -115,3 +107,15 @@ spec:
   resources:
     requests:
       storage: 100Mi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ctfd-db-2022
+  namespace: website
+type: Opaque
+data:
+  database: 'Y3RmZGRiCg=='
+  username: 'Y3RmZHVzZXIK'
+  password: 'Y3RmZHBhc3MK'
+  root-pass: 'Y3RmZHJvb3RwYXNzCg=='

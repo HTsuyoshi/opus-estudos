@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ctfd-env-configmap
+  namespace: website
+data:
+  DB_FILE: '/etc/ctfd-db/database'
+  DB_USER_FILE: '/etc/ctfd-db/username'
+  DB_PASS_FILE: '/etc/ctfd-db/password'
+  ACCESS_LOG: '-'
+  ERROR_LOG: '-'
+  UPLOAD_FOLDER: '/var/uploads'
+  LOG_FOLDER: '/var/log/CTFd'
+  REDIS_URL: 'redis://ctfd-redis-service:6379'
+  REVERSE_PROXY: 'true'
+  WORKERS: '1'
+  root-pass: 'Y3RmZHJvb3RwYXNzCg=='

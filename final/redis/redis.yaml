@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ctfd-redis-deployment
+  namespace: redis
   labels:
     ctfd.redis.deployment: ctfd-redis-deployment
 spec:
@@ -20,11 +21,20 @@ spec:
       containers:
       - image: redis:4
         name: redis
-        resources: {}
         volumeMounts:
         - mountPath: /data
           name: redis-pvc
+        resources:
+          requests:
+            memory: "100Mi"
+          limits:
+            memory: "1000Mi"
       restartPolicy: Always
+      tolerations:
+        - key: "type"
+          operator: "Equal"
+          value: "challs"
+          effect: "NoSchedule"
       volumes:
         - name: redis-pvc
           persistentVolumeClaim:
@@ -35,6 +45,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ctfd-redis-service
+  namespace: redis
   labels:
     ctfd.redis.service: ctfd-redis-service
 spec:
@@ -49,6 +60,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: redis-pvc
+  namespace: redis
   labels:
     ctfd.redis.deployment: ctfd-redis-deployment
 spec:
@@ -57,3 +69,33 @@ spec:
   resources:
     requests:
       storage: 100Mi
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: ctfd-redis-hpa
+  namespace: redis
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: ctfd-redis-deployment
+  minReplicas: 1
+  maxReplicas: 4
+  metrics:
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleDown:
+      policies:
+      - type: Pods
+        value: 3
+        periodSeconds: 60
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+      stabilizationWindowSeconds: 300
