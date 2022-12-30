@@ -62,9 +62,18 @@ spec:
   ports:
   - name: 'http'
     port: 8000
-    targetPort: 8001
+    targetPort: 8000
   selector:
     ctfd.2021.pod: ctfd-2021-pod
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ctfd-2021
+  namespace: website
+spec:
+  type: ExternalName
+  externalName: ctfd-2021-deployment.default.svc.cluster.local
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

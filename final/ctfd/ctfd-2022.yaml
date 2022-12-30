@@ -67,6 +67,15 @@ spec:
     ctfd.2022.pod: ctfd-2022-pod
 ---
 apiVersion: v1
+kind: Service
+metadata:
+  name: ctfd-2022
+  namespace: website
+spec:
+  type: ExternalName
+  externalName: ctfd-2022-deployment.default.svc.cluster.local
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: ctfd-2022-log-pvc

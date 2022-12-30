@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ctfd-nginx-deployment
-  namespace: nginx-controller
+  namespace: website
   labels:
     ctfd.nginx.service: ctfd-nginx-service
 spec:
@@ -65,7 +65,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: ctfd-nginx-hpa
-  namespace: nginx-controller
+  namespace: website
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
