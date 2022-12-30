@@ -17,7 +17,7 @@ Tópicos de Estudo:
   - [x] Configmaps
   - [x] Secrets
   - [x] Services
-  - [ ] Ingress
+  - [x] Ingress
   - [x] Persistência de dados (Storageclass - SC, Persistent Volume Claim - PVC, Persistent Volume - PV)
   - [ ] Job e Cronjobs - conceito
   - [ ] Statefulsets - conceito
