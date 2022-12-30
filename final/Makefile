@@ -29,9 +29,6 @@ start:
 	@echo 'Challenges...'
 	@kubectl apply -f ./challenges/ingress.yaml
 	@kubectl apply -f ./challenges/chall-uccdi.yaml
-	#@echo 'Starting nginx-ingress controller...'
-	#@helm install ingress-nginx --namespace=website nginx-stable/nginx-ingress -f ./nginx/values.yaml
-	#@helm install ingress-nginx --namespace=website nginx-stable/nginx-ingress
 
 .PHONY: 'clean'
 clean:
@@ -64,4 +61,3 @@ clean:
 	@kubectl delete -f ./namespace.yaml 2>&- \
 		|| echo 'Error while deleteting namespace'
 	@echo 'Deleting nginx-ingress controller...'
-	#@helm uninstall ingress-nginx --namespace=website
