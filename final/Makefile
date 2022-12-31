@@ -7,13 +7,16 @@ status:
 test:
 	@echo '--- Testing ctfd ---'
 	@echo -n 'ctfssi 2021... '
-	@curl ctfssi-2021.test &>/dev/null && echo 'Passed' || echo 'Failed'
+	@curl ctfssi-2021.test &>/dev/null && \
+		echo 'Passed' || echo 'Failed'
 	@echo -n 'ctfssi 2022... '
-	@curl ctfssi-2022.test &>/dev/null && echo 'Passed' || echo 'Failed'
+	@curl ctfssi-2022.test &>/dev/null && \
+		echo 'Passed' || echo 'Failed'
 	@echo 'challenges...'
 	@echo '--- Testing challs ---'
 	@echo -n 'chall 2021... '
-	@curl uccdi.challs.ctfssi-2022.test &>/dev/null && echo 'Passed' || echo 'Failed'
+	@curl uccdi.challs.ctfssi-2022.test &>/dev/null \
+		&& echo 'Passed' || echo 'Failed'
 	@echo 'chall 2022... '
 	@echo 'Run the following command to test:'
 	@echo 'nc (minikube ip) 47400'
@@ -49,8 +52,10 @@ start:
 	@kubectl apply -f ./challenges/ingress.yaml
 	@kubectl apply -f ./challenges/chall-uccdi.yaml
 	@kubectl apply -f ./challenges/chall-xor-otp.yaml
-	@kubectl patch configmap tcp-services -n ingress-nginx --patch '{"data":{"47400":"challs/ctfd-2021-chall-xor-otp-service:47400"}}'
-	@kubectl patch deployment ingress-nginx-controller --patch-file ./challenges/ingress-controller-patch.yaml -n ingress-nginx
+	@kubectl patch configmap tcp-services -n ingress-nginx \
+		--patch '{"data":{"47400":"challs/ctfd-2021-chall-xor-otp-service:47400"}}'
+	@kubectl patch deployment ingress-nginx-controller \
+		--patch-file ./challenges/ingress-controller-patch.yaml -n ingress-nginx
 
 
 
