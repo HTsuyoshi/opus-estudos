@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: ctfd-2022-deployment
   namespace: website
-  labels:
-    ctfd.2022.deployment: ctfd-2022-deployment
 spec:
   replicas: 1
   selector:
@@ -26,6 +24,9 @@ spec:
         envFrom:
         - configMapRef:
             name: ctfd-env-configmap
+        env:
+        - name: DB_SERVER
+          value: 'ctfd-db-2022-service.database.svc.cluster.local'
         volumeMounts:
         - name: ctfd-2022-log-pvc
           mountPath: '/var/log/CTFd'
@@ -33,6 +34,16 @@ spec:
           mountPath: '/var/uploads'
         - name: ctfd-db-2022-secret
           mountPath: '/etc/ctfd-db'
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 60
+      initContainers:
+      - name: init-myservice
+        image: busybox:1.28
+        command: ['sh', '-c', "until nslookup ctfd-db-2022-service.database.svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
       restartPolicy: Always
       tolerations:
         - key: "type"
@@ -55,8 +66,6 @@ kind: Service
 metadata:
   name: ctfd-2022-service
   namespace: website
-  labels:
-    ctfd.2022.service: ctfd-2022-service
 spec:
   type: ClusterIP
   ports:

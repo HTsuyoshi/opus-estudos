@@ -15,13 +15,6 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: nginx-controller
-  labels:
-    name: nginx-controller
----
-apiVersion: v1
-kind: Namespace
-metadata:
   name: redis
   labels:
     name: redis

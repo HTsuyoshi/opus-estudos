@@ -1,38 +1,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ctfd-2022-chall-uccdi-deployment
+  name: ctfd-2021-chall-xor-otp-deployment
   namespace: challs
   labels:
-    ctfd.chall.deployment: ctfd-2022-chall-uccdi-deployment
+    ctfd.chall.deployment: ctfd-2021-chall-xor-otp-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      ctfd.chall.pod: ctfd-2022-uccdi-pod
+      ctfd.chall.pod: ctfd-2021-xor-otp-pod
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        ctfd.chall.pod: ctfd-2022-uccdi-pod
+        ctfd.chall.pod: ctfd-2021-xor-otp-pod
     spec:
       containers:
-      - image: doombringerazurai/chall-uccdi:1.0
-        name: chall-uccdi
+      - image: doombringerazurai/chall-xor-otp:1.0
+        name: chall-xor-otp
         ports:
-        - containerPort: 80
+        - containerPort: 47400
         resources:
           requests:
             cpu: "30m"
           limits:
             cpu: "100m"
         livenessProbe:
-          httpGet:
-            path: /.git/HEAD
-            port: 80
-          initialDelaySeconds: 60
-          periodSeconds: 60
+              tcpSocket:
+                port: 8080
+              initialDelaySeconds: 60
+              periodSeconds: 60
       restartPolicy: Always
       tolerations:
         - key: "type"
@@ -52,39 +51,30 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ctfd-2022-chall-uccdi-service
+  name: ctfd-2021-chall-xor-otp-service
   namespace: challs
   labels:
-    ctfd.chall.service: ctfd-2022-chall-uccdi-service
+    ctfd.chall.service: ctfd-2021-chall-xor-otp-service
 spec:
   selector:
-    ctfd.chall.pod: ctfd-2022-uccdi-pod
+    ctfd.chall.pod: ctfd-2021-xor-otp-pod
   type: ClusterIP
   ports:
   - name: 'http'
-    port: 80
-    targetPort: 80
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ctfd-2022-chall-uccdi
-  namespace: challs
-spec:
-  type: ExternalName
-  externalName: ctfd-2022-chall-uccdi-deployment.default.svc.cluster.local
+    port: 47400
+    targetPort: 47400
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: ctfd-2022-chall-uccdi-hpa
+  name: ctfd-2021-chall-xor-otp-hpa
   labels:
-    ctfd.chall.pod: ctfd-2022-uccdi-pod
+    ctfd.chall.pod: ctfd-2021-xor-otp-pod
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: ctfd-2022-chall-uccdi-deployment
+    name: ctfd-2021-chall-xor-otp-deployment
   minReplicas: 1
   maxReplicas: 2
   metrics:

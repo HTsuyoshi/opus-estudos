@@ -11,7 +11,7 @@ data:
   ERROR_LOG: '-'
   UPLOAD_FOLDER: '/var/uploads'
   LOG_FOLDER: '/var/log/CTFd'
-  REDIS_URL: 'redis://ctfd-redis-service:6379'
+  REDIS_URL: 'redis://ctfd-redis-service.redis.svc.cluster.local:6379'
   REVERSE_PROXY: 'true'
   WORKERS: '1'
   root-pass: 'Y3RmZHJvb3RwYXNzCg=='
