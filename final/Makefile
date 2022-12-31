@@ -24,13 +24,22 @@ test:
 .PHONY: 'setup'
 setup:
 	@echo '--- Starting minikube ---'
-	# TODO: start 2 nodes and configure taints
+	#--- Start one node only ---
 	@minikube start --vm-driver=virtualbox
+	#--- Start two nodes ---
+	#@minikube start --nodes 2 --vm-driver=virtualbox
 	@echo '--- Enabling minikube addons  ---'
-	@minikube addon enable metrics-server
-	@minikube addon enable ingress
-	@minikube addon enable ingress-dns
-	@echo 'Minikube IP: $(minikube ip)'
+	@minikube addons enable metrics-server
+	@minikube addons enable ingress
+	@minikube addons enable ingress-dns
+	@echo '--- Add taints to the nodes ---'
+	#@kubectl taint nodes multinode-test type=challs:NoSchedule
+	#@kubectl taint nodes multinode-test-m02 type=site:NoSchedule
+
+.PHONY: 'clean'
+clean:
+	@echo '--- Deleting minikube nodes ---'
+	@minikube delete -p multinode-test
 
 .PHONY: 'start'
 start:
@@ -55,12 +64,12 @@ start:
 	@kubectl patch configmap tcp-services -n ingress-nginx \
 		--patch '{"data":{"47400":"challs/ctfd-2021-chall-xor-otp-service:47400"}}'
 	@kubectl patch deployment ingress-nginx-controller \
-		--patch-file ./challenges/ingress-controller-patch.yaml -n ingress-nginx
+		--patch-file ./ingress-controller-patch.yaml -n ingress-nginx
 
 
 
-.PHONY: 'clean'
-clean:
+.PHONY: 'stop'
+stop:
 	@echo 'Deleting k8s resources...'
 	@echo 'Database...'
 	@kubectl delete -f ./database/convert-internal-networkpolicy.yaml 2>&- \
