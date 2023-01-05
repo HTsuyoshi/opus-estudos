@@ -60,6 +60,7 @@ Lembrar de fazer o setup do servidor DNS ([link](https://minikube.sigs.k8s.io/do
 ```
 systemctl restart NetworkManager.service
 ```
+Já que o MySQL não se da muito bem com o NFS, foi criado dois diretórios: `~/.minikube/files/data/db-202{1,2}`
 
 Foi criado um servidor nfs no endereço `192.168.0.20` na rede LAN
 
