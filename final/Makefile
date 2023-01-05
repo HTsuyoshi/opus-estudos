@@ -1,7 +1,7 @@
 .PHONY: 'status'
 status:
 	@echo 'K8s resources status...'
-	@watch "kubectl get all -A | grep -v '^kube-system\|^ingress-nginx'"
+	@watch "kubectl get all -A -o wide | grep -v '^kube-system\|^ingress-nginx'"
 
 .PHONY: 'test'
 test:
@@ -25,24 +25,26 @@ test:
 setup:
 	@echo '--- Starting minikube ---'
 	#--- Start one node only ---
-	@minikube start --vm-driver=virtualbox
+	#@minikube start --vm-driver=virtualbox
 	#--- Start two nodes ---
-	#@minikube start --nodes 3 -p multinode --vm-driver=virtualbox
+	@minikube start --nodes 5 -p multinode --vm-driver=virtualbox
 	@echo '--- Enabling minikube addons  ---'
-	@minikube addons enable metrics-server
-	@minikube addons enable ingress
-	@minikube addons enable ingress-dns
-	#@minikube -p multinode addons enable metrics-server
-	#@minikube -p multinode addons enable ingress
-	#@minikube -p multinode addons enable ingress-dns
+	#@minikube addons enable metrics-server
+	#@minikube addons enable ingress
+	#@minikube addons enable ingress-dns
+	@kubectl taint nodes multinode-m02 type=site:NoSchedule
+	@kubectl taint nodes multinode-m03 type=ctfd:NoSchedule
+	@kubectl taint nodes multinode-m04 type=challs:NoSchedule
+	@kubectl taint nodes multinode-m05 type=database:NoSchedule
+	@minikube -p multinode addons enable metrics-server
+	@minikube -p multinode addons enable ingress
+	@minikube -p multinode addons enable ingress-dns
 	#echo '--- Add taints to the nodes ---'
-	#@kubectl taint nodes minikube type=challs:NoSchedule
-	#@kubectl taint nodes minikube-m02 type=site:NoSchedule
 
 .PHONY: 'clean'
 clean:
 	@echo '--- Deleting minikube nodes ---'
-	@minikube delete
+	@minikube -p multinode delete
 
 .PHONY: 'start'
 start:
@@ -72,6 +74,8 @@ start:
 		--patch '{"data":{"47400":"challs/ctfd-2021-chall-xor-otp-service:47400"}}'
 	@kubectl patch deployment ingress-nginx-controller \
 		--patch-file ./ingress-controller-patch.yaml -n ingress-nginx
+	@kubectl patch pod kube-ingress-dns-minikube \
+		--patch-file ./ingress-dns-patch.yaml -n kube-system
 
 .PHONY: 'stop'
 stop:

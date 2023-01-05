@@ -37,7 +37,7 @@ spec:
       tolerations:
         - key: "type"
           operator: "Equal"
-          value: "site"
+          value: "challs"
           effect: "NoSchedule"
 #      affinity:
 #        nodeaffinity:

@@ -45,8 +45,7 @@ spec:
       tolerations:
         - key: 'type'
           operator: 'Equal'
-          value: 'challs'
-          effect: 'NoSchedule'
+          value: 'database'
       volumes:
       - name: ctfd-db-2021-pvc
         persistentVolumeClaim:

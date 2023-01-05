@@ -41,7 +41,7 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - minikube
+          - multinode-m05
 # If reliability is a consideration for your data, do not configure InnoDB
 # to use data files or log files on NFS volumes. Potential problems vary
 # according to OS and version of NFS, and include such issues as lack of
@@ -94,7 +94,7 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - minikube
+          - multinode-m05
 # If reliability is a consideration for your data, do not configure InnoDB
 # to use data files or log files on NFS volumes. Potential problems vary
 # according to OS and version of NFS, and include such issues as lack of

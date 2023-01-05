@@ -48,7 +48,7 @@ spec:
       tolerations:
         - key: 'type'
           operator: 'Equal'
-          value: 'challs'
+          value: 'ctfd'
           effect: 'NoSchedule'
       volumes:
       - name: ctfd-2021-log-pvc
