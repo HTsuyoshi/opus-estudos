@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ctfd-2021-deployment
-  namespace: website
+  namespace: ctfd
 spec:
   replicas: 1
   selector:
@@ -43,13 +43,13 @@ spec:
       initContainers:
       - name: init-myservice
         image: busybox:1.28
-        command: ['sh', '-c', "until nslookup ctfd-db-2021-service.database.svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
+        command: ['sh', '-c', 'until nslookup ctfd-db-2021-service.database.svc.cluster.local; do echo waiting for db; sleep 2; done']
       restartPolicy: Always
       tolerations:
-        - key: "type"
-          operator: "Equal"
-          value: "challs"
-          effect: "NoSchedule"
+        - key: 'type'
+          operator: 'Equal'
+          value: 'challs'
+          effect: 'NoSchedule'
       volumes:
       - name: ctfd-2021-log-pvc
         persistentVolumeClaim:
@@ -65,7 +65,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ctfd-2021-service
-  namespace: website
+  namespace: ctfd
 spec:
   type: ClusterIP
   ports:
@@ -79,58 +79,16 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ctfd-2021
-  namespace: website
+  namespace: ctfd
 spec:
   type: ExternalName
   externalName: ctfd-2021-deployment.default.svc.cluster.local
 ---
 apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: ctfd-2021-log-pvc
-  namespace: website
-  labels:
-    io.kompose.pvc: ctfd-2021-log-pvc
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: ctfd-2021-opt-pvc
-  namespace: website
-  labels:
-    io.kompose.pvc: ctfd-2021-opt-pvc
-spec:
-  accessModes:
-  - ReadOnlyMany
-  resources:
-    requests:
-      storage: 100Mi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: ctfd-2021-uploads-pvc
-  namespace: website
-  labels:
-    io.kompose.pvc: ctfd-2021-uploads-pvc
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
----
-apiVersion: v1
 kind: Secret
 metadata:
   name: ctfd-db-2021
-  namespace: website
+  namespace: ctfd
 type: Opaque
 data:
   database: 'Y3RmZGRiCg=='

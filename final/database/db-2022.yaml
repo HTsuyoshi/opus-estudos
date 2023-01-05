@@ -71,20 +71,6 @@ spec:
     ctfd.db.2022.pod: ctfd-db-2022-pod
 ---
 apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: ctfd-db-2022-pvc
-  namespace: database
-  labels:
-    ctfd.2022.claim: ctfd-db-2022-pvc
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
----
-apiVersion: v1
 kind: Secret
 metadata:
   name: ctfd-db-2022

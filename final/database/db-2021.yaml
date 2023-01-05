@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       labels:
-        io.kompose.network/convert-internal: "true"
+        io.kompose.network/convert-internal: 'true'
         ctfd.db.2021.pod: ctfd-db-2021-pod
     spec:
       containers:
@@ -43,10 +43,10 @@ spec:
           mountPath: /etc/ctfd-db
       restartPolicy: Always
       tolerations:
-        - key: "type"
-          operator: "Equal"
-          value: "challs"
-          effect: "NoSchedule"
+        - key: 'type'
+          operator: 'Equal'
+          value: 'challs'
+          effect: 'NoSchedule'
       volumes:
       - name: ctfd-db-2021-pvc
         persistentVolumeClaim:
@@ -69,20 +69,6 @@ spec:
     targetPort: 3306
   selector:
     ctfd.db.2021.pod: ctfd-db-2021-pod
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: ctfd-db-2021-pvc
-  namespace: database
-  labels:
-    ctfd.2021.claim: ctfd-db-2021-pvc
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
 ---
 apiVersion: v1
 kind: Secret

@@ -1,27 +1,29 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: website
-  labels:
-    name: website
+  name: site
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ctfd
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: database
-  labels:
-    name: database
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: redis
-  labels:
-    name: redis
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: challs
-  labels:
-    name: challs
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring

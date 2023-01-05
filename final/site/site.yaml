@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ctfd-site-deployment
+  namespace: site
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ctfd.site.pod: ctfd-site-pod
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        ctfd.site.pod: ctfd-site-pod
+    spec:
+      containers:
+      - image: doombringerazurai/ctfd-site:1.0
+        name: ctfd-site
+        ports:
+        - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 60
+          periodSeconds: 60
+      restartPolicy: Always
+      tolerations:
+        - key: "type"
+          operator: "Equal"
+          value: "site"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ctfd-site-service
+  namespace: site
+spec:
+  type: ClusterIP
+  ports:
+  - name: 'http'
+    port: 80
+    targetPort: 80
+  selector:
+    ctfd.site.pod: ctfd-site-pod
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ctfd-site
+  namespace: ctfd
+spec:
+  type: ExternalName
+  externalName: ctfd-site-deployment.default.svc.cluster.local
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: ctfd-site-hpa
+  labels:
+    ctfd.site.pod: ctfd-site-pod
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: ctfd-site-deployment
+  minReplicas: 1
+  maxReplicas: 2
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 10
+status:
+  observedGeneration: 1
+  currentReplicas: 1
+  desiredReplicas: 1
+  currentMetrics:
+  - type: Resource
+    resource:
+      name: cpu
+      current:
+        averageUtilization: 0
+        averageValue: 0

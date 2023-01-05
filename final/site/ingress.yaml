@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-site
+  namespace: site
+spec:
+  rules:
+  - host: test
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: ctfd-site-service
+              port:
+                number: 80

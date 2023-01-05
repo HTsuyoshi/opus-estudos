@@ -55,4 +55,16 @@ LOGO=endeavouros
 
 Foi usado o `minikube` e o `virtualbox` para testar a aplicação localmente.
 
-Lembrar de arrumar o servidor DNS ([link](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/))
+Lembrar de fazer o setup do servidor DNS ([link](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/)) e aplicar com;
+
+```
+systemctl restart NetworkManager.service
+```
+
+Foi criado um servidor nfs no endereço `192.168.0.20` na rede LAN
+
+OBS: Para deletar o PV e reiniciar o cluster:
+
+```
+make clean && make setup && make start
+```
