@@ -36,7 +36,7 @@ A pasta `./final` contém o projeto final desenvolvido.
 
 ## Setup
 
-O computador utilizado para testar a aplicação tem o EndeavourOS instalado:
+O sistema operacional utilizado é o `EndeavourOS`:
 
 ```
 NAME=EndeavourOS
@@ -53,18 +53,31 @@ PRIVACY_POLICY_URL="https://terms.archlinux.org/docs/privacy-policy/"
 LOGO=endeavouros
 ```
 
-Foi usado o `minikube` e o `virtualbox` para testar a aplicação localmente.
+Foi usado o `minikube` em conjunto com o `virtualbox` para testar a aplicação localmente.
 
-Lembrar de fazer o setup do servidor DNS ([link](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/)) e aplicar com;
+A versão do `minikube`:
 
+```yaml
+minikube version: v1.28.0
+commit: 986b1ebd987211ed16f8cc10aed7d2c42fc8392f-dirty
 ```
-systemctl restart NetworkManager.service
+
+Versão do `kubectl`:
+
+```yaml
+WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
+Client Version: version.Info{Major:"1", Minor:"25", GitVersion:"v1.25.5", GitCommit:"804d6167111f6858541cef440ccc53887fbbc96a", GitTreeState:"archive", BuildDate:"2022-12-08T19:51:18Z", GoVersion:"go1.19.4", Compiler:"gc", Platform:"linux/amd64"}
+Kustomize Version: v4.5.7
+Server Version: version.Info{Major:"1", Minor:"25", GitVersion:"v1.25.3", GitCommit:"434bfd82814af038ad94d62ebe59b133fcb50506", GitTreeState:"clean", BuildDate:"2022-10-12T10:49:09Z", GoVersion:"go1.19.2", Compiler:"gc", Platform:"linux/amd64"}
 ```
-Já que o MySQL não se da muito bem com o NFS, foi criado dois diretórios: `~/.minikube/files/data/db-202{1,2}`
 
-Foi criado um servidor nfs no endereço `192.168.0.20` na rede LAN
+Sempre que inicializar os pods é preciso fazer o setup do servidor _DNS_ ([link](https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/)
 
-OBS: Para deletar o PV e reiniciar o cluster:
+Já que o _MariaDB_ não se da muito bem com o _NFS_, foi criado dois diretórios dentro do nó `multinode-m05` /data/db-202{1,2}. (É preciso adicionar essas pastas sempre que o cluster for inicializado)
+
+Foi criado um servidor _NFS_ no endereço `192.168.0.20` na rede LAN
+
+Reiniciar o cluster:
 
 ```
 make clean && make setup && make start

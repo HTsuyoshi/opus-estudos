@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ctfd-site-deployment
+  namespace: site
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ctfd.site.pod: ctfd-site-pod
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        ctfd.site.pod: ctfd-site-pod
+    spec:
+      containers:
+      - image: doombringerazurai/ctfd-site:1.0
+        name: ctfd-site
+        ports:
+        - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 60
+          periodSeconds: 60
+      restartPolicy: Always
+      tolerations:
+        - key: "type"
+          operator: "Equal"
+          value: "site"
