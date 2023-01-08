@@ -1,0 +1,38 @@
+\documentclass{beamer}
+%\usetheme{Boadilla}
+\usetheme{DarkConsole}
+\usepackage{courier}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usetikzlibrary{calc}
+\graphicspath{ {./images} }
+
+\title {Kubernetes}
+\author {Henrique Tsuyoshi Yara}
+\institute {OPUS-software}
+
+\begin{document}
+
+\begin{frame}{\titlepage}
+	\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.5\textwidth]{./assets/Kubernetes_logo.png}
+		\caption{Kubernetes logo}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Índice}
+\begin{multicols}{2}
+  \tableofcontents
+\end{multicols}
+\end{frame}
+
+%\setbeamercovered{transparent}
+
+\include{./chapters/Introducao.tex}
+\include{./chapters/Arquitetura.tex}
+
+\end{document}
