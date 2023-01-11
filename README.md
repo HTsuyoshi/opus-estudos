@@ -13,14 +13,14 @@ Tópicos de Estudo:
 - [x] Recursos (conceito e prática: comandos e aplicação de yaml)
   - [x] Namespaces
   - [x] Deployments
-  - [ ] Daemonsets - conceito
+  - [x] Daemonsets - conceito
   - [x] Configmaps
   - [x] Secrets
   - [x] Services
   - [x] Ingress
   - [x] Persistência de dados (Storageclass - SC, Persistent Volume Claim - PVC, Persistent Volume - PV)
-  - [ ] Job e Cronjobs - conceito
-  - [ ] Statefulsets - conceito
+  - [x] Job e Cronjobs - conceito
+  - [x] Statefulsets - conceito
   - [x] HPA - conceito
   - [ ] RBAC (roles, service accounts, users) - conceito
   - [ ] CRD - conceito
