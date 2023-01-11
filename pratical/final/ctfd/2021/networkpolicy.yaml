@@ -1,0 +1,43 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ctfd-2021-network-policy
+  namespace: ctfd
+spec:
+  podSelector:
+    matchLabels:
+      ctfd.2021.pod: ctfd-2021-pod
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - {}
+      #    - from:
+      #        - namespaceSelector:
+      #            matchLabels:
+      #              name: "ingress-nginx"
+      #        - namespaceSelector:
+      #            matchLabels:
+      #              name: "database"
+#        - podSelector:
+#            matchLabels:
+#              app.kubernetes.io/name: "ingress-nginx"
+#        - ipBlock:
+#            cidr: 172.17.0.0/16
+#            except:
+#              - 172.17.1.0/24
+#        - podSelector:
+#            matchLabels:
+#              role: frontend
+#      ports:
+#        - protocol: TCP
+#          port: 6379
+  egress:
+    - {}
+#    - to:
+#        - ipBlock:
+#            cidr: 10.0.0.0/24
+#      ports:
+#        - protocol: TCP
+#          port: 5978
+

@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: ctfd-2021-chall-xor-otp-deployment
   namespace: challs
-  labels:
-    ctfd.chall.deployment: ctfd-2021-chall-xor-otp-deployment
 spec:
   replicas: 1
   selector:

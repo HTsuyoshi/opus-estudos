@@ -1,0 +1,86 @@
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" 
+      rel="stylesheet"
+/> 
+
+<style id="theme-color">
+:root {
+  --theme-color: #222831;
+  --principal: #E4E4E4;
+  --extra: #D65A31;
+  }
+.navbar{
+  background-color: var(--theme-color) !important;
+  }
+.jumbotron{
+  background-color: var(--theme-color) !important;
+  }
+:not(i) {
+  font-family: "Roboto Mono", monospace !important;
+}
+  #challenge-solves-names{
+  color: var(--principal);
+  }
+  a{
+  color: var(--extra) !important;
+  transition: 0.3s;
+  }
+  .btn{
+  color: white;
+  }
+  button{
+  background-color: var(--extra) !important;
+  
+  transition: 0.3s;
+  }
+  
+  #challenge-submit{
+  color: white;
+  }
+  
+  a:hover, button:hover{
+  opacity: 50%;
+  text-decoration: none;
+  }
+   
+  body{
+  background-color: var(--theme-color) !important;
+  color: #fff !important;
+  }
+ 
+  td{
+  color: white;
+  }
+  
+  .modal{
+  color:var(--theme-color);
+  }
+  
+  input[type=submit]{
+  	background-color: var(--extra);
+    border: none;
+    transition: 0.3s;
+  }
+  
+  input[type=submit]:hover{
+  	background-color: var(--extra);
+    border-style: solid;
+  	border-width: 2px;
+    border-color: var(--extra);
+    transition: 0.3s;
+  }
+  
+  #challenge{
+  color:var(--theme-color);
+  }
+  
+  canvas{
+
+  border-radius: 5px;
+  }
+  
+  .badge-info, .btn-info{
+  	background-color: #b3c8e8 !important;
+    border: none;
+  }
+  
+</style>

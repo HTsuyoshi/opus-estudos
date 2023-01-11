@@ -1,0 +1,31 @@
+# Apresentação
+
+- Mostrar a aplicação, os domínios e subdomínios funcionando
+	- ctfssi-2021.test
+	- ctfssi-2022.test
+	- uccdi.challs.ctfssi-2021.test
+	- `nc $(minikube ip) 47400`
+- Explicar por cima sobre a arquitetura da aplicação
+	- Master node
+	- Worker nodes
+		- m02 (db)
+		- m03 (site)
+		- m04 (challs)
+	- NFS server
+- Explicar a organização dos name spaces (limites de recurso, acesso aos secrets)
+	- kube-system
+		- ingress-dns
+		- metrics-server
+	- site
+	- database
+		- database secrets
+		- persistent volume
+	- ctfd
+		- database secrets
+		- persistent volume
+		- configmap
+	- redis
+	- challs
+	- ingress-nginx
+		- ingress-controller
+- Network Policies

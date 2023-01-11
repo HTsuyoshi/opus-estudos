@@ -14,4 +14,3 @@ data:
   REVERSE_PROXY: 'true'
   REDIS_URL: 'redis://ctfd-redis-master.redis.svc.cluster.local:6379'
   WORKERS: '1'
-  root-pass: 'Y3RmZHJvb3RwYXNzCg=='

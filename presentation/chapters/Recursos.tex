@@ -1,0 +1,250 @@
+\section{Recursos}
+
+\begin{frame}
+\frametitle{Recursos - Namespaces}
+
+\begin{itemize}
+	\item Os \textit{namespaces} permitem isolar grupos de recursos em um cluster
+		\begin{itemize}
+			\item \uncover<2->{Os \textit{namespaces} são uma forma de dividir o cluster para várias pessoas com limite de recursos.\footnote{\href{https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/}{Kubernetes Documentation}}}
+			\item \uncover<3->{Os administradores do cluster devem dividir os recursos}
+		\end{itemize}
+	\item \uncover<4->{O nome dos recursos precisam ser únicos em cada namespace}
+	\item \uncover<5->{Não são todos os objetos que aceitam o isolamento do \textit{namespace}}
+\end{itemize}
+
+Recursos (conceito e prática: comandos e aplicação de yaml)
+    Namespaces
+    Deployments
+    Daemonsets - conceito
+    Configmaps
+    Secrets
+    Services
+    Ingress
+    Persistência de dados (Storageclass - SC, Persistent Volume Claim - PVC, Persistent Volume - PV)
+    Job e Cronjobs - conceito
+    Statefulsets - conceito
+    HPA - conceito
+    RBAC (roles, service accounts, users) - conceito
+    CRD - conceito
+
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Recursos - Namespaces}
+
+Para ver os recursos que estão e não são gerenciados por namespace
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\begin{block}{\textbf{values.yaml}}
+\begin{lstlisting}[language=bash]
+# In a namespace
+kubectl api-resources --namespaced=true
+
+# Not in a namespace
+kubectl api-resources --namespaced=false
+\end{lstlisting}
+\end{block}
+\end{minipage}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Namespaces}
+\centering
+\begin{multicols}{3}
+	\begin{tikzpicture}
+		\makens{site}{ctfd}
+		\node (L1) at ($(site) + (0,1.1)$) {\tiny site-hpa};
+		\node (L2) at ($(L1) - (0,0.3)$) {\tiny site-deployment};
+		\node (L3) at ($(L2) - (0,0.3)$) {\tiny site-service};
+		\node (L4) at ($(L3) - (0,0.3)$) {\tiny site-ingress};
+		\node (L1) at ($(ctfd) + (0,1.1)$) {\tiny secrets (mariaDB)};
+	\end{tikzpicture}
+	\columnbreak
+	\begin{tikzpicture}
+		\makens{database}{redis}
+		\node (L1) at ($(database) + (0,1.1)$) {\tiny secrets (mariaDB)};
+		\node (L2) at ($(L1) - (0,0.3)$) {\tiny db-202\{1,2\}-statefulset};
+		\node (L3) at ($(L2) - (0,0.3)$) {\tiny db-202\{1,2\}-service};
+		\node (L1) at ($(redis) + (0,1.1)$) {\tiny secrets (mariaDB)};
+		\node (L2) at ($(L1) - (0,0.3)$) {\tiny db-202\{1,2\}-statefulset};
+		\node (L3) at ($(L2) - (0,0.3)$) {\tiny db-202\{1,2\}-service};
+	\end{tikzpicture}
+	\columnbreak
+	\begin{tikzpicture}
+	\makens{challs}{ingress-nginx}
+		\node (L1) at ($(challs) + (0,1.1)$) {\tiny \{uccdi,xor-otp\}-hpa};
+		\node (L2) at ($(L1) - (0,0.3)$) {\tiny \{uccdi,xor-otp\}-deployment};
+		\node (L3) at ($(L2) - (0,0.3)$) {\tiny \{uccdi,xor-otp\}-service};
+		\node (L4) at ($(L3) - (0,0.3)$) {\tiny uccdi-ingress};
+		\node (L1) at ($(ingress-nginx) + (0,1.1)$) {\tiny ingress-nginx-controller};
+		\node (L2) at ($(L1) - (0,0.3)$) {\tiny ingress-dns};
+	\end{tikzpicture}
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\frametitle{Recursos - Daemonsets}
+\begin{itemize}
+	\item O \textit{DaemonSet} garante que todos os nós ou os nós selecionados rodem uma cópia de um \textit{Pod}
+	\item \uncover<2->{Quando nós são adicionados nos clusters, os \textit{Pods} são adicionados nesses nós e vice versa}
+	\item \uncover<3->{Deletar o \textit{DaemonSet} mata os \textit{Pods} que foram criados}
+	\item \uncover<4->{Alguns exemplos de uso:}
+	\begin{itemize}
+		\item \uncover<4->{Rodar um \textit{cluster storage daemon} em todos os nós}
+		\item \uncover<5->{Rodar um \textit{logs collection daemon} em todos os nós}
+		\item \uncover<6->{Rodar um \textit{node monitoring daemon} em todos os nós}
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Recursos - ConfigMaps}
+\begin{itemize}
+	\item O \textit{ConfigMap} é usado para guardar dados não confidenciais em pares de chave-valor
+	\item \uncover<2->{Pode ser usado como:}
+		\begin{itemize}
+			\item \uncover<3->{Variáveis de ambiente}
+			\item \uncover<4->{Argumentos de comando de linha}
+			\item \uncover<5->{Arquivos de configuração em um volume}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Recursos - ConfigMaps}
+\begin{itemize}
+	\item Aplicação no projeto prático:
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\begin{block}{Variáveis de ambiente}
+\begin{lstlisting}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ctfd-env-configmap
+  namespace: ctfd
+data:
+  DB_FILE: '/etc/ctfd-db/database'
+  DB_USER_FILE: '/etc/ctfd-db/username'
+  DB_PASS_FILE: '/etc/ctfd-db/password'
+  ACCESS_LOG: '-'
+  ERROR_LOG: '-'
+  UPLOAD_FOLDER: '/var/uploads'
+  LOG_FOLDER: '/var/log/CTFd'
+  REVERSE_PROXY: 'true'
+\end{lstlisting}
+\end{block}
+\end{minipage}
+\end{center}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Recursos - Secrets}
+
+\begin{itemize}
+	\item O \textit{secret} é um objeto que contém uma pequena quantidade de dados \textbf{sensíveis}
+	\item \uncover<2->{Como senhas, tokens, chaves, etc\dots}
+	\item \uncover<3->{Dessa forma não é preciso incluir dados confidenciais no seu código}
+	\item \uncover<4->{Algumas boas práticas para manter o \textit{secrets} seguro:\footnote{\url{https://kubernetes.io/docs/concepts/security/secrets-good-practices/}}}
+		\begin{itemize}
+			\item \uncover<4->{Encryption at Rest for Secrets}
+			\item \uncover<5->{Enable or configure RBAC rules with least-privilege access to Secrets}
+			\item \uncover<6->{Restrict Secret access to specific containers}
+			\item \uncover<7->{Consider using external Secret store providers}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Recursos - Secrets}
+\begin{itemize}
+	\item Aplicação no projeto prático:
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\begin{block}{Volumes}
+\begin{lstlisting}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ctfd-db-2022
+  namespace: database
+type: Opaque
+data:
+  database: 'Y3RmZGRiCg=='
+  username: 'Y3RmZHVzZXIK'
+  password: 'Y3RmZHBhc3MK'
+  root-pass: 'Y3RmZHJvb3RwYXNzCg=='
+\end{lstlisting}
+\end{block}
+\end{minipage}
+\end{center}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Recursos - Services}
+    Secrets
+\end{frame}
+
+\begin{frame}
+\frametitle{Recursos - Ingress}
+    Secrets
+\end{frame}
+
+\begin{frame}
+\frametitle{Recursos - Persistência de dados}
+    Secrets
+\end{frame}
+
+\begin{frame}
+\frametitle{Recursos - Jobs e CronJobs}
+\begin{itemize}
+	\item \textbf{Jobs}: Cria um ou mais \textit{Pods} para executar uma tarefa
+		\begin{itemize}
+			\item \uncover<2->{Continua reexecutando os \textit{Pods} até que o número especificado de tentativas dele termine (\textit{backoff failure policy})}
+			\item \uncover<3->{Assim que um \textit{Pod} completa com sucesso, o \textit{Job} continua a executar até o número de sucessos seja atingido}
+			\item \uncover<4->{Suspender/Apagar um \textbf{Job} vai apagar os \textit{Pods} criados.}
+			\item \uncover<5->{Quando um \textbf{Job} termina os \textit{Pods} e o \textbf{Job} em si não são apagados}
+			\item \uncover<6->{É possível rodar \textbf{Jobs} em paralelo}
+		\end{itemize}
+	\item \uncover<7->{\textbf{Cronjobs}: Executa uma tarefa periodicamente em um determinado cronograma, escrito no formato Cron.}
+		\begin{itemize}
+			\item \uncover<7->{O fuso horário para o contêiner executando o \textbf{kube-controller-manager} determina o fuso horário que o \textbf{CronJob} utiliza}
+			\item \uncover<8->{O nome não pode ter mais que 52 caracteres}
+			\item \uncover<9->{Podem fazer backup, enviar emails, etc\dots}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Recursos - StatefulSet}
+    Secrets
+\end{frame}
+
+\begin{frame}
+\frametitle{Recursos - HPA}
+	\textit{Horizontal Pod Autoscaling}
+	In Kubernetes, a HorizontalPodAutoscaler automatically updates a workload resource (such as a Deployment or StatefulSet), with the aim of automatically scaling the workload to match demand.
+
+Horizontal scaling means that the response to increased load is to deploy more Pods. This is different from vertical scaling, which for Kubernetes would mean assigning more resources (for example: memory or CPU) to the Pods that are already running for the workload.
+
+If the load decreases, and the number of Pods is above the configured minimum, the HorizontalPodAutoscaler instructs the workload resource (the Deployment, StatefulSet, or other similar resource) to scale back down.
+
+Horizontal pod autoscaling does not apply to objects that can't be scaled (for example: a DaemonSet.)
+
+The HorizontalPodAutoscaler is implemented as a Kubernetes API resource and a controller. The resource determines the behavior of the controller. The horizontal pod autoscaling controller, running within the Kubernetes control plane, periodically adjusts the desired scale of its target (for example, a Deployment) to match observed metrics such as average CPU utilization, average memory utilization, or any other custom metric you specify.
+\end{frame}
+
+\begin{frame}
+\frametitle{Recursos - RBAC}
+    Daemonsets - conceito
+\end{frame}
+
+\begin{frame}
+\frametitle{Recursos - CRD}
+    Daemonsets - conceito
+\end{frame}

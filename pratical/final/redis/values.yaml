@@ -2,7 +2,31 @@ architecture: standalone
 auth:
   enabled: false
 master:
+  tolerations:
+    - key: "type"
+      operator: "Equal"
+      value: "db"
   securityContext:
     enabled: true
-    fsGroup: 0
+    fsGroup: 2000
     runAsUser: 0
+  persistence:
+    enabled: true
+    storageClass: "nfs"
+    accessModes:
+    - ReadWriteOnce
+    size: 8Gi
+    matchLabels:
+      name: ctfd-redis-pv
+
+#nfs:
+#  server: 192.168.0.20
+#  path: /mnt/nfs/redis
+#
+#storageClass:
+#  create: true
+#  defaultClass: false
+#  name: nfs
+#  allowVolumeExpansion: true
+#  reclaimPolicy: Delete
+#  archiveOnDelete: true

@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ctfd-db-2022-network-policy
+  namespace: database
+spec:
+  podSelector:
+    matchLabels:
+      ctfd.db.2022.pod: ctfd-db-2022-pod
+  policyTypes:
+    - Ingress
+      #    - Egress
+      #  ingress:
+      #    - {}
+      #    - from:
+      #        - podSelector:
+      #            matchLabels:
+      #              app.kubernetes.io/name: "ingress-nginx"
+#        - ipBlock:
+#            cidr: 172.17.0.0/16
+#            except:
+#              - 172.17.1.0/24
+#        - namespaceSelector:
+#            matchLabels:
+#              project: challs
+#        - podSelector:
+#            matchLabels:
+#              role: frontend
+#      ports:
+#        - protocol: TCP
+#          port: 6379
+#  egress:
+#  - {}

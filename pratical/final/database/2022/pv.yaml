@@ -1,50 +1,13 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ctfd-db-2021-pv
-  namespace: database
-  labels:
-    name: ctfd-db-2021-pv
-spec:
-  capacity:
-    storage: 10Gi
-  volumeMode: Filesystem
-  accessModes:
-  - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: local
-  claimRef:
-    name: ctfd-db-2021-pvc
-    namespace: database
-  local:
-    path: /data/db-2021
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - multinode-m05
-# If reliability is a consideration for your data, do not configure InnoDB
-# to use data files or log files on NFS volumes. Potential problems vary
-# according to OS and version of NFS, and include such issues as lack of
-# protection from conflicting writes, and limitations on maximum file sizes.
-#  nfs:
-#    path: /mnt/nfs/db/2021
-#    server: 192.168.0.20
-#    readOnly: no
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
   name: ctfd-db-2022-pv
   namespace: database
   labels:
     name: ctfd-db-2022-pv
 spec:
   capacity:
-    storage: 10Gi
+    storage: 2Gi
   volumeMode: Filesystem
   accessModes:
   - ReadWriteOnce
@@ -62,7 +25,7 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - multinode-m05
+          - multinode-m02
 # If reliability is a consideration for your data, do not configure InnoDB
 # to use data files or log files on NFS volumes. Potential problems vary
 # according to OS and version of NFS, and include such issues as lack of

@@ -13,7 +13,6 @@ spec:
   template:
     metadata:
       labels:
-        io.kompose.network/convert-internal: 'true'
         ctfd.2021.pod: ctfd-2021-pod
     spec:
       containers:
@@ -40,15 +39,18 @@ spec:
             port: 8000
           initialDelaySeconds: 60
           periodSeconds: 60
-      initContainers:
-      - name: init-myservice
-        image: busybox:1.28
-        command: ['sh', '-c', 'until nslookup ctfd-db-2021-service.database.svc.cluster.local; do echo waiting for db; sleep 2; done']
+            #initContainers:
+        #      - name: wait-redis
+        #        image: busybox:1.28
+        #        command: ['sh', '-c', 'until nslookup ctfd-redis-master.redis.svc.cluster.local; do echo waiting for db; sleep 2; done']
+        #      - name: wait-database
+        #        image: busybox:1.28
+        #        command: ['sh', '-c', 'until nslookup ctfd-db-2021-service.database.svc.cluster.local; do echo waiting for db; sleep 2; done']
       restartPolicy: Always
       tolerations:
         - key: 'type'
           operator: 'Equal'
-          value: 'ctfd'
+          value: 'site'
           effect: 'NoSchedule'
       volumes:
       - name: ctfd-2021-log-pvc

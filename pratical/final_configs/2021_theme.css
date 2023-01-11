@@ -1,0 +1,59 @@
+<style id="theme-color">
+:root {
+  --theme-bg-color: #161616;
+  --theme-color: #e4e4e4;
+  --theme-high-color: #FF00FF;
+  --theme-low-color: #3A006E;
+  background-color: var(--theme-bg-color);
+  color: var(--theme-color);
+}
+#team-id {
+  overflow-wrap: break-word;
+}
+#text {
+  overflow-wrap: break-word;
+}
+.badge {
+  overflow-wrap: break-word;
+}
+.navbar {
+  background-color: var(--theme-bg-color) !important;
+}
+.jumbotron {
+  background-color: var(--theme-bg-color) !important;
+}
+.modal-body {
+  color: var(--theme-bg-color) !important;
+}
+.modal-title {
+  color: var(--theme-bg-color) !important;
+}
+
+.table {
+  color: var(--theme-color);
+  text-align: left !important;
+}
+.btn {
+  background-color: var(--theme-low-color);
+  border-color: var(--theme-low-color);
+}
+.btn-dark {
+  background-color: var(--theme-low-color) !important;
+}
+.challenge-name {
+  color: var(--theme-bg-color) !important;
+}
+.challenge-value {
+  color: var(--theme-bg-color);
+}
+.challenge-desc {
+  color: var(--theme-bg-color) !important;
+}
+main {
+  background-color: var(--theme-bg-color);
+  color: var(--theme-color);
+}
+a {
+  color: var(--theme-high-color);
+}
+</style>

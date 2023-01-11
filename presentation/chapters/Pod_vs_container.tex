@@ -1,0 +1,75 @@
+\section{Pod vs Container}
+
+\begin{frame}
+\frametitle{Pods vs containers}
+\textbf{"Pods are the smallest deployable units of computing that you can create and manage in Kubernetes."} \cite{K8s}
+\begin{itemize}
+	\item \uncover<2->{1 Pod : 1 Container}
+	\item \uncover<3->{Grupo de 1 ou mais containers}
+		\begin{itemize}
+			\item \uncover<4->{Compartilham armazenamento e rede}
+			\item \uncover<5->{Especificações para rodar o container}
+			\item \uncover<6->{Pode conter initContainers}
+			\item \uncover<7->{Pode conter containers efêmeros}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Containers efêmeros}
+\textbf{Ephemeral containers}:
+\begin{itemize}
+	\item Geralmente é usado para inspecionar (\textit{Debugging}) o estado do Pod:
+	\item \uncover<2->{Não possui portas, portanto \textbf{livenessProbe, readinessProbe} não são permitidos}
+	\item \uncover<3->{Recursos do pod são imutáveis, portanto não é permitido configurar recursos}
+	\item \uncover<4->{Lista completa de permissões: \href{https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/\#ephemeralcontainer-v1-core}{link}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Pods estáticos}
+\begin{itemize}
+	\item Gerenciados diretamente pelo \textit{kubelet} do nó (indepentente do \textit{API server})
+	\item \uncover<2->{O \textit{kubelet} verifica o \textit{Pod} e reinicia caso falhe}
+	\item \uncover<3->{\textit{kubelet} verifica o diretório \textit{/etc/kubernetes/manifests} por padrão e cria pods caso seja necessário}
+	\item \uncover<4->{Não suporta \textit{Containers efêmeros} e não pode referenciar outros objetos da \textit{API (ConfigMap, Secret, etc\dots)}}
+	\item \uncover<5->{Onde usar?}
+		\begin{itemize}
+			\item \uncover<6->{Nos componentes do control plane\footnote{\url{https://anote.dev/static-pods-in-kubernetes/}}}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\textit{LivenessProbe}, \textit{ReadinessProbe} e \textit{StartUpProbe}}
+
+Os 3 são controlados pelo \textit{kubelet}
+
+\uncover<2->{\textbf{LivenessProbe}:}
+\begin{itemize}
+	\item \uncover<2->{Tentar fazer a aplicação ficar mais disponível removendo \textit{bugs}}
+		\begin{itemize}
+			\item \uncover<3->{Pode perceber um \textit{deadlock} na aplicação}
+		\end{itemize}
+\end{itemize}
+
+\uncover<3->{\textbf{ReadinessProbe}:}
+\begin{itemize}
+	\item \uncover<3->{É usado para saber quando um container está pronto para aceitar tráfico de rede.}
+	\begin{itemize}
+		\item \uncover<4->{Pode ser usado para controler os pods que servem como \textit{backend}}
+		\item \uncover<5->{Se o pod não estiver pronto, ele é removido do \textit{Load Balancer} do serviço}
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{StartupProbe}:
+\begin{itemize}
+	\item É usado para sabe se o container da aplicação começou.
+	\begin{itemize}
+		\item \uncover<2->{Pode ser configurado para desativar \textit{liveness} e \textit{readness} até o \textit{startup} tenha sucesso.}
+		\item \uncover<3->{Dessa forma o \textit{kubelet} não vai matar aplicações lentas antes de elas inicializarem.}
+	\end{itemize}
+\end{itemize}
+\end{frame}

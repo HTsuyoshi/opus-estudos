@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: ctfd-2022-chall-uccdi-deployment
   namespace: challs
-  labels:
-    ctfd.chall.deployment: ctfd-2022-chall-uccdi-deployment
 spec:
   replicas: 1
   selector:

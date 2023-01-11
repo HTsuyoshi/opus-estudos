@@ -1,0 +1,92 @@
+\section{K8s}
+
+\begin{frame}
+\frametitle{Conceito}
+\begin{itemize}
+	\item O kubernetes provê:
+		\begin{itemize}
+			\item \uncover<2->{\textit{Service Discovery} e Balanceamento de carga}
+			\item \uncover<3->{Orquestração de armazenamento}
+			\item \uncover<4->{\textit{Rollouts} e \textit{Rollbacks} automáticos}
+			\item \uncover<5->{Controle de recursos automáticos (CPU, RAM)}
+			\item \uncover<6->{Auto recuperação}
+			\item \uncover<7->{Gerenciamento de \textit{Secrets} e configurações}
+		\end{itemize}
+\end{itemize}
+
+%Service discovery and load balancing Kubernetes can expose a container using the DNS name or using their own IP address. If traffic to a container is high, Kubernetes is able to load balance and distribute the network traffic so that the deployment is stable.
+%Storage orchestration Kubernetes allows you to automatically mount a storage system of your choice, such as local storages, public cloud providers, and more.
+%Automated rollouts and rollbacks You can describe the desired state for your deployed containers using Kubernetes, and it can change the actual state to the desired state at a controlled rate. For example, you can automate Kubernetes to create new containers for your deployment, remove existing containers and adopt all their resources to the new container.
+%Automatic bin packing You provide Kubernetes with a cluster of nodes that it can use to run containerized tasks. You tell Kubernetes how much CPU and memory (RAM) each container needs. Kubernetes can fit containers onto your nodes to make the best use of your resources.
+%Self-healing Kubernetes restarts containers that fail, replaces containers, kills containers that don't respond to your user-defined health check, and doesn't advertise them to clients until they are ready to serve.
+%Secret and configuration management Kubernetes lets you store and manage sensitive information, such as passwords, OAuth tokens, and SSH keys. You can deploy and update secrets and application configuration without rebuilding your container images, and without exposing secrets in your stack configuration.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Pré-requisitos}
+
+
+Container runtime
+The container runtime is the software that is responsible for running containers.
+Kubernetes supports container runtimes such as containerd, CRI-O, and any other implementation of the Kubernetes CRI (Container Runtime Interface).
+\end{frame}
+
+\begin{frame}
+\frametitle{Componentes}
+\begin{itemize}
+	\item \textit{Pod}: Consiste em um container ou um conjunto de containers
+	\item \uncover<2->{\textit{Node}: É onde fica agrupado os \textit{Pods} que compõe a aplicação}
+	\item \uncover<3->{\textit{Cluster}: Um conjunto de máquinas trabalhadoras (\textit{Nodes})}
+	\item \uncover<4->{\textit{Control Plane}: Faz decisões e gerencia o \textit{cluster} (detectar eventos, programar \textit{pods})}
+		\begin{itemize}
+			\item \uncover<5->{Pode rodar em múltiplos nós provendo alta disponibilidade e prevenindo falhas}
+		\end{itemize}
+	\item \uncover<6->{\textit{Worker}: Um conjunto de máquinas trabalhadoras (\textit{Nodes})}
+		\begin{itemize}
+			\item \uncover<7->{Roda em múltiplos nós provendo alta disponibilidade e prevenindo falhas}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Componentes - \textit{Control Plane}}
+\begin{itemize}
+	\item \textbf{kube-apiserver}: \textit{front end} do \textit{control plane}. A implementação foi feita de uma forma que é possível ser escalada horizontalmente em várias instancias e consegue balancear o trafico de rede entre essas instâncias.
+	\item \uncover<2->{\textbf{etcd}: Possui consistência e alta disponibilidade. Armazena os dados do cluster em valores-chaves. É bom ter um \textit{backup} para esses dados}
+	\item \uncover<3->{\textbf{kube-scheduler}: Procura por \textit{Pods} que não foram atribuídos à nós e atribui nós para eles (Leva em conta políticas, \textit{hardware}, \textit{software}, etc\dots)}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Componentes - \textit{Control Plane}}
+\begin{itemize}
+	\item \textbf{kube-controller-manager}: Roda processos \textit{controllers}
+		\begin{itemize}
+			\item \uncover<2->{\textbf{Node controller}: Verificar quando um nó falha}
+			\item \uncover<3->{\textbf{Job controller}: Procuram por \textit{Job} que acontecem apenas uma vez, criam \textit{Pods} para executar a tarefa}
+			\item \uncover<4->{\textbf{EndpointSlice controller}: Popula objetos \textit{EndpointSlice} (provê links entre Serviços e \textit{Pods})}
+			\item \uncover<5->{\textbf{ServiceAccount controller}: Criar \textit{ServiceAccounts} para novos \textit{namespaces}}
+		\end{itemize}
+	\item \uncover<6->{\textbf{cloud-controller-manager}: permite conectar com a \textit{API} do provedor de nuvem. Dessa forma o usuário vai interagir apenas com o \textit{cluster}}
+		\begin{itemize}
+			\item \uncover<7->{Pode ser escalado horizontalmente para melhorar a performace e ajudar a evitar falhas}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Componentes - Todos os \textit{Nodes}}
+Estão em todos os nós, fazem manutenção nos \textit{Pods} rodando.
+\begin{itemize}
+	\item \textbf{kubelet}: Garantem que os containers estão rodando em um \textit{Pod}
+		\begin{itemize}
+			\item \uncover<2->{O \textbf{kubelet} não gerencia containers que não foram criados pelo \textbf{kubernetes}}
+		\end{itemize}
+	\item \uncover<3->{\textbf{kube-proxy}: Um proxy que roda em todos os nós do \textit{cluster}}
+		\begin{itemize}
+			\item \uncover<4->{Fazem com que as regras de redes funcionem nos nós (Permitem comunicação de rede dos \textit{Pods} dentro e fora do cluster)}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+

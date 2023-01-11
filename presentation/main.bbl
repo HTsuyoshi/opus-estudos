@@ -1,0 +1,87 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{Helm}{online}{}
+      \name{author}{1}{}{%
+        {{hash=beb4fa781e4f410cc825aabfe4880cea}{%
+           family={Authors},
+           familyi={A\bibinitperiod},
+           given={Helm},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{beb4fa781e4f410cc825aabfe4880cea}
+      \strng{fullhash}{beb4fa781e4f410cc825aabfe4880cea}
+      \strng{bibnamehash}{beb4fa781e4f410cc825aabfe4880cea}
+      \strng{authorbibnamehash}{beb4fa781e4f410cc825aabfe4880cea}
+      \strng{authornamehash}{beb4fa781e4f410cc825aabfe4880cea}
+      \strng{authorfullhash}{beb4fa781e4f410cc825aabfe4880cea}
+      \field{extraname}{1}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Helm}
+      \field{urlday}{12}
+      \field{urlmonth}{1}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://helm.sh/
+      \endverb
+      \verb{url}
+      \verb https://helm.sh/
+      \endverb
+    \endentry
+    \entry{K8s}{online}{}
+      \name{author}{1}{}{%
+        {{hash=fd8e67856064116ead0c0e53d8c0de72}{%
+           family={Authors},
+           familyi={A\bibinitperiod},
+           given={The\bibnamedelima Kubernetes},
+           giveni={T\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \strng{namehash}{fd8e67856064116ead0c0e53d8c0de72}
+      \strng{fullhash}{fd8e67856064116ead0c0e53d8c0de72}
+      \strng{bibnamehash}{fd8e67856064116ead0c0e53d8c0de72}
+      \strng{authorbibnamehash}{fd8e67856064116ead0c0e53d8c0de72}
+      \strng{authornamehash}{fd8e67856064116ead0c0e53d8c0de72}
+      \strng{authorfullhash}{fd8e67856064116ead0c0e53d8c0de72}
+      \field{extraname}{2}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Kubernetes Documentation}
+      \field{urlday}{12}
+      \field{urlmonth}{1}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://kubernetes.io/docs/home/
+      \endverb
+      \verb{url}
+      \verb https://kubernetes.io/docs/home/
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

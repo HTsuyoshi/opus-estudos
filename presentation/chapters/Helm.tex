@@ -1,0 +1,89 @@
+\section{Helm}
+
+\begin{frame}
+\frametitle{Helm}
+\begin{center}
+\textbf{"Helm helps you manage Kubernetes applications — Helm Charts help you define, install, and upgrade even the most complex Kubernetes application."} \cite{Helm}
+\begin{itemize}
+	\uncover<2->{\item Instalar charts}
+	\uncover<3->{\item Criar charts}
+	\uncover<4->{\item Remover charts}
+	\uncover<5->{\item Escolher repositórios}
+\end{itemize}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Charts}
+\begin{center}
+\textbf{"Charts are easy to create, version, share, and publish — so start using Helm and stop the copy-and-paste."} \cite{Helm}
+\begin{itemize}
+	\uncover<2->{\item Criar}
+	\uncover<3->{\item Versionar}
+	\uncover<4->{\item Compartilhar}
+	\uncover<5->{\item Publicar}
+\end{itemize}
+\end{center}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Helm}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\begin{block}{Instalar o \textit{Redis}}
+\begin{lstlisting}[language=bash]
+helm install ctfd-redis -f ./redis/values.yaml \
+-n redis \
+bitnami/redis
+\end{lstlisting}
+\end{block}
+\end{minipage}
+\end{center}
+Instalar o \textit{redis} no namespace \textbf{redis} com os valores \textbf{./redis/values.yaml} do repositório \textbf{\url{https://charts.bitnami.com/bitnami}}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Helm}
+Como foi utilizado no projeto:
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\begin{block}{\textbf{values.yaml}}
+\begin{lstlisting}
+architecture: standalone
+auth:
+  enabled: false
+master:
+  tolerations:
+    - key: "type"
+      operator: "Equal"
+      value: "db"
+  securityContext:
+    enabled: true
+    fsGroup: 2000
+    runAsUser: 0
+\end{lstlisting}
+\end{block}
+\end{minipage}
+\end{center}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Helm}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\begin{block}{\textbf{values.yaml}}
+\begin{lstlisting}
+master:
+  persistence:
+    enabled: true
+    storageClass: "nfs"
+    accessModes:
+    - ReadWriteOnce
+    size: 8Gi
+    matchLabels:
+      name: ctfd-redis-pv
+\end{lstlisting}
+\end{block}
+\end{minipage}
+\end{center}
+\end{frame}

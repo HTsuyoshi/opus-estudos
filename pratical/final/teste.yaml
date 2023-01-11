@@ -1,0 +1,131 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubeadm.kubernetes.io/kube-apiserver.advertise-address.endpoint: 192.168.59.150:8443
+    kubernetes.io/config.hash: 25ec032925f2bc39b2ac022ffc16d5a6
+    kubernetes.io/config.mirror: 25ec032925f2bc39b2ac022ffc16d5a6
+    kubernetes.io/config.seen: "2023-01-10T17:09:56.602097438Z"
+    kubernetes.io/config.source: file
+    seccomp.security.alpha.kubernetes.io/pod: runtime/default
+  creationTimestamp: "2023-01-10T17:09:56Z"
+  name: kube-apiserver
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    controller: true
+    kind: Node
+    name: multinode
+    uid: 974e12a6-e7ff-42b5-b530-7af8e91a47a5
+  resourceVersion: "337"
+  uid: fd3a183c-061a-4897-8cc6-742dbeff934d
+spec:
+  containers:
+  - command:
+    - kube-apiserver
+    - --advertise-address=192.168.59.150
+    - --allow-privileged=true
+    - --authorization-mode=Node,RBAC
+    - --client-ca-file=/var/lib/minikube/certs/ca.crt
+    - --enable-admission-plugins=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,NodeRestriction,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota
+    - --enable-bootstrap-token-auth=true
+    - --etcd-cafile=/var/lib/minikube/certs/etcd/ca.crt
+    - --etcd-certfile=/var/lib/minikube/certs/apiserver-etcd-client.crt
+    - --etcd-keyfile=/var/lib/minikube/certs/apiserver-etcd-client.key
+    - --etcd-servers=https://127.0.0.1:2379
+    - --kubelet-client-certificate=/var/lib/minikube/certs/apiserver-kubelet-client.crt
+    - --kubelet-client-key=/var/lib/minikube/certs/apiserver-kubelet-client.key
+    - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+    - --proxy-client-cert-file=/var/lib/minikube/certs/front-proxy-client.crt
+    - --proxy-client-key-file=/var/lib/minikube/certs/front-proxy-client.key
+    - --requestheader-allowed-names=front-proxy-client
+    - --requestheader-client-ca-file=/var/lib/minikube/certs/front-proxy-ca.crt
+    - --requestheader-extra-headers-prefix=X-Remote-Extra-
+    - --requestheader-group-headers=X-Remote-Group
+    - --requestheader-username-headers=X-Remote-User
+    - --secure-port=8443
+    - --service-account-issuer=https://kubernetes.default.svc.cluster.local
+    - --service-account-key-file=/var/lib/minikube/certs/sa.pub
+    - --service-account-signing-key-file=/var/lib/minikube/certs/sa.key
+    - --service-cluster-ip-range=10.96.0.0/12
+    - --tls-cert-file=/var/lib/minikube/certs/apiserver.crt
+    - --tls-private-key-file=/var/lib/minikube/certs/apiserver.key
+    image: k8s.gcr.io/kube-apiserver:v1.24.3
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 8
+      httpGet:
+        host: 192.168.59.151
+        path: /livez
+        port: 8443
+        scheme: HTTPS
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 15
+    name: kube-apiserver
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        host: 192.168.59.151
+        path: /readyz
+        port: 8443
+        scheme: HTTPS
+      periodSeconds: 1
+      successThreshold: 1
+      timeoutSeconds: 15
+    resources:
+      requests:
+        cpu: 250m
+    startupProbe:
+      failureThreshold: 24
+      httpGet:
+        host: 192.168.59.151
+        path: /livez
+        port: 8443
+        scheme: HTTPS
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 15
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/ssl/certs
+      name: ca-certs
+      readOnly: true
+    - mountPath: /var/lib/minikube/certs
+      name: k8s-certs
+      readOnly: true
+    - mountPath: /usr/share/ca-certificates
+      name: usr-share-ca-certificates
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostNetwork: true
+  nodeName: multinode
+  preemptionPolicy: PreemptLowerPriority
+  priority: 2000001000
+  priorityClassName: system-node-critical
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    operator: Exists
+  volumes:
+  - hostPath:
+      path: /etc/ssl/certs
+      type: DirectoryOrCreate
+    name: ca-certs
+  - hostPath:
+      path: /var/lib/minikube/certs
+      type: DirectoryOrCreate
+    name: k8s-certs
+  - hostPath:
+      path: /usr/share/ca-certificates
+      type: DirectoryOrCreate
+    name: usr-share-ca-certificates
