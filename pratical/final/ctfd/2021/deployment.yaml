@@ -39,13 +39,13 @@ spec:
             port: 8000
           initialDelaySeconds: 60
           periodSeconds: 60
-            #initContainers:
-        #      - name: wait-redis
-        #        image: busybox:1.28
-        #        command: ['sh', '-c', 'until nslookup ctfd-redis-master.redis.svc.cluster.local; do echo waiting for db; sleep 2; done']
-        #      - name: wait-database
-        #        image: busybox:1.28
-        #        command: ['sh', '-c', 'until nslookup ctfd-db-2021-service.database.svc.cluster.local; do echo waiting for db; sleep 2; done']
+      initContainers:
+      - name: wait-redis
+        image: busybox:1.28
+        command: ['sh', '-c', 'until nslookup ctfd-redis-master.redis.svc.cluster.local; do echo waiting for db; sleep 2; done']
+      - name: wait-database
+        image: busybox:1.28
+        command: ['sh', '-c', 'until nslookup ctfd-db-2021-service.database.svc.cluster.local; do echo waiting for db; sleep 2; done']
       restartPolicy: Always
       tolerations:
         - key: 'type'

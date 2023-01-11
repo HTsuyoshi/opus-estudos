@@ -12,22 +12,6 @@
 	\item \uncover<4->{O nome dos recursos precisam ser únicos em cada namespace}
 	\item \uncover<5->{Não são todos os objetos que aceitam o isolamento do \textit{namespace}}
 \end{itemize}
-
-Recursos (conceito e prática: comandos e aplicação de yaml)
-    Namespaces
-    Deployments
-    Daemonsets - conceito
-    Configmaps
-    Secrets
-    Services
-    Ingress
-    Persistência de dados (Storageclass - SC, Persistent Volume Claim - PVC, Persistent Volume - PV)
-    Job e Cronjobs - conceito
-    Statefulsets - conceito
-    HPA - conceito
-    RBAC (roles, service accounts, users) - conceito
-    CRD - conceito
-
 \end{frame}
 
 \begin{frame}[containsverbatim]
@@ -192,7 +176,18 @@ data:
 
 \begin{frame}
 \frametitle{Recursos - Ingress}
-    Secrets
+\begin{itemize}
+	\item \textbf{Ingress}: Gerencia acesso externo para os serviços dentro do cluster (Geralmente o protocolo \textbf{HTTP})
+		\begin{itemize}
+			\item \uncover<2->{Provê balanceamento de carga, hosts virtuais e pode ser um terminal SSL/TLS}
+			\item \uncover<3->{O ingress não expõe portas ou protocolos}
+				\begin{itemize}
+					\item \uncover<4->{Serviços que não são \textbf{HTTP} ou \textbf{HTTPS} são expostos usando \textbf{Serviços} \textbf{Nodeport} ou \textbf{LoadBalancer}}
+				\end{itemize}
+		\end{itemize}
+	\item \textbf{Ingress Controllers}: É necessário para que o as regras o \textbf{Ingress} funcionem
+	\item \uncover<2->{Alguns exemplos são os \textbf{Ingress Controllers} da AWS, GCE e nginx\footnote{\href{https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/}{Outros exemplos de Ingress-Controllers}}}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -228,15 +223,13 @@ data:
 \begin{frame}
 \frametitle{Recursos - HPA}
 	\textit{Horizontal Pod Autoscaling}
-	In Kubernetes, a HorizontalPodAutoscaler automatically updates a workload resource (such as a Deployment or StatefulSet), with the aim of automatically scaling the workload to match demand.
-
-Horizontal scaling means that the response to increased load is to deploy more Pods. This is different from vertical scaling, which for Kubernetes would mean assigning more resources (for example: memory or CPU) to the Pods that are already running for the workload.
-
-If the load decreases, and the number of Pods is above the configured minimum, the HorizontalPodAutoscaler instructs the workload resource (the Deployment, StatefulSet, or other similar resource) to scale back down.
-
-Horizontal pod autoscaling does not apply to objects that can't be scaled (for example: a DaemonSet.)
-
-The HorizontalPodAutoscaler is implemented as a Kubernetes API resource and a controller. The resource determines the behavior of the controller. The horizontal pod autoscaling controller, running within the Kubernetes control plane, periodically adjusts the desired scale of its target (for example, a Deployment) to match observed metrics such as average CPU utilization, average memory utilization, or any other custom metric you specify.
+	\begin{itemize}
+		\item Automaticamente atualiza recursos (como \textit{Deployment} ou \textit{StatefulSet}), tem o objetivo de escalar automaticamente de acordo com a demanda
+		\item \uncover<2->{Ou seja, mais \textit{pods} \textbf{iguais} vão ser criados}
+		\item \uncover<3->{Quando a carga da aplicação abaixar os \textit{pods} vão se reduzir até a quantidade mínima}
+		\item \uncover<4->{Não se aplica a objetos que não podem ser escalados (Exemplo: \textbf{DaemonSet})}
+		\item \uncover<5->{Periodicamente o \textbf{HPA} ajusta os \textbf{pods} do seu objeto observando métricas (CPU, memória ou métricas customizadas)}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}

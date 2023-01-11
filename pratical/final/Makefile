@@ -7,13 +7,14 @@ status:
 setup:
 	@echo '--- Starting minikube ---'
 	@echo '--- Start nodes ---'
-	@minikube start --nodes='4' --network-plugin=cni --cni=calico  --profile=multinode --vm-driver=virtualbox --kubernetes-version=v1.24.3
-	#@minikube start --nodes='4' --profile multinode --vm-driver=virtualbox
+	#@minikube start --nodes='4' --network-plugin=cni --memory=4096 --cni=false --profile=multinode --vm-driver=virtualbox
+	@minikube start --nodes='4' --profile multinode --vm-driver=virtualbox
 	@echo '--- Enabling minikube addons  ---'
 	@kubectl taint nodes multinode type=b:NoSchedule
 	@kubectl taint nodes multinode-m03 type=b:NoSchedule
 	@kubectl taint nodes multinode-m04 type=b:NoSchedule
 	@kubectl label nodes multinode-m02 minikube.k8s.io/primary=true
+	@sleep 4
 	@minikube -p multinode addons enable ingress
 	@minikube -p multinode addons enable ingress-dns
 	@minikube -p multinode addons enable metrics-server
@@ -34,13 +35,11 @@ setup:
 .PHONY: 'clean'
 clean:
 	@echo '--- Deleting minikube nodes ---'
-	@minikube -p multinode delete
+	@minikube delete --all
 
 .PHONY: 'start'
 start:
 	@echo 'Applying k8s yaml files...'
-	@echo 'Kube-system...'
-	@kubectl apply -R -f ./kube-system
 	@echo 'Namespaces...'
 	@kubectl apply -f ./namespace.yaml
 	@echo 'Main page...'
@@ -64,9 +63,6 @@ start:
 .PHONY: 'stop'
 stop:
 	@echo 'Deleting k8s resources...'
-	@echo 'Kube-system...'
-	@kubectl delete -R -f ./kube-system 2>&- \
-		|| echo 'Error while deleteting kube-system netpoly'
 	@echo 'Main page...'
 	@kubectl delete -R -f ./site 2>&- \
 		|| echo 'Error while deleteting site'

@@ -32,8 +32,3 @@ metadata:
   name: challs
   labels:
     name: challs
-#---
-#apiVersion: v1
-#kind: Namespace
-#metadata:
-#  name: monitoring
