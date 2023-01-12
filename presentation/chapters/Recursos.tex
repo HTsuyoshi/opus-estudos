@@ -17,7 +17,7 @@
 \begin{frame}[containsverbatim]
 \frametitle{Recursos - Namespaces}
 
-Para ver os recursos que estão e não são gerenciados por namespace
+Para ver os recursos que são e não são isolados por namespace
 
 \begin{center}
 \begin{minipage}{0.9\textwidth}
@@ -45,16 +45,17 @@ kubectl api-resources --namespaced=false
 		\node (L3) at ($(L2) - (0,0.3)$) {\tiny site-service};
 		\node (L4) at ($(L3) - (0,0.3)$) {\tiny site-ingress};
 		\node (L1) at ($(ctfd) + (0,1.1)$) {\tiny secrets (mariaDB)};
+		\node (L2) at ($(L1)  - (0,0.3)$) {\tiny ctfd-202{1,2}-service};
+		\node (L3) at ($(L2)  - (0,0.3)$) {\tiny ctfd-202{1,2}-deployment};
 	\end{tikzpicture}
 	\columnbreak
 	\begin{tikzpicture}
 		\makens{database}{redis}
 		\node (L1) at ($(database) + (0,1.1)$) {\tiny secrets (mariaDB)};
-		\node (L2) at ($(L1) - (0,0.3)$) {\tiny db-202\{1,2\}-statefulset};
+		\node (L2) at ($(L1) - (0,0.3)$) {\tiny db-202\{1,2\}-deployment};
 		\node (L3) at ($(L2) - (0,0.3)$) {\tiny db-202\{1,2\}-service};
-		\node (L1) at ($(redis) + (0,1.1)$) {\tiny secrets (mariaDB)};
-		\node (L2) at ($(L1) - (0,0.3)$) {\tiny db-202\{1,2\}-statefulset};
-		\node (L3) at ($(L2) - (0,0.3)$) {\tiny db-202\{1,2\}-service};
+		\node (L1) at ($(redis) + (0,1.1)$) {\tiny redis-202\{1,2\}-statefulset};
+		\node (L2) at ($(L1) - (0,0.3)$) {\tiny redis-202\{1,2\}-service};
 	\end{tikzpicture}
 	\columnbreak
 	\begin{tikzpicture}
@@ -64,7 +65,6 @@ kubectl api-resources --namespaced=false
 		\node (L3) at ($(L2) - (0,0.3)$) {\tiny \{uccdi,xor-otp\}-service};
 		\node (L4) at ($(L3) - (0,0.3)$) {\tiny uccdi-ingress};
 		\node (L1) at ($(ingress-nginx) + (0,1.1)$) {\tiny ingress-nginx-controller};
-		\node (L2) at ($(L1) - (0,0.3)$) {\tiny ingress-dns};
 	\end{tikzpicture}
 \end{multicols}
 \end{frame}
@@ -171,7 +171,81 @@ data:
 
 \begin{frame}
 \frametitle{Recursos - Services}
-    Secrets
+\begin{itemize}
+	\item Os \textbf{Services} conseguem abstrair a parte da rede dos \textbf{Pods}
+	\item \uncover<2->{Os \textbf{Services} cuidam da parte do balanceamento de carga e \textbf{Service Discovery}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Recursos - ClusterIP}
+\begin{itemize}
+	\item Expõe o serviço para o \textit{cluster} interno
+	\item O serviço só pode ser alcançado dentro do cluster
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\begin{block}{\textbf{ClusterIP} do Apache}
+\scriptsize
+\begin{lstlisting}[language=bash]
+apiVersion: v1
+kind: Service
+metadata:
+  name: ctfd-site-service
+  namespace: site
+spec:
+  type: ClusterIP
+  ports:
+  - name: 'http'
+    port: 80
+    targetPort: 80
+  selector:
+    ctfd.site.pod: ctfd-site-pod
+\end{lstlisting}
+\end{block}
+\end{minipage}
+\end{center}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Recursos - NodePort}
+\begin{itemize}
+	\item Expõe o serviço em todos os Nós em uma porta estática
+	\item \uncover<2->{\textbf{node port} o K8s aloca uma porta com o protocolo do serviço (TCP, UDP, SCTP, etc\dots)}
+	\item \uncover<3->{Todo os nós começam a ouvir na porta especificada e redirecionar o tráfico para o \textit{endpoint} do serviço}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Recursos - LoadBalancer}
+\begin{itemize}
+	\item Expõe o serviço usando o provedor de nuvem especificado
+	\item \uncover<2->{O tráfico de rede externo do \textit{Load Balancer} é redirecionado para os \textbf{Pods}. A distribuição dos requests é decidida pelo provedor}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Recursos - ExternalName}
+\begin{itemize}
+	\item Mapeia o serviço para um nome \textbf{DNS}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+	\begin{block}{\textbf{ExternalName} uccdi}
+\tiny
+\begin{lstlisting}[language=bash]
+apiVersion: v1
+kind: Service
+metadata:
+  name: ctfd-2022-chall-uccdi
+  namespace: challs
+spec:
+  type: ExternalName
+  externalName: ctfd-2022-chall-uccdi-deployment.default.svc.cluster.local
+\end{lstlisting}
+\end{block}
+\end{minipage}
+\end{center}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -185,14 +259,86 @@ data:
 					\item \uncover<4->{Serviços que não são \textbf{HTTP} ou \textbf{HTTPS} são expostos usando \textbf{Serviços} \textbf{Nodeport} ou \textbf{LoadBalancer}}
 				\end{itemize}
 		\end{itemize}
-	\item \textbf{Ingress Controllers}: É necessário para que o as regras o \textbf{Ingress} funcionem
-	\item \uncover<2->{Alguns exemplos são os \textbf{Ingress Controllers} da AWS, GCE e nginx\footnote{\href{https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/}{Outros exemplos de Ingress-Controllers}}}
+	\item \uncover<5->{\textbf{Ingress Controllers}: É necessário para que o as regras o \textbf{Ingress} funcionem}
+	\item \uncover<6->{Alguns exemplos são os \textbf{Ingress Controllers} da AWS, GCE e nginx\footnote{\href{https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/}{Outros exemplos de Ingress-Controllers}}}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Recursos - Persistência de dados}
-    Secrets
+\begin{itemize}
+	\item \textbf{Persistent Volume (PV)}: é um armazenameto do cluster que foi disponibilizado pelo administrador ou dinamicamente disponibilizado usando \textbf{Storage Class}
+		\begin{itemize}
+			\item \uncover<2->{É um recurso assim como um \textbf{Node}}
+			\item \uncover<3->{Tem um ciclo de vida independente de um \textbf{Pod} que usa o \textbf{PV}}
+			\item \uncover<4->{Esse objeto pega os detalhes de implementação do armazenamento disponibilizado. (Podendo ser NFS, iSCSI, cloud, etc\dots)}
+		\end{itemize}
+	\item \uncover<5->{\textbf{Persistent Volume Claim}: Permite um usuário consumir armazenamentos}
+		\begin{itemize}
+			\item \uncover<6->{É comum o usuário precisar de \textbf{PVs} com várias propriedades, tamanhos e acessos}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Recursos - Lifecycle}
+Provisionamento:
+\begin{itemize}
+	\item \textbf{Estático}: O administrador cria um número de \textbf{PVs} e vão ficar disponíveis para consumo
+	\item \uncover<2->{\textbf{Dinâmico}: Quando nenhum \textbf{PV} estático supre as necessidades do \textbf{PVC}, o cluster dinâmicamente provê um volume especialmente para o \textbf{PVC}}
+		\begin{itemize}
+			\item \uncover<3->{O \textbf{PVC} precisa pedir por uma \textbf{Storage Class} que foi configurada para a alocação dinâmica acontecer}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Recursos - Lifecycle}
+\begin{itemize}
+	\item Binding:
+	\begin{itemize}
+		\item O \textbf{PVC} só vai juntar com um \textbf{PV} se o \textbf{PV} foi provisionado dinâmicamente.
+		\item \uncover<2->{Caso não seja provisionado dinâmicamente vai pegar o \textbf{PV} com pelo menos a capacidade requerida pelo \textbf{PVC}}
+		\item \uncover<3->{Um \textbf{PVC} só vai se juntar com um \textbf{PV} e vice versa}
+	\end{itemize}
+	\item Using:
+	\begin{itemize}
+		\item Então os \textbf{Pods} usam os \textbf{Claims} como volumes
+		\item \uncover<2->{O \textbf{PV} então perntece ao usuário até ele parar de usar}
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Recursos - Lifecycle}
+\begin{itemize}
+	\item Storage Object in Use Protection
+		\begin{itemize}
+			\item \uncover<2->{Ele garante que \textbf{PVC} ativos em um \textbf{Pod} e um \textbf{PV} não podem ser removido do sistema}
+			\item \uncover<3->{Só vai ser removido quando nenhum \textbf{Pod} usar o \textbf{PVC}}
+			\item \uncover<4->{Um \textbf{PV} só vai ser deletado quando não estiver junto com nenhum \textbf{PVC}}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Recursos - Lifecycle}
+\begin{itemize}
+	\item Reclaiming:
+		\begin{itemize}
+			\item \uncover<2->{Retain}
+				\begin{itemize}
+					\item \uncover<3->{Depois de um \textbf{PVC} for deletado, o \textbf{PV} mantém seus dados e fica indisponível para outros \textbf{PVC}}
+					\item \uncover<4->{O administrador precisa alocar ele manualmente}
+				\end{itemize}
+			\item \uncover<5->{Delete}
+				\begin{itemize}
+					\item \uncover<6->{Remove o \textbf{PV} e o armazenamento externo (AWS EBS, GCE PD, etc\dots)}
+					\item \uncover<7->{}
+				\end{itemize}
+		\end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -217,7 +363,13 @@ data:
 
 \begin{frame}
 \frametitle{Recursos - StatefulSet}
-    Secrets
+\begin{itemize}
+	\item O \textbf{StatefulSet} é um objeto da \textit{API} que é usado para gerenciar aplicações com estados
+	\item \uncover<2->{Gerencia e escala os \textbf{Pods} de forma previsível (Nomes únicos e com ordenados)}
+	\item \uncover<3->{Diferente do \textbf{Deployment} o \textbf{StatefulSet} mantém um indentificador para cada \textbf{Pod}}
+	\item \uncover<4->{Os \textbf{Pods} são criados da mesma especificação, mas não podem ser trocados}
+	\item \uncover<5->{Os indentificadores dos \textbf{Pods} facilitam na hora de relacionar um \textbf{Pod} com seu \textbf{Volume}}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -234,10 +386,50 @@ data:
 
 \begin{frame}
 \frametitle{Recursos - RBAC}
-    Daemonsets - conceito
+\begin{itemize}
+	\item \textbf{Role-based access control (RBAC)} é um método de regular acesso para o computador ou recursos na rede baseado nos seus papéis
+	\item \uncover<2->{O \textbf{RBAC} usa a \textit{API} \textbf{rbac.authorization.k8s.io} para autorizar as decisões}
+	\item \uncover<3->{É possível configurar as políticas dinamicamentes pela API do kuberntes}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
+\frametitle{Recursos - RBAC}
+\begin{itemize}
+	\item \textbf{RBAC Role}
+		\begin{itemize}
+			\item \uncover<2->{Permissões dentro de um \textbf{namespace}}
+		\end{itemize}
+	\item \uncover<3->{\textbf{RBAC Cluster Role}}
+		\begin{itemize}
+			\item \uncover<3->{Permissões que se aplicam em todos os \textbf{namespaces}}
+		\end{itemize}
+	\item \uncover<4->{As regras do \textbf{RBAC Role} e do \textbf{RBAC ClusterRole} são sempre aditivas}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
 \frametitle{Recursos - CRD}
-    Daemonsets - conceito
+\begin{itemize}
+	\item \textbf{Custom Resources} são extensões da \textit{API} do kubernetes
+	\item \textbf{Custom Resources Definition} é uma forma simples de criar um \textbf{Custom Resources}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\begin{block}{Calico exemplo}
+\scriptsize
+\begin{lstlisting}
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: default-deny
+spec:
+  selector: projectcalico.org/namespace != "kube-system"
+  types:
+  - Ingress
+  - Egress
+\end{lstlisting}
+\end{block}
+\end{minipage}
+\end{center}
+\end{itemize}
 \end{frame}

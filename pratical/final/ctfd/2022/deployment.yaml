@@ -15,6 +15,8 @@ spec:
       labels:
         ctfd.2022.pod: ctfd-2022-pod
     spec:
+      nodeSelector:
+        minikube.k8s.io/hostname: multinode-m03
       containers:
       - image: doombringerazurai/ctfd:1.0
         name: ctfd-2022
@@ -42,7 +44,7 @@ spec:
       initContainers:
       - name: wait-redis
         image: busybox:1.28
-        command: ['sh', '-c', 'until nslookup ctfd-redis-master.redis.svc.cluster.local; do echo waiting for redis; sleep 2; done']
+        command: ['sh', '-c', 'until nslookup ctfd-redis-2022-master.redis.svc.cluster.local; do echo waiting for redis; sleep 2; done']
       - name: wait-database
         image: busybox:1.28
         command: ['sh', '-c', 'until nslookup ctfd-db-2022-service.database.svc.cluster.local; do echo waiting for db; sleep 2; done']

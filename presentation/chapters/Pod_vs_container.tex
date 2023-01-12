@@ -52,18 +52,57 @@ Os 3 são controlados pelo \textit{kubelet}
 			\item \uncover<3->{Pode perceber um \textit{deadlock} na aplicação}
 		\end{itemize}
 \end{itemize}
+\end{frame}
 
-\uncover<3->{\textbf{ReadinessProbe}:}
+\begin{frame}[containsverbatim]
+\frametitle{\textit{LivenessProbe}, \textit{ReadinessProbe} e \textit{StartUpProbe}}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\begin{block}{Exemplo \textit{LivenessProbe}}
+\begin{lstlisting}
+livenessProbe:
+  tcpSocket:
+    port: 8080
+  initialDelaySeconds: 60
+  periodSeconds: 60
+\end{lstlisting}
+\end{block}
+\end{minipage}
+\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\textit{LivenessProbe}, \textit{ReadinessProbe} e \textit{StartUpProbe}}
+
+\uncover<1->{\textbf{ReadinessProbe}:}
 \begin{itemize}
-	\item \uncover<3->{É usado para saber quando um container está pronto para aceitar tráfico de rede.}
+	\item \uncover<1->{É usado para saber quando um container está pronto para aceitar tráfico de rede.}
 	\begin{itemize}
-		\item \uncover<4->{Pode ser usado para controler os pods que servem como \textit{backend}}
-		\item \uncover<5->{Se o pod não estiver pronto, ele é removido do \textit{Load Balancer} do serviço}
+		\item \uncover<2->{Pode ser usado para controlar os pods que servem como \textit{backend}}
+		\item \uncover<3->{Se o pod não estiver pronto, ele é removido do \textit{Load Balancer} do serviço}
 	\end{itemize}
 \end{itemize}
 \end{frame}
 
+\begin{frame}[containsverbatim]
+\frametitle{\textit{LivenessProbe}, \textit{ReadinessProbe} e \textit{StartUpProbe}}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\begin{block}{Exemplo \textit{ReadinessProbe}}
+\begin{lstlisting}
+readinessProbe:
+  tcpSocket:
+    port: 8080
+  initialDelaySeconds: 60
+  periodSeconds: 60
+\end{lstlisting}
+\end{block}
+\end{minipage}
+\end{center}
+\end{frame}
+
 \begin{frame}
+\frametitle{\textit{LivenessProbe}, \textit{ReadinessProbe} e \textit{StartUpProbe}}
 \textbf{StartupProbe}:
 \begin{itemize}
 	\item É usado para sabe se o container da aplicação começou.

@@ -12,5 +12,5 @@ data:
   UPLOAD_FOLDER: '/var/uploads'
   LOG_FOLDER: '/var/log/CTFd'
   REVERSE_PROXY: 'true'
-  REDIS_URL: 'redis://ctfd-redis-master.redis.svc.cluster.local:6379'
+  REDIS_URL: 'redis://ctfd-redis-2021-master.redis.svc.cluster.local:6379'
   WORKERS: '1'

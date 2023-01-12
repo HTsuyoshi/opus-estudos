@@ -15,6 +15,8 @@ spec:
       labels:
         ctfd.chall.pod: ctfd-2022-uccdi-pod
     spec:
+      nodeSelector:
+        minikube.k8s.io/hostname: multinode-m04
       containers:
       - image: doombringerazurai/chall-uccdi:1.0
         name: chall-uccdi

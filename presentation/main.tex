@@ -8,8 +8,8 @@
 \usepackage{multicol}
 \usepackage{ifthen}
 \usepackage{tikz}
-\usepackage{hyperref}
 \usetikzlibrary{calc}
+\usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{listings}
 
@@ -21,6 +21,7 @@
 %  \setlength{\textwidth}{0.9\textwidth}%
 %}{}
 %\setbeamertemplate{blocks}[rounded][shadow]
+
 
 \newcommand{\makens}[2]{
 	\coordinate (#1) at (1.5,0);
@@ -88,6 +89,7 @@
 
 %\setbeamercovered{transparent}
 
+\include{./chapters/Introducao.tex}
 \include{./chapters/K8s.tex}
 \include{./chapters/K8s_vs_docker.tex}
 \include{./chapters/Pod_vs_container.tex}

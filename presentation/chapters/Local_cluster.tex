@@ -5,7 +5,7 @@
 \begin{itemize}
 	\item \uncover<1->{Ambientes menores (Recursos da máquina local);}
 	\item \uncover<2->{Para aprendizado;}
-	\item \uncover<3->{Não são feitos para produção}
+	\item \uncover<3->{Não são feitos para produção;}
 \end{itemize}
 \end{frame}
 
@@ -17,11 +17,7 @@ Ferramentas para criação de cluster \textbf{local} do kubernetes:
 		\begin{itemize}
 			\item Cluster usando containers de docker para criar os nós.
 		\end{itemize}}
-	\uncover<3->{\item kubeadm
-		\begin{itemize}
-			\item Cluster usando um container runtime.
-		\end{itemize}}
-	\uncover<4->{\item minikube
+	\uncover<3->{\item minikube
 		\begin{itemize}
 			\item Cluster usando containeres ou máquinas virtuais.
 		\end{itemize}}
@@ -36,11 +32,8 @@ Criação do cluster utilizado na parte prática:
 \begin{block}{Comando \textit{minikube}}
 \begin{lstlisting}[language=bash]
 minikube start --nodes='4' \
---network-plugin=cni \
---cni=calico \
 --profile=multinode \
---vm-driver=virtualbox \
---kubernetes-version=v1.24.3
+--vm-driver=virtualbox
 \end{lstlisting}
 \end{block}
 \end{minipage}
@@ -53,22 +46,21 @@ minikube start --nodes='4' \
 \begin{multicols}{2}
 	\begin{tikzpicture}
 		\node at (-0.5,0) {};
-		\node (PC1) at (3.6,2) [draw,thick,minimum width=8cm,minimum height=7.5cm] {};
+		\node (PC1) at (3.6,2) [draw,thick,minimum width=9cm,minimum height=7.5cm] {};
 		\node at ($(PC1) + (0,4.05)$) {Computador 1};
-		\makenode{Master}{}{M}{1}{3.5}
+		\makenode{Master}{}{M}{1.25}{0}
 		\node at ($(M) + (0,0)$) {\huge K8s};
 		\node at (BM) {\tiny 192.168.59.154};
-		\makenode{Qualquer nó}{}{Q}{1}{0}
-		\node at ($(Q) + (0,0.5)$) {\tiny Ingress-};
-		\node at ($(Q) + (0,0)$) {\tiny controller};
-		\node at ($(Q) + (0,-0.5)$) {\tiny Ingress-dns};
-		\coordinate (W2) at (5,3.5);
+		\coordinate (W2) at (3.75,3.5);
 		\coordinate (TW2) at ($(W2) + (0,1.3)$);
 		\coordinate (BW2) at ($(W2) - (0,1.3)$);
-		\node at (W2) [draw,thick,minimum width=4.5cm,minimum height=2cm] {};
+		\node at (W2) [draw,thick,minimum width=7cm,minimum height=2cm] {};
+		\node at ($(W2) + (-2,0.5)$) {\tiny Ingress-controller};
+		\node at ($(W2) + (-2,0)$) {\tiny PV MariaDB};
+		\node at ($(W2) + (-2,-0.5)$) {\tiny Ingress-dns};
 		\node at (TW2) {M02};
-		\node at ($(W2) + (1,0)$) {\includegraphics[width=0.1\textwidth]{MariaDB}};
-		\node at ($(W2) - (1,0)$) {\includegraphics[width=0.1\textwidth]{Redis}};
+		\node at ($(W2) + (2,0)$) {\includegraphics[width=0.1\textwidth]{MariaDB}};
+		\node at ($(W2) + (0,0)$) {\includegraphics[width=0.1\textwidth]{Redis}};
 		\makenode{M03}{}{W3}{6.25}{0}
 		\node at ($(W3) + (0.4,0)$) {\includegraphics[width=0.05\textwidth]{Apache}};
 		\node at ($(W3) - (0.4,0)$) {\includegraphics[width=0.05\textwidth]{CTFd}};

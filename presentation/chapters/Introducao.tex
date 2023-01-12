@@ -1,0 +1,75 @@
+\section{Introdução}
+
+\begin{frame}
+\frametitle{Mostrar o projeto funcionando}
+\begin{itemize}
+	\item Mostrar o projeto funcionando
+	\item K9s
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Especificação do projeto}
+\begin{itemize}
+	\item Plataforma de \textit{Capture The Flag}\footnote{\href{https://github.com/CTFd/CTFd}{Repositório para o CTFd}}
+	\item \uncover<2->{Especificações:}
+		\begin{itemize}
+			\item \uncover<2->{2 \textit{Deployments} de \textit{MariaDB}}
+			\item \uncover<3->{2 \textit{Deployments} de \textit{CTFd}}
+			\item \uncover<4->{2 \textit{StatefulSet} de \textit{Redis}}
+			\item \uncover<5->{1 \textit{Deployment} de \textit{Apache}}
+			\item \uncover<6->{1 \textit{Deployment} de \textit{Php}}
+			\item \uncover<7->{1 \textit{Deployment} de \textit{Python}}
+		\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Jornada do usuário e Rede interna}
+\centering
+\begin{tikzpicture}
+	\node (Apache) at (5,10) {\includegraphics[width=0.1\textwidth]{Apache}};
+	\node at ($(Apache) - (0,0.8)$) {\tiny Site principal};
+	\node at ($(Apache) + (0,0.8)$) {\tiny teste};
+	\node (CTFd1) at (3,7.5) {\includegraphics[width=0.1\textwidth]{CTFd}};
+	\node at ($(CTFd1) - (0,0.8)$) {\tiny CTFSSI 2021};
+	\node at ($(CTFd1) + (0,0.8)$) {\tiny ctfssi-2021.test};
+	\node (CTFd2) at (8,7.5) {\includegraphics[width=0.1\textwidth]{CTFd}};
+	\node at ($(CTFd2) - (0,0.8)$) {\tiny CTFSSI 2022};
+	\node at ($(CTFd2) + (0,0.8)$) {\tiny ctfssi-2022.test};
+	\node (MariaDB1) at (1,5) {\includegraphics[width=0.1\textwidth]{MariaDB}};
+	\node at ($(MariaDB1) - (0,0.8)$) {\tiny CTFd database 2021};
+	\node (MariaDB2) at (9,5) {\includegraphics[width=0.1\textwidth]{MariaDB}};
+	\node at ($(MariaDB2) - (0,0.8)$) {\tiny CTFd database 2022};
+	\node (Redis1) at (3.5,5) {\includegraphics[width=0.1\textwidth]{Redis}};
+	\node at ($(Redis1) - (0,0.8)$) {\tiny redis 2021};
+	\node (Redis2) at (6.5,5) {\includegraphics[width=0.1\textwidth]{Redis}};
+	\node at ($(Redis2) - (0,0.8)$) {\tiny redis 2022};
+	\node (uccdi) at (1.5,10.5) {\includegraphics[width=0.1\textwidth]{Php}};
+	\node at ($(uccdi) - (0,0.8)$) {\tiny Desafio 1};
+	\node at ($(uccdi) + (0,0.8)$) {\tiny uccdi.challs.ctfssi-2022.test};
+	\node (xor-otp) at (8.5,10.5) {\includegraphics[width=0.1\textwidth]{Python}};
+	\node at ($(xor-otp) - (0,0.8)$) {\tiny Desafio 2};
+	\node at ($(xor-otp) + (0,0.8)$) {\tiny multinode-m02 port 47400};
+	\node (SquareApache) at (Apache)[draw,thick,minimum width=2cm,minimum height=2cm] {};
+	\node (SquareCTFd1) at (CTFd1)[draw,thick,minimum width=2.2cm,minimum height=2cm] {};
+	\node (SquareCTFd2) at (CTFd2)[draw,thick,minimum width=2.2cm,minimum height=2cm] {};
+	\node (SquareMariaDB1) at (MariaDB1)[draw,thick,minimum width=2.5cm,minimum height=2cm] {};
+	\node (SquareMariaDB2) at (MariaDB2)[draw,thick,minimum width=2.5cm,minimum height=2cm] {};
+	\node (Squareuccdi) at (uccdi)[draw,thick,minimum width=4cm,minimum height=2cm] {};
+	\node (Squarexor-otp) at (xor-otp)[draw,thick,minimum width=4cm,minimum height=2cm] {};
+	\node (SquareRedis1) at (Redis1)[draw,thick,minimum width=2cm,minimum height=2cm] {};
+	\node (SquareRedis2) at (Redis2)[draw,thick,minimum width=2cm,minimum height=2cm] {};
+	\node (InternalNetwork) at ($(Apache) - (0,3.8)$)[draw,thick,dotted,minimum width=11.5cm,minimum height=5cm] {};
+	\node at ($(Apache) - (4.8,1.1)$) {\tiny Rede interna};
+	\draw[-,thick] (SquareApache.south) -- (SquareCTFd1.north);
+	\draw[-,thick] (SquareApache.south) -- (SquareCTFd2.north);
+	\draw[-,thick,dotted] (SquareCTFd1.south) -- (SquareMariaDB1.north);
+	\draw[-,thick,dotted] (SquareCTFd2.south) -- (SquareMariaDB2.north);
+	\draw[-,thick,dotted] (SquareCTFd1.south) -- (SquareRedis1.north);
+	\draw[-,thick,dotted] (SquareCTFd2.south) -- (SquareRedis2.north);
+	\draw[-,thick] (Squareuccdi.south) -- (SquareCTFd1.north);
+	\draw[-,thick] (Squarexor-otp.south) -- (SquareCTFd2.north);
+\end{tikzpicture}
+\end{frame}

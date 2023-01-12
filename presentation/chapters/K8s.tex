@@ -24,15 +24,6 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Pré-requisitos}
-
-
-Container runtime
-The container runtime is the software that is responsible for running containers.
-Kubernetes supports container runtimes such as containerd, CRI-O, and any other implementation of the Kubernetes CRI (Container Runtime Interface).
-\end{frame}
-
-\begin{frame}
 \frametitle{Componentes}
 \begin{itemize}
 	\item \textit{Pod}: Consiste em um container ou um conjunto de containers
@@ -42,9 +33,9 @@ Kubernetes supports container runtimes such as containerd, CRI-O, and any other 
 		\begin{itemize}
 			\item \uncover<5->{Pode rodar em múltiplos nós provendo alta disponibilidade e prevenindo falhas}
 		\end{itemize}
-	\item \uncover<6->{\textit{Worker}: Um conjunto de máquinas trabalhadoras (\textit{Nodes})}
+	\item \uncover<6->{\textit{Worker}: Máquinas trabalhadoras que vão rodar a aplicação(\textit{Nodes})}
 		\begin{itemize}
-			\item \uncover<7->{Roda em múltiplos nós provendo alta disponibilidade e prevenindo falhas}
+			\item \uncover<7->{Geralmente são usados múltiplos nós \textit{workers} provendo alta disponibilidade e prevenindo falhas}
 		\end{itemize}
 \end{itemize}
 \end{frame}
@@ -67,10 +58,6 @@ Kubernetes supports container runtimes such as containerd, CRI-O, and any other 
 			\item \uncover<3->{\textbf{Job controller}: Procuram por \textit{Job} que acontecem apenas uma vez, criam \textit{Pods} para executar a tarefa}
 			\item \uncover<4->{\textbf{EndpointSlice controller}: Popula objetos \textit{EndpointSlice} (provê links entre Serviços e \textit{Pods})}
 			\item \uncover<5->{\textbf{ServiceAccount controller}: Criar \textit{ServiceAccounts} para novos \textit{namespaces}}
-		\end{itemize}
-	\item \uncover<6->{\textbf{cloud-controller-manager}: permite conectar com a \textit{API} do provedor de nuvem. Dessa forma o usuário vai interagir apenas com o \textit{cluster}}
-		\begin{itemize}
-			\item \uncover<7->{Pode ser escalado horizontalmente para melhorar a performace e ajudar a evitar falhas}
 		\end{itemize}
 \end{itemize}
 \end{frame}

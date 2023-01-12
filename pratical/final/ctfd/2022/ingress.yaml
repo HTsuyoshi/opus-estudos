@@ -1,17 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: uccdi-ingress
-  namespace: challs
+  name: ctfd-2022
+  namespace: ctfd
 spec:
   rules:
-  - host: uccdi.challs.ctfssi-2022.test
+  - host: ctfssi-2022.test
     http:
       paths:
         - path: /
           pathType: Prefix
           backend:
             service:
-              name: ctfd-2022-chall-uccdi-service
+              name: ctfd-2022-service
               port:
-                number: 80
+                number: 8000
+

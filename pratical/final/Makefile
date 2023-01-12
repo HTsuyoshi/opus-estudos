@@ -7,25 +7,23 @@ status:
 setup:
 	@echo '--- Starting minikube ---'
 	@echo '--- Start nodes ---'
-	#@minikube start --nodes='4' --network-plugin=cni --memory=4096 --cni=false --profile=multinode --vm-driver=virtualbox
+	#@minikube start --nodes='4' --network-plugin=cni --memory=4096 --cni=cillium --profile=multinode --vm-driver=virtualbox
 	@minikube start --nodes='4' --profile multinode --vm-driver=virtualbox
-	@echo '--- Enabling minikube addons  ---'
-	@kubectl taint nodes multinode type=b:NoSchedule
-	@kubectl taint nodes multinode-m03 type=b:NoSchedule
-	@kubectl taint nodes multinode-m04 type=b:NoSchedule
-	@kubectl label nodes multinode-m02 minikube.k8s.io/primary=true
-	@sleep 4
-	@minikube -p multinode addons enable ingress
-	@minikube -p multinode addons enable ingress-dns
+	@echo '--- Enabling minikube metrics-server ---'
 	@minikube -p multinode addons enable metrics-server
-	@kubectl label nodes multinode-m02 minikube.k8s.io/primary-
-	@kubectl taint nodes multinode type=b:NoSchedule-
-	@kubectl taint nodes multinode-m03 type=b:NoSchedule-
-	@kubectl taint nodes multinode-m04 type=b:NoSchedule-
-	@echo '--- Add taints ---'
-	@kubectl taint nodes multinode-m02 type=db:NoSchedule
+	@echo '--- Add Taints ---'
+	@kubectl taint nodes multinode type=b:NoSchedule
 	@kubectl taint nodes multinode-m03 type=site:NoSchedule
 	@kubectl taint nodes multinode-m04 type=challs:NoSchedule
+	@kubectl label nodes multinode-m02 minikube.k8s.io/primary=true
+	@echo '--- Enabling minikube addons  ---'
+	@minikube -p multinode addons enable ingress
+	@minikube -p multinode addons enable ingress-dns
+	@sleep 8
+	@echo '--- Add Labels ---'
+	@kubectl label nodes multinode-m02 minikube.k8s.io/hostname=multinode-m02
+	@kubectl label nodes multinode-m03 minikube.k8s.io/hostname=multinode-m03
+	@kubectl label nodes multinode-m04 minikube.k8s.io/hostname=multinode-m04
 	@echo '--- Changing /etc/NetworkManager/dnsmasq.d/minikube.conf ---'
 	@sudo sed -i "s/\([0-9]\{1,3\}\.\)\{3\}[0-9]\{1,3\}\$$/$$(minikube --profile multinode ip --node multinode-m02)/" /etc/NetworkManager/dnsmasq.d/minikube.conf
 	@cat /etc/NetworkManager/dnsmasq.d/minikube.conf
@@ -50,7 +48,9 @@ start:
 	@kubectl apply -R -f ./ctfd
 	@echo 'Redis...'
 	@kubectl apply -f ./redis/pv.yaml
-	@helm install ctfd-redis -f ./redis/values.yaml -n redis bitnami/redis 2>&- \
+	@helm install ctfd-redis-2021 -f ./redis/values-2021.yaml -n redis bitnami/redis 2>&- \
+		|| echo 'Error while installing redis'
+	@helm install ctfd-redis-2022 -f ./redis/values-2022.yaml -n redis bitnami/redis 2>&- \
 		|| echo 'Error while installing redis'
 	@echo 'Challenges...'
 	@kubectl apply -R -f ./challenges
@@ -64,22 +64,24 @@ start:
 stop:
 	@echo 'Deleting k8s resources...'
 	@echo 'Main page...'
-	@kubectl delete -R -f ./site 2>&- \
+	@kubectl delete --force --grace-period=0 -R -f ./site 2>&- \
 		|| echo 'Error while deleteting site'
 	@echo 'Database...'
-	@kubectl delete -R -f ./database 2>&- \
+	@kubectl delete --force --grace-period=0 -R -f ./database 2>&- \
 		|| echo 'Error while deleteting database'
 	@echo 'Website...'
-	@kubectl delete -R -f ./ctfd 2>&- \
+	@kubectl delete --force --grace-period=0 -R -f ./ctfd 2>&- \
 		|| echo 'Error while deleteting ctfd'
 	@echo 'Redis...'
-	@helm uninstall -n redis ctfd-redis 2>&- \
-		|| echo 'Error while deleteting helm redis'
+	@helm uninstall --force --grace-period=0 -n redis ctfd-redis-2021 2>&- \
+		|| echo 'Error while deleteting helm redis 2021'
+	@helm uninstall --force --grace-period=0 -n redis ctfd-redis-2022 2>&- \
+		|| echo 'Error while deleteting helm redis 2022'
 	@echo 'Challenges...'
-	@kubectl delete -R -f ./challenges/ingress.yaml 2>&- \
+	@kubectl delete --force --grace-period=0 -R -f ./challenges 2>&- \
 		|| echo 'Error while deleteting challs'
 	@echo 'Namespaces...'
-	@kubectl delete -f ./namespace.yaml 2>&- \
+	@kubectl delete --force --grace-period=0 -f ./namespace.yaml 2>&- \
 		|| echo 'Error while deleteting namespace'
 
 .PHONY: 'reset'

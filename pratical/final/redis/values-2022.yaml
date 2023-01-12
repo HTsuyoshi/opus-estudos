@@ -1,0 +1,22 @@
+architecture: standalone
+auth:
+  enabled: false
+master:
+  nodeSelector:
+    minikube.k8s.io/hostname: multinode-m02
+  tolerations:
+    - key: "type"
+      operator: "Equal"
+      value: "db"
+  securityContext:
+    enabled: true
+    fsGroup: 2000
+    runAsUser: 0
+  persistence:
+    enabled: true
+    storageClass: "nfs"
+    accessModes:
+    - ReadWriteOnce
+    size: 8Gi
+    matchLabels:
+      name: ctfd-redis-2022-pv

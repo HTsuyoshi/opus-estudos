@@ -8,9 +8,9 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: ctfd
+  name: redis
   labels:
-    name: ctfd
+    name: redis
 ---
 apiVersion: v1
 kind: Namespace
@@ -22,9 +22,9 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: redis
+  name: ctfd
   labels:
-    name: redis
+    name: ctfd
 ---
 apiVersion: v1
 kind: Namespace

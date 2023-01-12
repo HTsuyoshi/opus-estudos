@@ -16,6 +16,8 @@ spec:
       labels:
         ctfd.db.2021.pod: ctfd-db-2021-pod
     spec:
+      nodeSelector:
+        minikube.k8s.io/hostname: multinode-m02
       containers:
       - image: mariadb:10.4.12
         name: ctfd-db-2021
@@ -35,7 +37,7 @@ spec:
         - name: MYSQL_USER_FILE
           value: '/etc/ctfd-db/username'
         volumeMounts:
-        - name: ctfd-db-2021-pvc #datadir
+        - name: ctfd-db-2021-pvc
           mountPath: /var/lib/mysql
         - name: ctfd-db-2021-secret
           mountPath: /etc/ctfd-db

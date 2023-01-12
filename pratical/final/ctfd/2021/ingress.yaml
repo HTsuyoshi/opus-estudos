@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-nginx
+  name: ctfd-2021
   namespace: ctfd
 spec:
   rules:
@@ -13,15 +13,5 @@ spec:
           backend:
             service:
               name: ctfd-2021-service
-              port:
-                number: 8000
-  - host: ctfssi-2022.test
-    http:
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: ctfd-2022-service
               port:
                 number: 8000

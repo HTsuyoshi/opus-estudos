@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ctfd-redis-pv
+  name: ctfd-redis-2021-pv
   namespace: redis
   labels:
     name: ctfd-redis-pv
@@ -14,9 +14,32 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: "nfs"
   claimRef:
-    name: redis-data-ctfd-redis-master-0
+    name: redis-data-ctfd-redis-2021-master-0
     namespace: redis
   nfs:
-    path: /mnt/nfs/redis
+    path: /mnt/nfs/redis/2021
+    server: 192.168.0.20
+    readOnly: no
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ctfd-redis-2022-pv
+  namespace: redis
+  labels:
+    name: ctfd-redis-pv
+spec:
+  capacity:
+    storage: 8Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: "nfs"
+  claimRef:
+    name: redis-data-ctfd-redis-2022-master-0
+    namespace: redis
+  nfs:
+    path: /mnt/nfs/redis/2022
     server: 192.168.0.20
     readOnly: no

@@ -2,6 +2,8 @@ architecture: standalone
 auth:
   enabled: false
 master:
+  nodeSelector:
+    minikube.k8s.io/hostname: multinode-m02
   tolerations:
     - key: "type"
       operator: "Equal"
@@ -17,16 +19,4 @@ master:
     - ReadWriteOnce
     size: 8Gi
     matchLabels:
-      name: ctfd-redis-pv
-
-#nfs:
-#  server: 192.168.0.20
-#  path: /mnt/nfs/redis
-#
-#storageClass:
-#  create: true
-#  defaultClass: false
-#  name: nfs
-#  allowVolumeExpansion: true
-#  reclaimPolicy: Delete
-#  archiveOnDelete: true
+      name: ctfd-redis-2021-pv
