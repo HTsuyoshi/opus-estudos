@@ -1,0 +1,91 @@
+\section{Segurança}
+
+%\begin{frame}
+%	\frametitle{Segurança - Thread Modeling - pt 1}
+%	\begin{itemize}
+%		\item Quais são os possíveis vetores de ataque?
+%			\begin{itemize}
+%				\item \uncover<1->{Container Escape (System);}
+%					\begin{itemize}
+%						\item \uncover<1->{O atacante conseguiu abrir uma shell no container do sistema;}
+%						\item \uncover<2->{Ele pode ter acesso de um usuário comum ou escalar privilégios;}
+%					\end{itemize}
+%				\item \uncover<3->{Other Containers via Network:}
+%					\begin{itemize}
+%						\item \uncover<3->{Está tentando atacar outro container pela rede;}
+%					\end{itemize}
+%				\item \uncover<4->{Attacking the Orchestration Tool via Network:}
+%					\begin{itemize}
+%						\item \uncover<4->{Atacar a ferrameta de orquestração;}
+%					\end{itemize}
+%			\end{itemize}
+%	\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%	\frametitle{Segurança - Thread Modeling - pt 2}
+%	\begin{itemize}
+%		\item Quais são os possíveis vetores de ataque?
+%			\begin{itemize}
+%				\item \uncover<1->{Resource Starvation:}
+%					\begin{itemize}
+%						\item \uncover<1->{Usar muita CPU, RAM, internet ou armazenamento;}
+%						\item \uncover<2->{Acaba afetando outros containers;}
+%					\end{itemize}
+%				\item \uncover<3->{Host Compromise:}
+%					\begin{itemize}
+%						\item \uncover<3->{Atacou diretamente o host;}
+%					\end{itemize}
+%				\item \uncover<4->{Integrity of Images:}
+%					\begin{itemize}
+%						\item \uncover<4->{Mudou a imagem em algum momento antes do deploy;}
+%					\end{itemize}
+%			\end{itemize}
+%	\end{itemize}
+%\end{frame}
+
+\begin{frame}
+	\frametitle{OWASP Docker Top 10}
+	\begin{itemize}
+		\item D01 - Secure User Mapping;
+		\item D02 - Patch Management Strategy;
+		\item D03 - Network Segmentation and Firewalling;
+		\item D04 - Secure Defaults and Hardening;
+		\item D05 - Maintain Security Contexts;
+		\item D06 - Protect Secrets;
+		\item D07 - Resource Protection;
+		\item D08 - Container Image Integrity and Origin;
+		\item D09 - Follow Immutable Paradigm;
+		\item D10 - Logging;
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{Segurança - Ferramentas}
+	\begin{itemize}
+		\item Docker scan: Segurança de Imagens (Snyk)
+		\item \href{https://github.com/docker/docker-bench-security}{Docker bench security}
+		\item \href{https://www.cisecurity.org/benchmark/docker}{Guideline para usar docker (CIS)}
+		\item InSpec (Segurança e Compliance)
+		\item Lynis
+		\item \href{https://github.com/OWASP/Docker-Security}{OWASP Docker-security}
+		\item \href{https://github.com/kost/dockscan}{Dockscan}
+		\item \href{https://www.slideshare.net/jlkinsel/a-fun-comparison-of-docker-vulnerability-scanners/}{Comparações de scanners de vulnerabilidade de containers}
+		\item \href{https://sysdig.com/blog/20-docker-security-tools/}{20 de scanners de vulnerabilidade de containers}
+		\item \href{https://thenewstack.io/draft-vulnerability-scanners/}{Lista de scanners de vulnerabilidade de container}
+		\item SELinux (Security Enchantment Linux): Administrar permissões no Linux
+			\begin{itemize}
+				\item O Linux usa o DAC (Discretionary Access Control);
+				\item O \textit{SELinux} permite o MAC (Mandatory Access Control);
+				\item Adiciona categorias/rótulos/perfis em todos os objetos contidos no sistema de arquivos;
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+%\begin{frame}[t]
+%	\frametitle{Videos}
+%	\begin{itemize}
+%		\item How I Learned Docker Security the Hard Way (So You Don’t Have To): \url{https://www.youtube.com/watch?v=C343TPOpTzU}
+%		\item Learn which Container Security checks you should implement into your Software Development Life Cycle: \url{https://www.youtube.com/watch?v=rcrmTHOIz24}
+%	\end{itemize}
+%\end{frame}

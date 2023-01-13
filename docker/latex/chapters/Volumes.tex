@@ -1,0 +1,14 @@
+\section{Volumes}
+
+\begin{frame}
+	\frametitle{Volumes}
+	\begin{itemize}
+		\item \uncover<1->{Os volumes são formas de armazenar informações persistentes para uso futuro.}
+		\item \uncover<2->{Tipos de volumes:}
+			\begin{itemize}
+				\item \uncover<2->{Volumes: Os volumes são gerenciados pelo próprio \textbf{docker}.}
+				\item \uncover<3->{Bint mounts: É possível montar diretórios dentro do container, dessa forma o container pode acessar arquivos que existem dentro da máquina host.}
+				\item \uncover<4->{Tmpfs: O \textbf{tmpfs} é uma forma de evitar armazenar dados permanenteente, e melhora a performace do container evitando escrever na camada de escrita do container}
+			\end{itemize}
+	\end{itemize}
+\end{frame}

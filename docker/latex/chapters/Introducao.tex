@@ -1,0 +1,157 @@
+\section{Introdução}
+
+\begin{frame}
+\frametitle{O que é docker?}
+Gerenciar a infra-estrutura:
+\begin{itemize}
+	\item \uncover<1->{Ambientes "isolados" usando container;}
+	\item \uncover<2->{Agilizar as entregas das aplicações;}
+	\item \uncover<3->{Aplicações seguras;}
+	\item \uncover<4->{Portabilidade;}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{O que é um container?}
+\begin{itemize}
+	\item Containers:
+		\begin{itemize}
+			\item \uncover<1->{Usa o \textit{kernel} da máquina \textit{host};}
+			\item \uncover<2->{Contém:}
+				\begin{itemize}
+					\item \uncover<2->{\textit{Softwares};}
+					\item \uncover<3->{Bibliotecas;}
+				\end{itemize}
+			\item \uncover<4->{Leves (Somente o necessário);}
+			\item \uncover<5->{Execução quase igual à execução nativa;}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Características do container}
+\begin{itemize}
+\item \uncover<1->{Portabilidade:}
+	\begin{itemize}
+		\item \uncover<1->{Fácil compartilhar;}
+		\item \uncover<2->{Ambiente igual para todos;}
+		\item \uncover<3->{A mesma execução para todos;}
+	\end{itemize}
+\item \uncover<4->{Alternativa viável para as máquinas virtuais (hypervisor):}
+	\begin{itemize}
+		\item \uncover<4->{Melhor uso da capacidade do seu computador;}
+		\item \uncover<5->{Ambientes grandes e densos;}
+		\item \uncover<6->{Ambientes pequenos ou médios;}
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Máquina virtual X Container}
+\begin{multicols}{2}
+\begin{itemize}
+	\item Máquina Virtual
+		\begin{itemize}
+			\item \uncover<1->{Virtualiza a camada de aplicação e a camada do SO;}
+			\item \uncover<3->{Mais pesado (Na casa dos Gigabytes);}
+			\item \uncover<5->{Demoram mais para inicializar;}
+			\item \uncover<7->{Executa qualquer sistema operacional em qualquer Sistema Operacional;}
+		\end{itemize}
+\end{itemize}
+\columnbreak
+\begin{itemize}
+	\item Container
+		\begin{itemize}
+			\item \uncover<2->{Virtualiza a camada de aplicação;}
+			\item \uncover<4->{Mais leve (Na casa dos megabytes);}
+			\item \uncover<6->{Inicializam rapidamente;}
+			\item \uncover<8->{O sistema operacional precisa ser compatível com a máquina principal ou usar uma camada de compatibilidade;}
+		\end{itemize}
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\frametitle{Máquina virtual X Container (Imagens)}
+\centering
+\begin{multicols}{2}
+\begin{tikzpicture}
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (0,-2.25);
+	\coordinate (C) at (0,-0.75);
+	\coordinate (D) at (0,-1.5);
+	\coordinate (E) at (-0.925,1.25);
+	\coordinate (F) at (0.925,1.25);
+	\coordinate (G) at (0.925,1.5);
+	\coordinate (H) at (0.925,0.5);
+	\coordinate (I) at (-0.925,1.5);
+	\coordinate (J) at (-0.925,0.5);
+	\node at (A) [draw,thick,minimum width=4cm,minimum height=6cm] {};
+	\node at (B) [draw,thick,minimum width=3.5cm,minimum height=0.5cm] {};
+	\onslide<2>{\node at (B) [draw,red,thick,minimum width=3.5cm,minimum height=0.5cm] {};}
+	\node at (B) {\footnotesize Máquina host};
+	\node at (C) [draw,thick,minimum width=3.5cm,minimum height=0.5cm] {};
+	\onslide<4>{\node at (C) [draw,red,thick,minimum width=3.5cm,minimum height=0.5cm] {};}
+	\node at (C) {\footnotesize HyperVisor};
+	\node at (D) [draw,thick,minimum width=3.5cm,minimum height=0.5cm] {};
+	\onslide<3>{\node at (D) [draw,red,thick,minimum width=3.5cm,minimum height=0.5cm] {};}
+	\node at (D) {\footnotesize SO do host};
+	\node at (E) [draw,thick,minimum width=1.625cm,minimum height=3cm] {};
+	\node at ($(E)+(0,1.25)$) {\scriptsize VM};
+	\node at (F) [draw,thick,minimum width=1.625cm,minimum height=3cm] {};
+	\node at ($(F)+(0,1.25)$) {\scriptsize VM};
+	\node (rect) at (G) [draw,thick,minimum width=1.125cm,minimum height=1cm] {};
+	\node at (G) {\tiny App 2};
+	\node at (H) [draw,thick,minimum width=1.125cm,minimum height=1cm] {};
+	\node[align=center] at (H) {\tiny Guest OS\\ \tiny Windows};
+	\node at (I) [draw,thick,minimum width=1.125cm,minimum height=1cm] {};
+	\node at (I) {\tiny App 1};
+	\node at (J) [draw,thick,minimum width=1.125cm,minimum height=1cm] {};
+	\onslide<5>{\node (rect) at (I) [red,draw,thick,minimum width=1.125cm,minimum height=1cm] {};}
+	\onslide<5>{\node (rect) at (J) [red,draw,thick,minimum width=1.125cm,minimum height=1cm] {};}
+	\node[align=center] at (J) {\tiny Guest OS\\ \tiny Linux};
+\end{tikzpicture}
+\columnbreak
+\begin{tikzpicture}
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (0,-2.25);
+	\coordinate (C) at (0,-0.75);
+	\coordinate (D) at (0,-1.5);
+	\coordinate (E) at (-0.925,1.25);
+	\coordinate (F) at (0.925,1.25);
+	\coordinate (G) at (0.925,1);
+	\coordinate (H) at (-0.925,1);
+	\node (rect) at (A) [draw,thick,minimum width=4cm,minimum height=6cm] {};
+	\node (rect) at (B) [draw,thick,minimum width=3.5cm,minimum height=0.5cm] {};
+	\node at (B) {\footnotesize Máquina host};
+	\node (rect) at (C) [draw,thick,minimum width=3.5cm,minimum height=0.5cm] {};
+	\node at (C) {\footnotesize Container Engine};
+	\node (rect) at (D) [draw,thick,minimum width=3.5cm,minimum height=0.5cm] {};
+	\node at (D) {\footnotesize SO do host};
+	\node (rect) at (E) [draw,thick,minimum width=1.625cm,minimum height=3cm] {};
+	\node at ($(E)+(0,1.25)$) {\scriptsize Container};
+	\node (rect) at (F) [draw,thick,minimum width=1.625cm,minimum height=3cm] {};
+	\node at ($(F)+(0,1.25)$) {\scriptsize Container};
+	\node (rect) at (G) [draw,thick,minimum width=1.125cm,minimum height=2cm] {};
+	\node at (G) {\tiny App 2};
+	\node (rect) at (H) [draw,thick,minimum width=1.125cm,minimum height=2cm] {};
+	\onslide<5>{\node (rect) at (H) [red,draw,thick,minimum width=1.125cm,minimum height=2cm] {};}
+	\node[align=center] at (H) {\tiny App 1};
+\end{tikzpicture}
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\frametitle{Onde os containers podem ser encontrados?}
+\begin{itemize}
+	\item Repositórios privados:
+		\begin{itemize}
+			\item Repostórios das empresas;
+		\end{itemize}
+	\item \uncover<2->{Repositórios públicos:}
+		\begin{itemize}
+			\item \uncover<2->{Docker hub;}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+

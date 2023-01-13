@@ -1,0 +1,76 @@
+\section{Redes}
+
+\begin{frame}
+	\frametitle{Redes - Bridge}
+	\begin{itemize}
+		\item \uncover<1->{Usar a interface de rede \textbf{docker0};}
+			\begin{itemize}
+				\item \uncover<1->{Cada container vai ter um veth (Virtual ethernet interface);}
+				\item \uncover<2->{Cada veth vai estar conectado com o docker0;}
+			\end{itemize}
+		\item \uncover<3->{Todos os containers na rede vão conseguir se comunicar (Ruim);}
+		%\item \uncover<4->{Usa o /etc/resolv.conf da máquina local dentro do docker;}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Redes - User-Defined Bridge}
+	\begin{itemize}
+		\item \uncover<1->{Igual ao Bridge}
+		\item \uncover<2->{Mais controle das conexões entre os containers}
+		\item \uncover<3->{Isolados dos containers dentro do bridge padrão}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Redes - Host}
+	\begin{itemize}
+		\item \uncover<1->{Compartilha o ip e as portas com a máquina host}
+		\item \uncover<2->{É como se fosse uma aplicação rodando no computador}
+		\item \uncover<3->{Acaba não ficando isolado}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Redes - macVLAN}
+	\begin{itemize}
+		%\item docker network create -d macvlan --subnet 10.7.1.0/24 --gateway 192.168.0.1 -o parent=enp0s3 macVLANname
+		%\item docker run -itd --rm --network lan --ip 192.168.0.24 --name teste
+		\item \uncover<1->{Feito para aplicações antigas que precisam conectar diretamente na internet física}
+			\begin{itemize}
+				\item \uncover<1->{Conseguem um enderaço MAC próprio;}
+				\item \uncover<2->{Tem seus próprios IPs;}
+			\end{itemize}
+		\item \uncover<3->{Desvantagens:}
+			\begin{itemize}
+				\item \uncover<3->{Existe só um endereço MAC;}
+					\begin{itemize}
+						\item \uncover<3->{Precisa do modo Prosmiscuous (Um endereço físico pode ter múltiplos endereços MAC)}
+					\end{itemize}
+				\item \uncover<4->{Vão existir o DHCP do roteador e o DHCP do docker;}
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Redes - IPVLAN (L2)}
+%	\begin{itemize}
+%		\item A interface de rede da máquina é compartilhada;
+%		\item Allow the host to share its interface network
+%		\item docker network create -d ipvlan --subnet 192.168.20.0/24 --gateway 192.168.0.1 -o parent=enp0s3 ipVLANname
+%		\item like switching
+%	\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{Redes - IPVLAN (L3)}
+%	\begin{itemize}
+%		\item docker network create -d ipvlan --subnet 192.168.20.0/24 -o parent=enp0s3 -o ipvlan\_mode=l3 --subnet 192.168.95.0/24 ipVLANname
+%		\item you dont need to specify the gateway, as it will be the host
+%		\item The host becomes like a router
+%		\item Layer 3
+%		\item They connect to the host like he is a router
+%		\item (no broadcast and no arp)
+%		\item Like a UTM?
+%	\end{itemize}
+%\end{frame}

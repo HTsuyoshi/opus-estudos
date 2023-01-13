@@ -1,0 +1,93 @@
+\section{Pratico}
+
+\begin{frame}[t]
+	\frametitle{Pratico - Docker client}
+	\framesubtitle{Lista de comandos}
+\begin{multicols}{2}
+	\begin{itemize}
+		\item docker system info
+		\item docker ps [-a]
+		\item docker container;
+			\begin{itemize}
+				\item ls;
+				\item \{un,\}pause;
+				\item stop;
+				\item start;
+				\item restart;
+				\item create;
+				\item run;
+			\end{itemize}
+		\item docker \{image,volume,network\};
+		\item docker build;
+	\end{itemize}
+	\columnbreak
+	\begin{itemize}
+		\item docker history;
+		\item docker inspect;
+		\item docker logs;
+		\item docker ports;
+		\item docker stats;
+		\item docker top;
+	\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Pratico - Docker client}
+	\framesubtitle{Lista de comandos}
+%\begin{multicols}{2}
+	\begin{itemize}
+		\item docker commit;
+		\item docker login;
+		\item docker pull;
+		\item docker push;
+		\item docker search;
+	\end{itemize}
+	%\columnbreak
+	%\begin{itemize}
+	%	\item docker daemon:
+	%		\begin{itemize}
+	%			\item --insecure registry: Permite comunicação com registry inseguros Sem certificados TLS
+	%			\item --bridge: Conecta os containers com uma especifica bridge
+	%			\item --bip:  Especifica um IP para a bridge
+	%			\item --debug: Habilita o modo debug
+	%			\item --default gateway: Configura a rota padrão
+	%			\item --default ulimit: Configura o ulimit para os containers
+	%			\item --dns: Indica os DNS servers que os containers utilizarão
+	%			\item --fixed cidr: Fixa um range de IP para utilização do Docker
+	%			\item --ip forward: Habilita o net.ipv4.ip\_forward
+	%			\item --ip masq: Habilita o mascaramento de IP
+	%			\item --pidfile: Configura o caminho do PID file do Docker
+	%			\item --selinux enabled: Habilita o SELinux
+	%			\item --storage-opt: Configura outras opções de storage
+	%		\end{itemize}
+	%\end{itemize}
+%\end{multicols}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Pratico - Dockerfile}
+	\framesubtitle{Dockerfile}
+	\begin{itemize}
+		\item \textbf{FROM}: Indica qual imagem vai ser utilizada para ser a base do container;
+		\item \textbf{MAINTAINER}: Autor da imagem;
+		\item \textbf{LABEL}: Adiciona metadados (Versão, descrição e fabricante);
+		\item \textbf{ADD}: Copia arquivos para dentro do container (Pode descomprimir alguns arquivos e pegar arquivos de URL);
+		\item \textbf{COPY}: Copia arquivos e diretórios para dentro do container;
+		\item \textbf{CMD}: Executar um comando no início da execução do container. Mas pode definir argumentos padrão para o \textbf{ENTRYPOINT};
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{Pratico - Dockerfile}
+	\framesubtitle{Dockerfile}
+	\begin{itemize}
+		\item \textbf{ENTRYPOINT}: Assim como o \textbf{CMD} executa um comando no início da execução do container, mas é mais difícil sobrescrever. E pode receber argumentos do \textbf{CMD};
+		\item \textbf{ENV}: Coloca variáveis de ambiente no container;
+		\item \textbf{EXPOSE}: Abre uma porta para a \textbf{Rede interna};
+		\item \textbf{RUN}: Executa um comando durante a criação da imagem;
+		\item \textbf{USER}: Define qual usuário vai ser utilizado para executar os próximos comandos;
+		\item \textbf{WORKDIR}: Define o diretório raiz;
+		\item \textbf{VOLUME}: Permite a criação de um ponto de montagem no container;
+	\end{itemize}
+\end{frame}

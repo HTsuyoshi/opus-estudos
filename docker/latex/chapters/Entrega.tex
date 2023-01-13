@@ -1,0 +1,56 @@
+\section{Entrega}
+
+\begin{frame}
+	\frametitle{Entrega - Objetivos}
+	\begin{itemize}
+	\item Ambientes ``isolados``:
+		\begin{itemize}
+			\item \uncover<1->{Ambiente de testes $=$ Ambiente de produção;}
+			\item \uncover<2->{Entregas de software de forma mais rápida;}
+				\begin{itemize}
+					\item \uncover<2->{Não é necessário instalar dependências nas máquinas ($\uparrow$ tempo);}
+				\end{itemize}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Entrega - CI/CD}
+\begin{itemize}
+	\item Docker é ótimo para \textit{continuous delivery} e \textit{continuous integration}:
+		\begin{itemize}
+			\item \uncover<1->{Desenvolvedores fazem mudanças no código localmente;}
+			\item \uncover<2->{No ambiente de teste são executados testes manuais e automáticos;}
+			\item \uncover<3->{Erros podem ser reproduzidos e arrumados usando docker;}
+			\item \uncover<4->{Então a imagem vai para o ambiente de produção;}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Entrega - Produção e escalabilidade}
+\begin{itemize}
+	\item Responsive deployment and scaling
+		\begin{itemize}
+			\item \uncover<1->{Pode ser executado em:}
+				\begin{itemize}
+					\item \uncover<1->{Máquinas físicas;}
+					\item \uncover<2->{Máquinas virtuais;}
+					\item \uncover<3->{Data centers;}
+					\item \uncover<4->{Nuvem;}
+					\item \uncover<5->{Misto;}
+				\end{itemize}
+			\item \uncover<6->{Portabilidade $\rightarrow$ escalar os projetos ou retirar aplicações e serviços (Quase tempo real);}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ciclo de vida}
+\framesubtitle{Ciclo de vida}
+\begin{itemize}
+	\item \uncover<1->{Desenvolver: Aplicação e componentes isolados no container;}
+	\item \uncover<2->{Execução: Testar e distribuir containers;}
+	\item \uncover<3->{Entrega: Ambiente de produção usando container ou serviço orquestrado;}
+\end{itemize}
+\end{frame}

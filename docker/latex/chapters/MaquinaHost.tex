@@ -1,0 +1,79 @@
+\section{Maquina host}
+
+\begin{frame}
+	\frametitle{Segurança - Máquina host}
+	\begin{itemize}
+		\item \uncover<1->{Docker-bench-security: Security auditing and benchmarktool for Docker;}
+		\item \uncover<2->{The Linux Auditing Framework: Linux Auditing Framework}
+		\item \uncover<3->{InSpec: Automated security and compliance Framework}
+		\item \uncover<4->{Lynis: Security auditing tool for systems based on UNIX like Linux, macOS, BSD and others. \textbf{in-depht security scan} and runs on systems itself. The primary goal is to test security defenses and provide tips for further system hardening}
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Docker Bench Security}
+	\begin{itemize}
+		\item \textit{docker-bench-security} vai analisar todo o sistema e dar uma pontuação total para o seu sistema.
+		\item O \textit{docker-bench-security} pode ser usado com a flag \textit{-c} e o argumento \textit{host\_configuration};
+			\begin{itemize}
+				\item Dessa forma vai ser rodado testes de segurança na máquina local;
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{The Linux Audit Framework}
+	\begin{itemize}
+		\item \textit{auditctl}: Vai fazer logs de alguns programas que estão rodando na máquina host.
+			\begin{itemize}
+				\item \textit{/run/containerd}
+				\item \textit{/var/lib/docker}
+				\item \textit{/etc/docker}
+				\item \textit{/lib/systemd/system/docker.service}
+				\item \textit{/lib/systemd/system/docker.socket}
+				\item \textit{/etc/default/docker}
+				\item \textit{/usr/bin/docker-containerd}
+				\item \textit{/usr/bin/docker-runc}
+				\item \textit{/usr/bin/containerd}
+				\item \textit{/usr/bin/containerd-shim}
+				\item \textit{/usr/bin/containerd-shim-runc-v1}
+				\item \textit{/usr/bin/containerd-shim-runc-v2}
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{The Linux Audit Framework}
+	\begin{itemize}
+		\item \uncover<1->{As regras precisam ser adicionadas dentro do arquivo \textit{audit.rules};}
+			\begin{itemize}
+				\item \uncover<1->{O arquivo das regras fica armazenado no \textit{/etc/audit/rules.d/audit.rules};}
+			\end{itemize}
+		\item \uncover<2->{O comando \textit{aureport} vai ser usado para verificar os logs;}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{Logins por SSH}
+	\begin{itemize}
+		\item Arquivo \textit{/etc/ssh/sshd\_config}
+			\begin{itemize}
+				\item Port: Mudar a porta do SSH (Atacante é obrigado a escanear todas as portas);
+				\item \uncover<2->{LogLevel: Mudar para VERBOSE;}
+				\item \uncover<3->{LoginGraceTime: Diminuir o tempo limite (O server desconecta o usuário se ele não conseguir fazer o login);}
+				\item \uncover<4->{PermitRootLogin: Não permitir;}
+				\item \uncover<5->{MaxAuthTries: Colocar um limite nas tentativas de autenticação;}
+				\item \uncover<6->{MaxSessions: Número máximo de sessões concorrentes;}
+				\item \uncover<7->{PasswordAuthentication: Desabilitar login por senha;}
+				\item \uncover<8->{PublicKeyAuthentication: Habilitar (Por padrão já aceita);}
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{Referencias}
+	\begin{itemize}
+		\item \href{https://www.youtube.com/watch?v=egqSNqNISz0}{Securing Docker Host}
+	\end{itemize}
+\end{frame}

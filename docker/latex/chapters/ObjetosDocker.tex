@@ -1,0 +1,165 @@
+\section{Docker Objects}
+
+\begin{frame}
+\frametitle{Docker Objects - Imagem}
+\begin{itemize}
+	\item É um \textbf{template}. Portanto, só é permitido ler;
+	\item \uncover<2->{Contém instruções para criar um container de \textit{Docker};}
+	\item \uncover<3->{Uma \textbf{Imagem} é composta por camadas;}
+	\item \uncover<4->{Camada inicial $\rightarrow$ Imagem pequena de Linux;}
+	\item \uncover<5->{Imagens existentes $\rightarrow$ Customizadas para gerar novas imagens;}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Docker Objects - Imagem personalizada}
+\begin{itemize}
+	\item Para construir a uma imagem customizada, é preciso construir um \textit{Dockerfile}.
+	\item \uncover<2->{\textit{Dockerfile}:}
+		\begin{itemize}
+			\item \uncover<2->{Arquivo com instruções para construir e executar uma imagem de um container;}
+			\item \uncover<3->{Cada instrução no arquivo Dockerfile adiciona uma camada nova na imagem;}
+		\end{itemize}
+\begin{center}
+
+\begin{multicols}{2}
+\begin{tikzpicture}
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (0,0.6);
+	\coordinate (C) at (0,1.2);
+	\coordinate (D) at (0,1.8);
+	\coordinate (E) at (0,2.4);
+	\uncover<4->{\node (rect) at (A) [draw,thick,minimum width=3cm,minimum height=0.5cm] {};}
+	\uncover<4->{\node at ($(A)-(0,0.2)$)[above] {\tiny FROM python:3};}
+	\uncover<5->{\node (rect) at (B) [draw,thick,minimum width=3cm,minimum height=0.5cm] {};}
+	\uncover<5->{\node at ($(B)-(0,0.2)$)[above] {\tiny WORKDIR /usr\dots};}
+	\uncover<6->{\node (rect) at (C) [draw,thick,minimum width=3cm,minimum height=0.5cm] {};}
+	\uncover<6->{\node at ($(C)-(0,0.2)$)[above] {\tiny RUN pip install fla\dots};}
+	\uncover<7->{\node (rect) at (D) [draw,thick,minimum width=3cm,minimum height=0.5cm] {};}
+	\uncover<7->{\node at ($(D)-(0,0.2)$)[above] {\tiny COPY . .};}
+	\uncover<8->{\node (rect) at (E) [draw,thick,minimum width=3cm,minimum height=0.5cm] {};}
+	\uncover<8->{\node at ($(E)-(0,0.2)$)[above] {\tiny CMD ["python",\dots};}
+\end{tikzpicture}
+\columnbreak
+\begin{tikzpicture}
+	\uncover<9->{\node (rect) at (A) [red,draw,thick,minimum width=3cm,minimum height=0.5cm] {};}
+	\uncover<9->{\node at ($(A)-(0,0.2)$)[above] {\tiny FROM python:3};}
+	\uncover<10->{\node (rect) at (B) [red,draw,thick,minimum width=3cm,minimum height=0.5cm] {};}
+	\uncover<10->{\node at ($(B)-(0,0.2)$)[above] {\tiny WORKDIR /usr\dots};}
+	\uncover<11->{\node (rect) at (C) [draw,thick,minimum width=3cm,minimum height=0.5cm] {};}
+	\uncover<11->{\node at ($(C)-(0,0.2)$)[above] {\tiny RUN pip install  uvi\dots};}
+	\uncover<12->{\node (rect) at (D) [draw,thick,minimum width=3cm,minimum height=0.5cm] {};}
+	\uncover<12->{\node at ($(D)-(0,0.2)$)[above] {\tiny COPY . .};}
+	\uncover<13->{\node (rect) at (E) [draw,thick,minimum width=3cm,minimum height=0.5cm] {};}
+	\uncover<13->{\node at ($(E)-(0,0.2)$)[above] {\tiny  ENTRYPOINT u\dots};}
+\end{tikzpicture}
+\end{multicols}
+
+\end{center}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Docker Objects - Imagem}
+\framesubtitle{Imagem}
+\begin{itemize}
+	\item Novas customizações $\rightarrow$ Novas camadas na Imagem;
+	\item \uncover<2->{Na construção de uma imagem, apenas as camadas que sofreram mudanças vão ser reconstruídas;}
+	\item \uncover<3->{Imagens leves, pequenas e rápidas (Comparadas com outras tecnologias);}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Docker Objects - Containers}
+\begin{itemize}
+	\item Instância de uma imagem;
+		\begin{itemize}
+			\item Configurações definidas na inicialização e na imagem;
+			\item \uncover<2->{Mudanças no container não são armazenadas;}
+		\end{itemize}
+	\item \uncover<3->{Com a API do docker é possível:}
+		\begin{itemize}
+			\item \uncover<3->{Criar um container;}
+			\item \uncover<4->{Executar um container;}
+			\item \uncover<5->{Parar um container;}
+			\item \uncover<6->{Mover um container;}
+			\item \uncover<7->{Deletar um container;}
+		\end{itemize}
+	\item \uncover<8->{Gerenciar:}
+		\begin{itemize}
+			\item \uncover<8->{Redes;}
+			\item \uncover<9->{Armazenamento;}
+			\item \uncover<10->{Imagem;}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Docker Objects - Tecnologias}
+\begin{itemize}
+	\item Linguagem \textbf{Go};
+	\item \uncover<2->{Muitas funcionalidades do kernel do linux:}
+		\begin{itemize}
+			\item \uncover<2->{namespaces: Garante que cada um dos containers tenha a capacidade de se isolar em níveis:}
+			\begin{itemize}
+				\item \uncover<3->{PID: Ter seus próprios PIDs, mas a máquina host pode ver os PIDs do container;}
+				\item \uncover<3->{NET: Ter suas próprias interfaces de redes e portas. Responsável pela comunicação de containers;}
+				\item \uncover<3->{MNT: Garante que um sistema de arquivos montado não consiga acessar outro sistema de arquivos montado por outro mnt;}
+				\item \uncover<3->{IPC: Ter um SystemV IPC isolado, além de uma fila de mensagems POSIX própria;}
+				\item \uncover<3->{UTS: Isolamento do hostname, nome do domínio, versão do SO, etc...;}
+			\end{itemize}
+			\item \uncover<4->{cgroups: Garantir o controle do consumo de processo;}
+			\item \uncover<5->{Linux Security Modules: Permissões do que eu sou permitido fazer;}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Docker Objects - Container Runtimes}
+\begin{itemize}
+	\item As ferramentas \textbf{Container Runtimes} são ferramentas que facilitam a criação de containers de forma isolada e segura.
+	\item Open container Initiative runtimes:
+		\begin{itemize}
+			\item Native Runtimes:
+			\begin{itemize}
+				\item runC: escrito em go e mantido pelo projeto moby do docker;
+				\item Railcar: escrito em rust, mas foi abandonado;
+				\item Crun: escrito em c, performatico e leve;
+			\end{itemize}
+		\end{itemize}
+	\item Container Runtime Interface
+		\begin{itemize}
+			\item containerd: um runtime de alto nível desenvolvido no projeto moby do docker, por padrão usa o runC por baixo dos panos;
+			\item cri-o: implementação liderada pela Redhat, feita especificamente para o kubernetes;
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Docker Objects - Resumo}
+\begin{itemize}
+	\item Daemon (dockerd): espera por chamads API do docker, e gerencia objetos como imagens, containers, redes e volumes;
+	\item \uncover<2->{Cliente (docker): interage com o dockerd;}
+		\begin{itemize}
+			\item \uncover<2->{Comandos como: docker run, o cliente envia comandos para o dockerd;}
+			\item \uncover<3->{O cliente docker pode se comunicar com mais de um daemon;}
+		\end{itemize}
+	\item \uncover<4->{Docker desktop: é uma aplicação fácil de ser instalada nos ambientes Mac, Windows ou Linux.}
+		\begin{itemize}
+			\item \uncover<5->{O docker desktop contém o daemon (dockerd), o docker client (docker), docker compose, docker content trust, kubernetes e credential helper;}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Docker Objects - Resumo}
+\begin{itemize}
+	\item Docker registries: Guarda as imagens de docker;
+		\begin{itemize}
+			\item Docker Hub: é um registro público, por padrão o docker procura por imagens no Docker Hub;
+			\item \uncover<2->{É possível ter até seu registro próprio;}
+			\item \uncover<3->{Os comandos docker pull, docker run e docker push procuram ou enviam as imagens para o registro configurado na máquina que estão rodando;}
+		\end{itemize}
+	\item \uncover<4->{Docker objects: Imagens, conteiners, redes, volumes, plugins, etc...}
+\end{itemize}
+\end{frame}

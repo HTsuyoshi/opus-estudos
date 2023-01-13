@@ -1,0 +1,70 @@
+\section{Docker Daemon}
+
+\begin{frame}
+	\frametitle{Segurança - Docker Daemon}
+	\begin{itemize}
+		\item \uncover<1->{Controlar acesso do grupo `docker`;}
+		\item \uncover<2->{Criptografia TLS;}
+		\item \uncover<3->{Implementar Namespaces do usuario;}
+		\item \uncover<4->{Desabilitar comunicação entre containers na rede default;}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Criptografia TLS}
+	\begin{itemize}
+		\item \uncover<1->{A criptografia TLS vai ficar entre o cliente do docker e o docker host}
+		\item \uncover<2->{Arrumar o arquivo \textbf{/etc/docker/daemon.json:}}
+		\item \uncover<3->{Arrumar o arquivo \textbf{/etc/systemd/system/docker.service.d/override.conf:}}
+			\begin{itemize}
+				\item \uncover<4->{--tlsverify}
+				\item \uncover<4->{--tlscert=server-cert.pem}
+				\item \uncover<4->{--tlscacert=ca.pem}
+				\item \uncover<4->{--tlskey=server-key.pem}
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Criptografia TLS}
+	\begin{itemize}
+		\item \uncover<1->{Arrumar variáveis de ambiente no cliente:}
+			\begin{itemize}
+				\item \uncover<1->{DOCKER\_TLS\_VERIFY=1;}
+				\item \uncover<1->{DOCKER\_CERT\_PATH='path';}
+			\end{itemize}
+		\item \uncover<2->{Para recarregar:}
+			\begin{itemize}
+				\item \uncover<2->{systemctl daemon-reload;}
+				\item \uncover<2->{systemctl restart docker;}
+			\end{itemize}
+		\item \uncover<3->{\href{https://github.com/AlexisAhmed/DockerSecurityEssentials/blob/main/Docker-TLS-Authentication/secure-docker-daemon.sh}{Script for TLS-Authentication}}
+		\item \uncover<4->{Evitar ataque \textit{Man-in-the-middle}}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{User Namespaces}
+	\begin{itemize}
+		\item \uncover<1->{Criar um usuário e grupo nos arquivos /etc/subuid e /etc/subgid;}
+		\item \uncover<2->{Ou usar o usuário padrão \textbf{dockremap};}
+		\item \uncover<4->{Diminuir os danos causados em caso de \textit{container breakout};}
+		\item \uncover<5->{Arrumar o arquivo \textbf{/etc/docker/daemon.json:}}
+		\item \uncover<5->{Arrumar o arquivo \textbf{/etc/systemd/system/docker.service.d/override.conf:}}
+			\begin{itemize}
+				\item userns-remap="default"
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{Comunicação entre containers}
+	\begin{itemize}
+		\item \uncover<5->{Arrumar o arquivo \textbf{/etc/docker/daemon.json:}}
+		\item \uncover<5->{Arrumar o arquivo \textbf{/etc/systemd/system/docker.service.d/override.conf:}}
+			\begin{itemize}
+				\item icc="false"
+			\end{itemize}
+		\item \uncover<2->{Containers dentro da rede default não vão conseguir se comunicar;}
+	\end{itemize}
+\end{frame}

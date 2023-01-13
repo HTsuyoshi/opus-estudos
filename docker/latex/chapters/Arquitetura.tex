@@ -1,0 +1,85 @@
+\section{Arquitetura}
+
+\begin{frame}
+\frametitle{Arquitetura do docker}
+\begin{itemize}
+	\item Arquitetura cliente-servidor:
+		\begin{itemize}
+			\item Cliente docker se comunica com o servidor do docker;
+			\item \uncover<2->{Comunicação usando sockets UNIX ou pela interface de redes usando uma API REST;}
+			\item \uncover<3->{O servidor é o responsável por criar imagens, rodar imagens e distribuir;}
+			\item \uncover<4->{Podem rodar na mesma máquina ou em máquinas diferentes;}
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Arquitetura do docker}
+\centering
+\begin{tikzpicture}
+	% Coordinate A
+	\coordinate (A) at (0,0);
+	\node at ($(A)-(0,2.75)$) [draw,thin,minimum width=3.5cm,minimum height=5cm] {};
+	\node at (A) [draw,thick,minimum width=3.5cm,minimum height=0.5cm] {};
+	\node at ($(A)-(0,0.2)$)[above] { \tiny Docker client};
+	\node (dbuild) at ($(A)-(0,0.9)$) [draw,thin,minimum width=3cm,minimum height=0.5cm] { \tiny Docker build};
+	\node (dpull) at ($(A)-(0,2.1)$) [draw,thin,minimum width=3cm,minimum height=0.5cm]  {\tiny Docker pull};
+	\node (drun) at ($(A)-(0,3.3)$) [draw,thin,minimum width=3cm,minimum height=0.5cm]  {\tiny Docker run};
+	\node (detc) at ($(A)-(0,4.5)$) [draw,thin,minimum width=3cm,minimum height=0.5cm]  {\tiny \dots};
+
+	% Coordinate B
+	\coordinate (B) at ($(1,0)+(3,0)+(A)$);
+	\node at ($(B)-(0,2.75)$) [draw,thin,minimum width=3.5cm,minimum height=5cm] {};
+	\node at (B) [draw,thick,minimum width=3.5cm,minimum height=0.5cm] {};
+	\node at ($(B)-(0,0.2)$)[above] {\tiny Docker host};
+	\node (ddaemon) at ($(B)-(0,0.9)$) [draw,thin,minimum width=3cm,minimum height=0.5cm] { \tiny Docker daemon};
+	\node (rect) at ($(B)-(0.8,2.1)$) [draw,thick,minimum width=1.4cm,minimum height=0.5cm]  {\tiny Container};
+	\node (rect) at ($(B)-(-0.8,2.1)$) [draw,thick,minimum width=1.4cm,minimum height=0.5cm]  {\tiny Image};
+	\node (rect) at ($(B)-(0.8,3.55)$) [draw,thin,minimum width=1.4cm,minimum height=2.4cm]  {};
+	\node[inner sep=0pt] (docker) at ($(B)-(0.8,2.8)$)
+    {\includegraphics[width=.05\textwidth]{./assets/Docker_logo.png}};
+	\node[inner sep=0pt] at ($(B)-(0.8,3.6)$)
+    {\includegraphics[width=.05\textwidth]{./assets/Docker_logo.png}};
+	\node[inner sep=0pt] at ($(B)-(0.8,4.4)$)
+    {\includegraphics[width=.05\textwidth]{./assets/Docker_logo.png}};
+	\node (rect) at ($(B)-(-0.8,3.55)$) [draw,thin,minimum width=1.4cm,minimum height=2.4cm]  {};
+	\node[inner sep=0pt] (ubuntu2) at ($(B)-(-0.8,2.8)$)
+    {\includegraphics[width=.05\textwidth]{./assets/Ubuntu.png}};
+	\node[inner sep=0pt] at ($(B)-(-0.8,3.6)$)
+    {\includegraphics[width=.05\textwidth]{./assets/Fedora.png}};
+	\node[inner sep=0pt] (amazon2) at ($(B)-(-0.8,4.4)$)
+    {\includegraphics[width=.05\textwidth]{./assets/Amazon.png}};
+
+	% Coordinate C
+	\coordinate (C) at ($(1,0)+(3,0)+(B)$);
+	\node at ($(C)-(0,2.75)$) [draw,thin,minimum width=3.5cm,minimum height=5cm] {};
+	\node at (C) [draw,thick,minimum width=3.5cm,minimum height=0.5cm] {};
+	\node at ($(C)-(0,0.2)$)[above] {\tiny Registry};
+	\node[inner sep=0pt] at ($(C)-(0.8,1.25)$) {\includegraphics[width=.10\textwidth]{./assets/Ubuntu.png}};
+	\node[inner sep=0pt] at ($(C)-(-0.8,2.75)$) {\includegraphics[width=.10\textwidth]{./assets/Fedora.png}};
+	\node[inner sep=0pt] (amazon) at ($(C)-(0.8,4.25)$) {\includegraphics[width=.10\textwidth]{./assets/Amazon.png}};
+	
+
+	% Lines
+	\draw[-,thin,dotted] (dbuild.east) -- (ddaemon.west);
+	\onslide<2>{\draw[-,red,thick,dotted] (dbuild.east) -- (ddaemon.west);}
+	\draw[-,thin,dotted] (ddaemon.east) to[out=-20,in=-30] (ubuntu2.east);
+	\onslide<3>{\draw[-,red,thick,dotted] (ddaemon.east) to[out=-20,in=-30] (ubuntu2.east);}
+
+	\draw[-,thin,dashed] (dpull.east) -- (ddaemon.west);
+	\onslide<4>{\draw[-,red,thick,dashed] (dpull.east) -- (ddaemon.west);}
+	\draw[-,thin,dashed] (ddaemon.east) -- (amazon.west);
+	\onslide<5>{\draw[-,red,thick,dashed] (ddaemon.east) -- (amazon.west);}
+	\draw[-,thin,dashed] (amazon.west) -- (amazon2.east);
+	\onslide<6>{\draw[-,red,thick,dashed] (amazon.west) -- (amazon2.east);}
+
+	\draw[-,thin] (drun.east) -- (ddaemon.west);
+	\onslide<7>{\draw[-,red,thick] (drun.east) -- (ddaemon.west);}
+	\draw[-,thin] (detc.east) -- (ddaemon.west);
+
+	\draw[->,thin] (ddaemon.south) -- (ubuntu2.west);
+	\onslide<8>{\draw[->,red,thick] (ddaemon.south) -- (ubuntu2.west);}
+	\draw[->,thin] (ubuntu2.west) -- (docker.east);
+	\onslide<9>{\draw[->,red,thick] (ubuntu2.west) -- (docker.east);}
+\end{tikzpicture}
+\end{frame}
