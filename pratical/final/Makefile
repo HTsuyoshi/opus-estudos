@@ -9,17 +9,15 @@ setup:
 	@echo '--- Start nodes ---'
 	#@minikube start --nodes='4' --network-plugin=cni --memory=4096 --cni=cillium --profile=multinode --vm-driver=virtualbox
 	@minikube start --nodes='4' --profile multinode --vm-driver=virtualbox
-	@echo '--- Enabling minikube metrics-server ---'
-	@minikube -p multinode addons enable metrics-server
 	@echo '--- Add Taints ---'
-	@kubectl taint nodes multinode type=b:NoSchedule
+	@kubectl taint nodes multinode a=b:NoSchedule
+	@kubectl label nodes multinode-m02 minikube.k8s.io/primary=true
 	@kubectl taint nodes multinode-m03 type=site:NoSchedule
 	@kubectl taint nodes multinode-m04 type=challs:NoSchedule
-	@kubectl label nodes multinode-m02 minikube.k8s.io/primary=true
 	@echo '--- Enabling minikube addons  ---'
+	@minikube -p multinode addons enable metrics-server
 	@minikube -p multinode addons enable ingress
 	@minikube -p multinode addons enable ingress-dns
-	@sleep 8
 	@echo '--- Add Labels ---'
 	@kubectl label nodes multinode-m02 minikube.k8s.io/hostname=multinode-m02
 	@kubectl label nodes multinode-m03 minikube.k8s.io/hostname=multinode-m03
