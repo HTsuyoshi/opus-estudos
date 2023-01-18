@@ -1,0 +1,68 @@
+\section{Virtual Private Cloud}
+
+\begin{frame}
+	\frametitle{Virtual Private Cloud (VPC)}
+	\begin{itemize}
+		\item VPCs são isoladas entre si, mas podem ser configuradas para se comunicarem
+		\item Cada região tem uma VPC padrão, mas é recomendada criar sua própria VPC para o ambiente de produção
+		\item Dentro de uma VPC é possível criar uma subnet
+		\item As subnets são aplicadas em AZs (Zonas de disponibilidade)
+		\item Subnet:
+			\begin{itemize}
+				\item Pública: Pode ser acessada remotamente por qualquer lugar
+				\item Privada: Só vai ser acessível por dentro da AWS
+			\end{itemize}
+		\item \textbf{VPC wizard} tem algumas configurações pré-definidas de VPC
+		\item Lembrar de verificar e configurar:
+		\begin{itemize}
+			\item DHCP options set
+			\item DNS resolution
+			\item DNS hostname
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Internet Gateway}
+	\begin{itemize}
+		\item Libera a entrada e a saída de determinado \textbf{Route Table}
+		\item Não tem custo
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Route table}
+	\begin{itemize}
+		\item Associa as \textbf{subnets}
+		\item Se a \textbf{Route table} não tiver uma rota default ela não está pública
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Security Groups X NetworkACL}
+	\begin{itemize}
+		\item \textbf{Securty Groups}
+		\begin{itemize}
+			\item Opera no nível de instância (Primeira camada de defesa)
+			\item Apenas regras de liberação
+			\item Stateful: o tráfego de retorno é automaticamente permitido, independentemente de quaisquer regras
+			\item Aplica-se a uma instância somente quando especificado o grupo de segurança
+		\end{itemize}
+		\item \textbf{NetworkACL}
+		\begin{itemize}
+			\item Regra de segurança da rede (Como se fosse um \textit{firewall})
+			\item Regras de liberação e negação
+			\item Stateless: o tráfego de retorno deve ser explicitamente permitido pelas regras
+			\item Aplica a todas as instâncias nas sub-redes
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{NetworkACL}
+	\begin{itemize}
+		\item Cada regra vai ter uma prioridade
+		\item É bom deixar um espaço entre cada regra para possíveis regras futuras (Ex: deixar 10 espaços entre cada regra)
+		\item \textbf{OBS}: É bom liberar portas efêmeras (1024-65535). São usadas para comunicações de saída através do protocolo de rede TCP/IP
+	\end{itemize}
+\end{frame}

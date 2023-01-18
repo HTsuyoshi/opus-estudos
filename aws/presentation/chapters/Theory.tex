@@ -1,0 +1,515 @@
+\section{Teoria}
+
+\subsection{Cloud X Virtualização}
+
+\begin{frame}
+	\frametitle{Virtualização}
+	\begin{itemize}
+		\item Criação de infraestruturas virtuais a partir de uma estrutura física
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Cloud}
+	\begin{itemize}
+		\item Conceito que reúne vários \textit{softwares} e utiliza de virtualização
+		\item Possui algumas características específicas:
+			\begin{itemize}
+				\item Autoserviço sob demanda
+				\item Amplo acesso a rede
+				\item Pool de recursos
+				\item Rápida elaticidade
+				\item Serviços mensuráveis
+			\end{itemize}
+		\item \textbf{Colocation}: 1000 \textbf{VMs} na rede, \textbf{VPS} por um provedor, servidor físico em um provedor, etc\dots
+	\end{itemize}
+\end{frame}
+
+\subsection{Cloud para o NIST}
+
+\begin{frame}
+	\frametitle{NIST}
+	\begin{itemize}
+		\item Um modelo para habilitar o acesso por rede a um conjunto compartilhado de recursos de computação e precisa ser:
+			\begin{itemize}
+				\item Ubíquo (Pode ser encontrado em todos os lugares)
+				\item Conveniente
+				\item Sob demanda
+			\end{itemize}
+		\item \textbf{Recursos de computação}: Redes, servidores, armazenamento, aplicações e serviços
+		\item Esses recursos devem ser provisionados e liberados com o mínimo de esforço de gerenciamento ou interação com o provedor de serviços.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Características}
+	\begin{itemize}
+		\item \textbf{Auto-serviço sob demanda}
+		\item \textbf{Amplo acesso por rede}
+		\item \textbf{Agrupamento de recursos}
+		\item \textbf{Elasticidade rápida}
+		\item \textbf{Serviço mensurado}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Auto-serviço sob demanda}
+	\begin{itemize}
+		\item O consumidor pode providionar por conta própra \textbf{Recursos de computação}
+		\item Não necessita da intervenção humana dos provedores de serviço
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Amplo acesso por rede}
+	\begin{itemize}
+		\item Os \textbf{Recursos de computação} estão disponíveis através da rede
+		\item São acessados através de mecanismos padronizados que promovem o uso por dispositivos, clientes leves ou ricos de diversas plataformas (Smartphones, tablets, laptops ou desktops)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Agrupamento de recursos}
+	\begin{itemize}
+		\item Os \textbf{Recusos de computação} do provedor são agrupados para atender a múltiplos consumidores em modalidade multi-inquilinos (Recursos físicos e virtuais diferentes dinamicamentes atribuídos e reatribuídos conforme a demanda dos consumidores)
+		\item Há uma certa independência de localização geográfica, uma vez que o consumidor em geral não controla ou conhece a localização exata dos recursos fornecidos
+		\item Mas pode ser capaz de especificar a localização em um nível de abstração mais alto (país, estado, datacenter)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Elasticidade rápida}
+	\begin{itemize}
+		\item Os recursos podem ser provisionados e liberados elasticamente, em alguns casos automaticamentes, para rapidamente aumentar ou diminuir de acordo com a demanda
+		\item Para o consumidor, os recursos disponíveis para provisionamento muitas vezes parecem ser ilimitados e podem ser alocados em qualquer quantidade e a qualquer tempo
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Serviços mensurado}
+	\begin{itemize}
+		\item Os sistemas na nuvem automaticamente controlam e otimizam o uso dos recursos através de medições em um nível de abstração apropriado para o tipo de serviço (como armazenamento, processamento, comunicação de ree e contas de usuário ativas)
+		\item A utilização de recursos pode ser monitorada, controlada e informada, gerando transparência tanto para o fornecedor como para o consumidor do serviço utilizado
+	\end{itemize}
+\end{frame}
+
+\subsection{Papéis e atividades no cloud}
+
+\begin{frame}
+	\frametitle{Papéis e atividades do profissional cloud}
+	\begin{itemize}
+		\item \textbf{Consumidor de nuvem}
+		\item \textbf{Provedor de nuvem}
+		\item \textbf{Broker de nuvem}
+		\item \textbf{Auditor}
+		\item \textbf{Operadora de nuvem}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Consumidor de nuvem}
+	\begin{itemize}
+		\item Uma pessoa/organização que mantém relação comercial com o fornecedor da nuvem, e usa o serviço
+		\item Uso:
+			\begin{itemize}
+				\item Um consumidor de nuvem procura o catálogo de serviços de um provedor de nuvem
+				\item Solicita o serviço apropriado
+				\item Configura contratos de serviço com o provedor da nuvem
+				\item Usa o serviço
+			\end{itemize}
+		\item O consumidor pode ser cobrado pelo serviço fornecido e precisa organizar os pagamentos de acordo
+		\item \textbf{OBS}: Dependendo dos serviços solicitados, as atividades e os cenários de uso podem ser diferentes entre os consumidores da nuvem
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Provedor de nuvem}
+	\begin{itemize}
+		\item Um provedor de nuvem pode ser uma pessoa, uma organização ou uma entidade responsável por disponibilizar um serviço aos consumidores de nuvem
+		\item Um provedor de nuvem:
+			\begin{itemize}
+				\item Cria o software/plataforma/serviços de infraestrutura solicitados
+				\item Gerencia a infraestrutura técnica necessária para fornecr os serviços
+				\item Providencia os acordos de níveis de serviço (SLA) e protege a segurança e a privacidade dos serviços
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Broker de nuvem}
+	\begin{itemize}
+		\item Uma entidade que
+			\begin{itemize}
+				\item Gerencia o uso
+				\item Desempenho
+				\item Entrega de serviços na nuvem
+				\item Negocia relaões entre o \textbf{Provedor de nuvem} e o \textbf{Consumidor de nuvem}
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Auditor}
+	\begin{itemize}
+		\item Pode avaliar os serviços fornecidos por um \textbf{Provedor de nuvem}:
+			\begin{itemize}
+				\item Controles de segurança
+				\item Impacto de privacidade
+				\item Desempenho
+				\item Aderência aos parâmetros do acordo de nível de serviço (SLA)
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Operadora de nuvem}
+	\begin{itemize}
+		\item Um intermediário que fornece conectividade e transporte de serviços na nuvem entre \textbf{Consumidores de nuvem} e \textbf{Provedores de nuvem}
+		\item As operadoras de nuvem fornecem acesso aos consumidores através de redes, telecomunicações e outros dispositivos de acesso (computadores, laptops, telefones celulares, etc\dots)
+		\item A distribuição de serviços na nuvem é normalmente fornecida por operadoras de rede e telecomunicações ou por um agente de transporte
+	\end{itemize}
+\end{frame}
+
+\subsection{Tipos de nuvem}
+
+\begin{frame}
+	\frametitle{Tipos de nuvem}
+	\begin{itemize}
+		\item \textbf{Infraestrutura como Serviço (Iaas)}
+		\item \textbf{Software como Serviço (SaaS)}
+		\item \textbf{Plataforma como Serviço (PaaS)}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{IaaS - Infrastructure as a Service}
+	\begin{itemize}
+		\item O recurso fornecido ao consumidor é provisionar:
+			\begin{itemize}
+				\item Processamento
+				\item Armazenamento
+				\item Comunicação de rede
+				\item Outros recursos de computação funcamentais nos quais o consumidor pode instalar e executar softwares em geral, incluindo sistemas operaionais e aplicativos
+				\item Possivelmente um controle limitado de alguns componentes de rede (\textit{firewall})
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{PaaS - Plataform as a Service}
+	\begin{itemize}
+		\item O recurso fornecido ao consumidor é instalar na infraestrutura na nuvem aplicativos criados ou adiquiridos pelo consumidor,
+		\item O consumidor tem controle sobre as aplicações instaladas e possívelmente configuraçoes de hospedagem de aplicações
+		\item O consumidor não gerencia nem controla a infraestrutura na nuvem subjacente (Rede, servidores, sistemas operacionais, armazenamento ou mesmo recursos individuais da aplicação, com a possível exeção de configurações limitadas por usuário)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{SaaS - Software as a Service}
+	\begin{itemize}
+		\item O recurso fornecido ao consumidor é o uso de aplicções do fornecedor executando em uma infraestrutura na nuvem
+		\item As aplicações podem ser acessadas por vários dispositivos clientes através de interfaces leves ou ricas
+		\item O consumidor não gerencia nem controla a infraestrutura na nuvem subjacente (Rede, servidores, sistemas operacionais, armazenamento ou mesmo recursos individuais da aplicação, com a possível exeção de configurações limitadas por usuário)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Exemplos}
+	\begin{tiny}
+	\begin{table}[ht]
+		\centering
+		\begin{tabular}{|p{1cm}|p{5cm}|p{4cm}|}
+		\hline
+			Tipo & Serviço & Exemplos \\
+		\hline
+		\hline
+		  \multirow{3}{*}{IaaS}
+			& Rede virtualizada & AWS VPC, Azura Virtual Network \\
+			& Armazenamento de dados & AWS S3, Google cloud storage \\
+			& Servidores Virtuais & AWS EC2, Azure Virtual Machines \\
+			\hline
+		  \multirow{2}{*}{PaaS}
+			& Infraestrutura para desenvolvimento, implantação e execução de aplicativos & Heroku, Google App Engine \\
+			& Plataforma testes e gerenciamento de aplicações & AWS Elastic Beanstalk \\
+			\hline
+		  \multirow{3}{*}{SaaS}
+			& Armazenamento Dados & DropBox, Google Drive \\
+			& Editor de textos e planilha & Gsuite e Office 365 \\
+			& SIstema de Gestão de banco de dados & AWS RDS, Google Cloud SQL \\
+		\hline
+		\end{tabular}
+		\caption{Exemplos de serviços}
+	\end{table}
+	\end{tiny}
+\end{frame}
+
+\subsection{Categorias de Serviços de nuvem}
+
+\begin{frame}
+	\frametitle{Categorias de Serviços de nuvem}
+	\begin{itemize}
+		\item \textbf{Comunicação como serviço (CaaS)}
+		\item \textbf{Computação como serviço (CompaaS)}
+		\item \textbf{Armazenamento de dados como serviço (DSaaS)}
+		\item \textbf{Rede como serviço (NaaS)}
+		\item \textbf{Banco de dados como serviço (DBaaS)}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Comunicação como serviço (CaaS)}
+	\begin{itemize}
+		\item As capacidades oferecidas ao cliente do serviço de nuvem são a interação e a colaboração em tempo real
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Computação como serviço (CompaaS)}
+	\begin{itemize}
+		\item As capacidades oferecidas ao cliente do serviço de nuvem são a provisão e o uso de recursos de processamento necessários à implantação e execucão de softwares
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Armazenamento de dados como serviço (DSaaS)}
+	\begin{itemize}
+		\item As capacidades oferecidas ao cliente do serviço de nuvem são a provisão e o uso de armazenamento de dados e suas capacidades relacionadas
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Rede como serviço (NaaS)}
+	\begin{itemize}
+		\item As capacidades oferecidas ao cliente do serviço de nuvem são a conectividade para o transporte e as capacidades relacionadas à rede
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Banco de dados como serviço (DBaaS)}
+	\begin{itemize}
+		\item Oferece a funcionalidade d eum banco de dados semelhante ao que é encontrado em SGBDs
+	\end{itemize}
+\end{frame}
+
+\subsection{Modelos de implementação de nuvem}
+
+\begin{frame}
+	\frametitle{Modelos de implementação de nuvem}
+	\begin{itemize}
+		\item Nuvem pública
+		\item Nuvem privada
+		\item Nuvem híbrida
+		\item Nuvem comunitária
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Nuvem pública}
+	\begin{itemize}
+		\item Provisionada para uso aberto ao público em geral
+		\item Sua propriedade, gerenciamento e operação podem ser de:
+			\begin{itemize}
+				\item Uma empresa
+				\item Uma instituição acadêmica
+				\item Uma organização do governo
+				\item Ou uma combinação mista
+			\end{itemize}
+		\item Fica nas instalações do fornecedor
+	\item \textbf{OBS}: Criar uma estrutura na Amazon e configurar usando VPN ou conexão direta continua sendo uma nuvem pública
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Nuvem privada}
+	\begin{itemize}
+		\item Provisionada para uso exclusivo por uma únic organização composta de diversos consumidores
+		\item A sua propriedade, gerenciamento de operação podem ser de:
+			\begin{itemize}
+				\item A própria organização
+				\item Terceiros
+				\item Combinação mista
+			\end{itemize}
+		\item Pode estar dentro ou fora das instalações da organização
+		\item Nuvem privada não é organização e não precisa estar instalada localmente
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Nuvem comunitária}
+	\begin{itemize}
+		\item Provisionada para uso exclusivo por uma determinada comunidade de consumidores de organizações que têm interesses em comum (missão, requisitos de segurança, políticas, observância de regulamentações)
+		\item A sua propriedade, gerenciamento e operação podem ser de:
+			\begin{itemize}
+				\item Uma organização
+				\item Mais de uma organizações da comunidade
+				\item Terceiros
+				\item Combinação mista
+			\end{itemize}
+		\item Pode estar dentro ou fora das instalações das organizações participantes
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Nuvem híbrida}
+	\begin{itemize}
+		\item Composição de duas ou mais infraestruturas na nuvem (\textbf{privadas}, \textbf{comunitárias} ou \textbf{públicas}) que permanecem entidades distintas
+		\item São interligadas por tecnoogia padronizada ou proprietária que permite a comunicação de dados e portabilidade de aplicações (Transferencia de processamento para a nuvem para balanceamento de carga entre nuvens)
+	\end{itemize}
+\end{frame}
+
+\subsection{Arquitetura de Aplicações}
+
+\begin{frame}
+	\frametitle{Single-tenant X Multi-tetant}
+	\begin{multicols}{2}
+		\begin{itemize}
+			\item \textbf{Single-tenant}
+			\item \tiny Várias empresas compartilham a mesma instância para armazenamento
+			\item \tiny Instância é dividida/particionada para que as empresas não acessem informações de outra
+			\item \tiny Benefícios
+				\begin{itemize}
+					\item \tiny Máxima privacidade: 1 instância por usuário
+					\item \tiny Sem prioridades
+					\item \tiny Pode usar os recursos como quiser
+				\end{itemize}
+			\item \tiny Desvantagens
+				\begin{itemize}
+					\item \tiny Custear todo sistema sozinho
+					\item \tiny O uso do sistema não é o mais eficiente
+				\end{itemize}
+		\end{itemize}
+		\columnbreak
+		\begin{itemize}
+			\item \textbf{Multi-tenant}
+			\item \tiny Cada empresa possui sua própria instância do aplicativo e infra-estrutura
+			\item \tiny Benefícios
+				\begin{itemize}
+					\item \tiny Economia de Hardware e energia (custo)
+					\item \tiny Esforço maior para atualizar
+					\item \tiny Backup e Redundância mais fáceis em relação ao Single-tenant
+				\end{itemize}
+			\item \tiny Desvantagens
+				\begin{itemize}
+					\item \tiny Menos customização específica
+					\item \tiny Menos autorização e Atraso de tempo (Recursos ou funcionalidades podem ser adiadas, empresas maiores ganham preferencia)
+				\end{itemize}
+		\end{itemize}
+		
+	\end{multicols}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Inquilino isolado}
+	\begin{itemize}
+		\item Cada inquilito tem seu próprio stack de tecnologia, não havendo compartilhamento de recursos
+		\item Para uma oferta SaaS, este modelo carece de agilidade e de elasticidade, porque adicionar um novo inquilino requer o provisionamento de sua própria instância de hardware e de software
+		\item Embora não seja verdadeiramente Computação em Nuvem, é um passo nessa direção, oferecendo como atrativo a facilidade de uma rápida oferta para SaaS
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Multi-inquilino (Virtualização)}
+	\begin{itemize}
+		\item Cada inquilino tem seu próprio stack de tecnologia, mas o hardware é alocado dinamicamente a partir de um pool de recursos, via mecanismos de virtualização
+		\item Bastante similar ao modelo anterior, mas permitindo elasticidade na camada do hardware
+		\item Entretanto, apresenta limitações, pois a unidade de alocação e liberação de recursos é a máquina virtual onde aplicação vai operar.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Multi-inquilino via container}
+	\begin{itemize}
+		\item Vários inquilinos são executados na mesma instância de um container de aplicação (um servidor de aplicações), mas cada inquilino está associado a uma instância separada do software de banco de dados
+		\item O ambiente de execução é compartilhado entre vários inquilinos, mas a plataforma de dados é a mesma
+		\item Premissa do modelo é que o isolamento do banco de dados garante integridade dos dados dos inquilinos, ao mesmo tempo em que o container de execução, por ser compartilhado, oferece as vantagens de elasticidade e de customização
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Multi-inquilino via todo o stack de software compartilhado}
+	\begin{itemize}
+		\item É uma evolução do modelo anterior, agora com todo o stack de software sendo compartilhado
+		\item Neste modelo, além do container da aplicação, também uma única instância do banco de dados é compartilhada por todos os inquilinos
+		\item \href{https://www.youtube.com/watch?v=S9_K1jwjo1U}{Vídeo explicativo}
+	\end{itemize}
+\end{frame}
+
+\subsection{Pontos para considerar migração}
+
+\begin{frame}
+	\frametitle{Devo migrar?}
+	\begin{itemize}
+		\item \textbf{Custo real}: Verificar se o modelo atual usado pela empresa tem um custo mais alto do que o modelo de computação em nuvem
+		\item \textbf{Confiabilidade}: É muito importante avaliar a reputação do provedor de nuvem, e também as políticas de segurança desse provedor
+		\item \textbf{Legalidade}: Nem todas as empresas podem mover suas aplicações para nuvens públicas, e um dos motivos são os fatores legais, regulamentações do tipo de negócio ou país que a empresa opera, que não permitem que os dados estejam localizados fora do país.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Custo real}
+	\begin{itemize}
+		\item Deve ser levado em conta:
+		\begin{itemize}
+			\item Quanto de armazenamento será necessário
+			\item Qual o poder computacional vai precisar como processamento e outros
+			\item Quanto de tráfego vai utilizar
+			\item O valor de licença de software
+			\item Contratar pessas para desenvolver aplicações para nuvem? Capacitar a equipe?
+			\item Investir dinheiro em certificações e para se adaptar às regulamentações da empresa
+			\item Custos inesperados como customização de aplicações
+			\item Transferência de dados
+			\item Custos de validação
+			\item Outros
+		\end{itemize}
+		\item Após somar tudo isso certifique que o ROI (retorno sobre o investimento) seja favorável para a migração.
+	\end{itemize}
+\end{frame}
+
+\subsection{Modelo de nuvem ideal}
+
+\begin{frame}
+	\frametitle{Custo real}
+	\begin{tiny}
+	\begin{itemize}
+		\item Se você quer reduzir custos operacionais de atualização, manutenção e licenciamento de software ou se você tem uma empresa pequena ou de médio porte mas não tem pessoal suficiente para manter a TI mas precisa de tecnologia de ponta, ou se a empresa não dispõe de recursos para investir em infraestrutura e precisa de tecnologia de ponta o modelo ideal é a nuvem pública
+		\item Mas se a empresa quer ter o controle de todo o datacenter, servidores, softwares, segurança ou por questões legais não pode hospedar seus serviços fora da empresa aí você deve utilizar nuvem privada
+		\item Mas tem um outro caso que é a empresa que gosta de manter o controle dos dados locais mas também gostaria de oferecer alguns serviços que estão disponíveis em nuvem pública, neste caso você utiliza uma estrutura com nuvem híbrida, e isso é o que vem acontecendo com a maioria das empresas
+	\end{itemize}
+	\end{tiny}
+\end{frame}
+
+\subsection{Escolher um provedor}
+
+\begin{frame}
+	\frametitle{Custo real}
+	\begin{tiny}
+	\begin{itemize}
+		\item Responsabilidade do provedor: Você precisa ler o contrato que o provedor disponibiliza
+		\item Recuperação contra desastre: Saber se o provedor tem um plano de contingência em caso de falha do serviço principal, isso vale mais para SaaS.
+		\item Modelo de adoção suportados pelo provedor: Verificar, e se o provedor suporta a integração da nuvem pública com a sua nuvem privada para poder criar uma nuvem híbrida.
+		\item Segurança dos dados: O que é responsabilidade do provedor e o que é sua responsabilidade, na maioria das vezes a segurança é compartilhado, o provedor disponibiliza as ferramentas, mas você precisa utilizá-las, conhecer as certificações que o provedor tem na área de segurança também é muito importante.
+		\item Modelo de controle de identidade: pesquisar os tipos de controle de acesso fornecidos pela nuvem, saber se é possível fazer a integração de seus usuário locais com os usuários na nuvem, utilizando o mesmo modelo de autenticação.
+		\item Manutenção dos serviços: Saber como são os procedimentos de manutenção, e isso serve para qualquer modelo de nuvem.
+		\item Visão futura: É muito importante você saber quais são os projetos do provedor para o futuro, saber se tem algo que eles não ofereçam hoje mas vão oferecer no futuro, pois essa é uma parceria de longo prazo, não pense só no presente.
+		\item Desempenho: Muitos provedores disponibilizam um período para você fazer testes e validar se o desempenho satisfaz as suas necessidades.
+		\item Flexibilidade: Você deve saber se o seu provedor tem flexibilidade de customização, isso é muito importante principalmente para o modelo SaaS e também flexibilidade nos termos contratuais, isso pode tornar a negociação menos complicada.
+		\item Segurança física: É muito importante procurar documentações e conhecer as certificações que provem a segurança física dos datacenters dos provedores.
+	\end{itemize}
+	\end{tiny}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Service Level Agreement (SLA)}
+	\begin{itemize}
+		\item Alguns exemplos de SLA da AWS e da Microsoft.
+		\begin{itemize}
+			\item \url{https://aws.amazon.com/pt/rds/sla/}
+			\item \url{https://aws.amazon.com/pt/ec2/sla/}
+			\item \url{https://aws.amazon.com/pt/s3/sla/}
+			\item \url{https://azure.microsoft.com/pt-br/support/legal/sla/virtual-machines/v1_6/}
+			\item \url{https://azure.microsoft.com/pt-br/support/legal/sla/storage/v1_2/}
+			\item \url{https://contaazul.com/termos/}
+	\end{itemize}
+	\end{itemize}
+\end{frame}
+
