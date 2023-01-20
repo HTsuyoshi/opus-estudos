@@ -14,7 +14,9 @@
 \usepackage{multirow}
 \usepackage{multicol}
 \usepackage{listings}
+\usepackage{chronology}
 
+\definecolor{lightgreen}{RGB}{127,255,0}
 \definecolor{myblack}{RGB}{68,68,68}
 \definecolor{mygreen}{RGB}{64,128,0}
 \setbeamercolor{block title}{bg=mygreen,fg=white}
@@ -23,7 +25,7 @@
 
 \graphicspath{ {./assets} }
 
-\title {Kubernetes}
+\title {AWS}
 \author {Henrique Tsuyoshi Yara}
 \institute {OPUS-software}
 
@@ -45,9 +47,15 @@
 
 %\setbeamercovered{transparent}
 
+\include{./chapters/History.tex}
 \include{./chapters/Introduction.tex}
 \include{./chapters/IAM.tex}
 \include{./chapters/VPC.tex}
 \include{./chapters/Theory.tex}
+
+\begin{frame}
+\frametitle{Referencias}
+\printbibliography
+\end{frame}
 
 \end{document}
