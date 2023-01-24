@@ -1,0 +1,161 @@
+\section{EC2}
+
+\begin{frame}
+	\frametitle{EC2}
+	\begin{itemize}
+		\item Oferece instâncias onde podemos escolher: Processador, Sistema Operacional, Armazenamento, Rede
+		\begin{figure}[htpb]
+		\begin{center}
+		\begin{tikzpicture}[scale=1, transform shape]
+			\node at (0,0) {\huge M5d.xlarge};
+			\node (M1) at (-2.3,-0.3) {};
+			\node (M2) at (-1.6,-0.3) {};
+
+			\draw (M1)--(M2);
+			\draw ($(M1)!0.5!(M2)$)--($(M1)!0.5!(M2) - (0,0.2)$);
+			\node at ($(M1)!0.5!(M2) - (0,0.4)$) {\tiny Family};
+
+			\node (C1) at (-1.8,0.4) {};
+			\node (C2) at (-1.2,0.4) {};
+
+			\draw (C1)--(C2);
+			\draw ($(C1)!0.5!(C2)$)--($(C1)!0.5!(C2) + (0,0.2)$);
+			\node at ($(C1)!0.5!(C2) + (0,0.4)$) {\tiny Generation};
+
+			\node (D1) at (-1.4,-0.3) {};
+			\node (D2) at (-0.7,-0.3) {};
+
+			\draw (D1)--(D2);
+			\draw ($(D1)!0.5!(D2)$)--($(D1)!0.5!(D2) - (0,0.5)$);
+			\node at ($(D1)!0.5!(D2) - (0,0.7)$) {\tiny Capabilities};
+
+			\node (T1) at (-0.6,-0.3) {};
+			\node (T2) at (2.3,-0.3) {};
+
+			\draw (T1)--(T2);
+			\draw ($(T1)!0.5!(T2)$)--($(T1)!0.5!(T2) - (0,0.2)$);
+			\node at ($(T1)!0.5!(T2) - (0,0.4)$) {\tiny Size};
+		\end{tikzpicture}
+		\end{center}
+		\caption{Tipo das instâncias}
+		\label{fig:}
+		\end{figure}
+ 		\item São para propósito geral, podem ser usadas em: Web/App servers, Enterprise apps, Gaming servers, caching Fleets, Analytics applications, Dev/Test Environments, etc\dots
+	\end{itemize}
+\end{frame}
+
+\subsection{Tipo de instâncias}
+
+\begin{frame}
+	\frametitle{Instâncias de propósito geral}
+	\begin{itemize}
+		\item \textbf{Instâncias M5}: Um equilíbrio entre memória, poder computacional e velocidade de rede. Proporção de memória para vCPU é de 4:1
+		\item \textbf{Instâncias T3}: Tem uma linha base de performace da CPU e tem a possibilidade de passar a linha base. Usado para workloads que não usam a CPU constantemente.
+		\item \textbf{Instâncias A1}: Workloads que precisam escalar em múltiplos cores, rodar instruções ARM, etc\dots
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Instâncias Memory-intensive workloads}
+	\begin{itemize}
+		\item Usado para: Banco de dados de alta performace, Análise de Big Data, Cache de memória, etc\dots
+		\item \textbf{R5 Instances}: Usado para workloads que processam data sets grandes em memória. Proporção de memória para vCPU é de 8:1
+		\item \textbf{X1/X1e Instances}: Proporção de memória para vCPU é de 16:1 e 32:1
+		\item \textbf{High memory instances}: Certificado para rodar SAP HANA. Possui 6 até 24 TB de memória
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Instâncias Compute-intensive workloads}
+	\begin{itemize}
+		\item Usado para: High-perf computing (HPC), Multiplayer Gaming, Video encoding, etc\dots
+		\item \textbf{C5 Instances}: Alta performace por um preço baixo. Proporção de memória para vCPU é 2:1
+		\item \textbf{z1d Instances}: ALta performace em uma única thread. Processador mais rápido em nuvem de 4.0 GHz. Proporção de memória para vCPU é de 8:1
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Instâncias Storage-intensive workloads}
+	\begin{itemize}
+		\item Usado para:
+			\begin{itemize}
+				\item Alta operações de I/O. Ex: High-perf databases, Real-time analytics, No SQL databases, etc\dots
+				\item Muito armazenamento. Ex: Big Data, Kafka, HDFS, Log processing\dots
+			\end{itemize}
+		\item \textbf{Instâncias I3/I3en}: Otimizadas para operações de I/O com pouca latencia
+		\item \textbf{Instâncias D2}: Custo baixo por armazenamento e suporta alta taxas de transferências
+		\item \textbf{Instâncias H1}: Aplicações de custo baixo que usam altas transferências de dadso e adesso sequencial para grandes Data Sets. Mais vCPUS e memória por TB que o D2
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Workloads de computação acelerada}
+	\begin{itemize}
+		\item Usado para: Machine learning (PLN, Reconhecimento de imagem e vídeo, etc\dots), HPC (Dinamica dos flúidos, Química computacional, etc\dots), Gráficos (Codificação de vídeo, Modelação 3D e renderização, etc\dots)
+		\item Podem ser usados:
+			\begin{itemize}
+				\item CPU
+				\item GPU
+				\item FPGA
+				\item ASICs
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Instâncias de computação acelerada}
+	\begin{itemize}
+		\item Usado para:
+			\begin{itemize}
+				\item Alta operações de I/O. Ex: High-perf databases, Real-time analytics, No SQL databases, etc\dots
+				\item Muito armazenamento. Ex: Big Data, Kafka, HDFS, Log processing\dots
+			\end{itemize}
+		\item \textbf{Instâncias I3/I3en}: Otimizadas para operações de I/O com pouca latencia
+		\item \textbf{Instâncias D2}: Custo baixo por armazenamento e suporta alta taxas de transferências
+		\item \textbf{Instâncias H1}: Aplicações de custo baixo que usam altas transferências de dadso e adesso sequencial para grandes Data Sets. Mais vCPUS e memória por TB que o D2
+	\end{itemize}
+\end{frame}
+
+\subsection{Amazon Machine Image (AMI)}
+
+\begin{frame}
+	\frametitle{Amazon Machine Images (AMIs)}
+	\begin{itemize}
+		\item Amazon Maintained
+			\begin{itemize}
+				\item Imagens de Windows e Linux
+				\item Recebem Updates pela amazon em cada região
+				\item Amazon Linux 2 (5 anos de suporte)
+			\end{itemize}
+		\item Marketplace Maintained
+			\begin{itemize}
+				\item São gerenciados e mantidos pelos parceiros da AWS
+			\end{itemize}
+		\item Your Machine Images
+			\begin{itemize}
+				\item AMIs que foram criadas de instâncias EC2
+				\item Podem ser privadas, compartilhadas com outras contas ou publicadas na comunidade
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\subsection{Security Group}
+
+\subsection{Autoscaling groups}
+\subsection{EBS}
+
+\subsection{Elastic IP}
+
+\subsection{Load Balancers}
+
+\begin{frame}
+	\frametitle{Load Balancers}
+	\begin{itemize}
+		\item Classic
+		\item alb
+		\item nlb
+		\item gateway
+	\end{itemize}
+\end{frame}
+
+

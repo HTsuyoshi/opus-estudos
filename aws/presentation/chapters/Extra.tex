@@ -1,0 +1,63 @@
+\section{Extra}
+
+\subsection{Reduce costs}
+
+\begin{frame}
+	\frametitle{Usando Spot (com Coiled)}
+	\begin{itemize}
+		\item Spots podem salvar muito dinheiro \cite{Spot}, mas você precisa:
+			\begin{itemize}
+				\item Encontrar máquinas Spots o suficiente na sua região
+				\item Lidar com seu desaparecimento
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Escolher AZ e Região \cite{AWSCETips}}
+	\begin{itemize}
+		\item Verificar se na sua zona tem Spots o suficiente
+			\begin{itemize}
+				\item  Usar o Spot placement score para ver qual região ou az tem mais chance de suprir as necessidades do usuário
+			\end{itemize}
+		\item Deixar todos os Spots em uma zona só (Evitar custos de transferência de dados por zona)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Fallback}
+	\begin{itemize}
+		\item Se os Spots não forem o suficiente é possível colocar instâncias \it{On-demand} para suprir as necessidades
+			\begin{itemize}
+				\item Spot: Vai alocar apenas Spots
+				\item Spot-with-fallback: Vai alocar Spots e vai alocar on-demand caso seja necessário
+				\item On-demand: Se quiser que tudo seja estável
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Burstable Instances}
+	\begin{itemize}
+		\item Vai existir cobrança se usar mais CPU do que foi definido
+		\item Caso a instância use menos CPU do que foi definido a instância vai juntar créditos de CPU para usar
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Outros}
+	\begin{itemize}
+		\item EBS Disks
+		\item Network traffic for EC2 instances
+		\item Nat Gateways
+	\end{itemize}
+\end{frame}
+
+\subsection{AWS Network Optimization Tips}
+
+\begin{frame}
+	\frametitle{AWS Network Optimization Tips}
+	\begin{itemize}
+		\item Read this \cite{AWSNOTips}
+	\end{itemize}
+\end{frame}

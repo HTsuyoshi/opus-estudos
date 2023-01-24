@@ -23,8 +23,21 @@
 \end{frame}
 
 \begin{frame}
+	\frametitle{NAT Gateway}
+	\begin{itemize}
+		\item Instâncias dentro de subnets privadas podem conectar com serviços fora da VPC, mas instâncias de fora não podem iniciar ocnexões com essas instâncias
+			\begin{itemize}
+				\item Public: Instâncias em subnets privadas podem conectar com a internet
+				\item Private: Instâncias em subnets privadas podem conectar com outros VPCs
+			\end{itemize}
+		\item Cobrança por hora de uso e quantidade em GBs de dados processados
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Internet Gateway}
 	\begin{itemize}
+		\item Permite a comunicação do seu VPC com a internet
 		\item Libera a entrada e a saída de determinado \textbf{Route Table}
 		\item Não tem custo
 	\end{itemize}
@@ -66,3 +79,35 @@
 		\item \textbf{OBS}: É bom liberar portas efêmeras (1024-65535). São usadas para comunicações de saída através do protocolo de rede TCP/IP
 	\end{itemize}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Network Optimization}
+	\begin{itemize}
+		\item Quantas VPCs eu preciso?
+			\begin{itemize}
+				\item Depende de quanto achar necessário para separar a aplicação
+				\item É comum uma VPC Para AWS Network Firewall ou Firewall com Gateway Load Balancer.
+				\item Talvez VPCs para Ingress e Egress centralizados
+			\end{itemize}
+		\item Tamanho da VPC
+			\begin{itemize}
+				\item Evitar alocar /16 endereços IP padrão para todas as VPCs
+				\item Alguns recursos precisam de IPs livres (Load balancer precisa de 8 IPs livres)
+				\item É possível usar o IPAM (VPC IP Address Manager)\footnote{\href{Network Address Management and Auditing at Scale with Amazon VPC IP Address Manager}{https://aws.amazon.com/blogs/aws/network-address-management-and-auditing-at-scale-with-amazon-vpc-ip-address-manager/}} para gerenciar os IPs nas redes
+				\item OBS: É possível usar o cloudWatch junto com o IPAM para verificar se os endereços IPs estão acabando
+			\end{itemize}
+		\item Quantas subnets por VPC?
+			\begin{itemize}
+				\item Pelo menos 1 subnet por VPC
+				\item Caso a aplicação esteja em várias AZs, é recomendado pelo menos uma subnet por AZ
+				\item OBS: Quando uma subnet é colocada em uma AZ não é possível mudar
+			\end{itemize}
+		\item Comparilhar VPC ou criar uma VPC nova para o workload?
+			\begin{itemize}
+				\item Mesmo que diferentes times trabalhem em diferentes contas da AWS, não significa que precisam necessariamente usar diferentes VPCs
+				\item VPC Sharing\footnote{\href{VPC Sharing}{https://aws.amazon.com/blogs/networking-and-content-delivery/vpc-sharing-a-new-approach-to-multiple-accounts-and-vpc-management/}} permite compartilhar VPCs com outras contas AWS
+				\item \href{VPC Sharing Best Pratices}{https://aws.amazon.com/blogs/networking-and-content-delivery/vpc-sharing-key-considerations-and-best-practices/}
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
