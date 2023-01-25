@@ -3,8 +3,8 @@
 \begin{frame}
 	\frametitle{Virtual Private Cloud (VPC)}
 	\begin{itemize}
+		\item Cada região tem uma VPC padrão (Não é recomendado usar)
 		\item VPCs são isoladas entre si, mas podem ser configuradas para se comunicarem
-		\item Cada região tem uma VPC padrão, mas é recomendada criar sua própria VPC para o ambiente de produção
 		\item Dentro de uma VPC é possível criar uma subnet
 		\item As subnets são aplicadas em AZs (Zonas de disponibilidade)
 		\item Subnet:
@@ -52,6 +52,13 @@
 \end{frame}
 
 \begin{frame}
+	\frametitle{Subnets}
+	\begin{itemize}
+		\item a
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Security Groups X NetworkACL}
 	\begin{itemize}
 		\item \textbf{Securty Groups}
@@ -80,33 +87,43 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[allowframebreaks]
 	\frametitle{Network Optimization}
 	\begin{itemize}
 		\item Quantas VPCs eu preciso?
 			\begin{itemize}
-				\item Depende de quanto achar necessário para separar a aplicação
-				\item É comum uma VPC Para AWS Network Firewall ou Firewall com Gateway Load Balancer.
-				\item Talvez VPCs para Ingress e Egress centralizados
+				\item Necessário para separar a aplicação
+				\item Comum uma VPC Para AWS Network Firewall ou Firewall com Gateway Load Balancer.
+				\item VPCs para Ingress e Egress centralizados
 			\end{itemize}
 		\item Tamanho da VPC
 			\begin{itemize}
 				\item Evitar alocar /16 endereços IP padrão para todas as VPCs
-				\item Alguns recursos precisam de IPs livres (Load balancer precisa de 8 IPs livres)
-				\item É possível usar o IPAM (VPC IP Address Manager)\footnote{\href{Network Address Management and Auditing at Scale with Amazon VPC IP Address Manager}{https://aws.amazon.com/blogs/aws/network-address-management-and-auditing-at-scale-with-amazon-vpc-ip-address-manager/}} para gerenciar os IPs nas redes
-				\item OBS: É possível usar o cloudWatch junto com o IPAM para verificar se os endereços IPs estão acabando
+				\item Alguns recursos precisam de IPs livres 
+					\begin{itemize}
+						\item Ex: Load balancer precisa de 8 IPs livres)
+					\end{itemize}
+				\item IPAM (VPC IP Address Manager)\footnote{\href{https://aws.amazon.com/blogs/aws/network-address-management-and-auditing-at-scale-with-amazon-vpc-ip-address-manager/}{Network Address Management and Auditing at Scale with Amazon VPC IP Address Manager}} para gerenciar os IPs nas redes
+					\begin{itemize}
+						\item OBS: IPAM pode ser usado no CloudWatch (Verificar se os endereços IPs estão acabando ou overlay de VPC)
+					\end{itemize}
 			\end{itemize}
+		\framebreak
 		\item Quantas subnets por VPC?
 			\begin{itemize}
 				\item Pelo menos 1 subnet por VPC
-				\item Caso a aplicação esteja em várias AZs, é recomendado pelo menos uma subnet por AZ
-				\item OBS: Quando uma subnet é colocada em uma AZ não é possível mudar
+				\item Aplicação em várias AZs = pelo menos uma subnet por AZ
+					\begin{itemize}
+						\item OBS: Quando uma subnet é colocada em uma AZ não é possível mudar
+					\end{itemize}
 			\end{itemize}
 		\item Comparilhar VPC ou criar uma VPC nova para o workload?
 			\begin{itemize}
-				\item Mesmo que diferentes times trabalhem em diferentes contas da AWS, não significa que precisam necessariamente usar diferentes VPCs
-				\item VPC Sharing\footnote{\href{VPC Sharing}{https://aws.amazon.com/blogs/networking-and-content-delivery/vpc-sharing-a-new-approach-to-multiple-accounts-and-vpc-management/}} permite compartilhar VPCs com outras contas AWS
-				\item \href{VPC Sharing Best Pratices}{https://aws.amazon.com/blogs/networking-and-content-delivery/vpc-sharing-key-considerations-and-best-practices/}
+				\item Times em diferentes contas da AWS, não precisam necessariamente usar diferentes VPCs
+					\begin{itemize}
+						\item VPC Sharing\footnote{\href{https://aws.amazon.com/blogs/networking-and-content-delivery/vpc-sharing-a-new-approach-to-multiple-accounts-and-vpc-management/}{VPC Sharing}} permite compartilhar VPCs com outras contas AWS
+					\end{itemize}
+				\item \href{https://aws.amazon.com/blogs/networking-and-content-delivery/vpc-sharing-key-considerations-and-best-practices/}{VPC Sharing Best Pratices}
 			\end{itemize}
 	\end{itemize}
 \end{frame}

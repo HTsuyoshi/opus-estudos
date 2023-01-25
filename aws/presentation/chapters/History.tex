@@ -50,11 +50,6 @@
 	\begin{bf}
 	\begin{center}
 		\begin{chronology}[10]{1955}{2010}{12cm}[\textwidth]
-			\event[1955]{1965}{1955-1965}
-			\event[1970]{1990}{1970-1990}
-			\event[1990]{2006}{1990-2006}
-			\event{2006}{2006}
-			\event[2006]{2010}{2016-2010}
 			\color{lightgreen}
 				\event[1955]{1965}{1955-1965}
 		\end{chronology}
@@ -64,14 +59,9 @@
 \end{frame}
 
 \begin{frame}[allowframebreaks]
-	\frametitle{(1955-1965) Problemas na infraestrutura de TI}
+	\frametitle{Problemas na infraestrutura de TI}
 	\begin{itemize}
 		\item 1942 - John Vincent Atanasoff construiu o computador ABC
-		\item Server/Mainframe (Componentes principais):
-			\begin{itemize}
-				\item Uma CPU
-				\item Um dispositivo de armazenamento de dados
-			\end{itemize}
 		\item 1960 - Muito caro para aderir os computadores
 			\begin{itemize}
 				\item Sala inteira para o servidor (Manter temperatura ideal, espaço, etc\dots)
@@ -79,7 +69,8 @@
 				\item Funcionários especializados
 				\item Problemas para adaptar o software
 			\end{itemize}
-		\item Apenas empresas que com poder aquisitivo conseguiram aderir os computadores
+		\framebreak
+		\item Empresas com poder aquisitivo conseguiram aderir os computadores
 		\item 1961 - John MacCharty fez uma palestra no MIT
 			\begin{itemize}
 				\item Computação poderia ser vendida como água ou eletricidade \cite{SimsonTCI}
@@ -99,10 +90,6 @@
 	\begin{bf}
 	\begin{center}
 		\begin{chronology}[10]{1955}{2010}{12cm}[\textwidth]
-			\event[1955]{1965}{1955-1965} \event[1970]{1990}{1970-1990}
-			\event[1990]{2006}{1990-2006}
-			\event{2006}{2006}
-			\event[2006]{2010}{2016-2010}
 			\color{lightgreen}
 				\event[1970]{1990}{1970-1990}
 		\end{chronology}
@@ -112,7 +99,7 @@
 \end{frame}
 
 \begin{frame}[allowframebreaks]
-	\frametitle{(1970-1990) Hypervisors e a internet}
+	\frametitle{Hypervisors e a internet}
 	\begin{itemize}
 		\item Diminiur os custos da adoção do computador
 			\begin{itemize}
@@ -120,17 +107,16 @@
 			\end{itemize}
 		\item 1970 - Nasceu a tecnologia da virtualização
 			\begin{itemize}
-				\item Um computador pode ser particionado em vários partes
+				\item Um host pode ser particionado em VMs
 				\item Cada parte pode rodar um código independente
-				\item Cada parte é chamada de Máquina Virtual (VM)
-				\item O server principal é chamado de \it{host}
 			\end{itemize}
+		\framebreak
 		\item 1983 - A internet nasceu
 			\begin{itemize}
-				\item Começou pelo projeto ARPANet para comunicação de professores de universidades
+				\item Projeto ARPANet: comunicação de professores de universidades
 			\end{itemize}
-		\item Foi introduzida a arquitetura cliente-servidor, o cliente e o server eram os mainframes interagindo com código e informação conectados por cabos (Internet)
-		\item Conforme os números de páginas foram crescendo o número de servers cresceram
+		\item Arquitetura cliente-servidor conectados por cabos (Internet)
+		\item O número de servers cresceram junto com as páginas web
 			\begin{itemize}
 				\item Os servers se moveram para datacenters
 			\end{itemize}
@@ -148,11 +134,6 @@
 	\begin{bf}
 	\begin{center}
 		\begin{chronology}[10]{1955}{2010}{12cm}[\textwidth]
-			\event[1955]{1965}{1955-1965}
-			\event[1970]{1990}{1970-1990}
-			\event[1990]{2006}{1990-2006}
-			\event{2006}{2006}
-			\event[2006]{2010}{2016-2010}
 			\color{lightgreen}
 				\event[1990]{2006}{1990-2006}
 		\end{chronology}
@@ -161,16 +142,19 @@
 	\end{scriptsize}
 \end{frame}
 
-\begin{frame}[allowframebreaks]
-	\frametitle{(1990-2006) Internet para todos}
+\begin{frame}
+	\frametitle{Internet para todos}
 	\begin{itemize}
-		\item A empresas maiores precisavam de datacenters maiores
+		\item Empresas precisavam de datacenters maiores
 		\item Problemas:
 			\begin{itemize}
-				\item Ociosidade quando seu website não está sendo acessado. Trazendo prejuízo para as empresas com os servers ativos
-				\item A escalabilidade era feita de forma manual e precisava de dispositivos físicos. Seria muito difícil acompanhar o crescimento da aplicação
-				\item As atualizações eram feitas manualmente, e precisariam possívelmente consertar as máquinas. Perdendo um tempo precioso
-				\item A experiência do usuário não era boa. A distância do server impacta o delay da página
+				\item Ociosidade dos servers (off-season)
+				\item Escalabilidade manual e precisava de dispositivos físicos
+					\begin{itemize}
+						\item Difícil acompanhar o crescimento da aplicação
+					\end{itemize}
+				\item Atualização e manutenção manuais
+				\item Grande distância dos servidores (UX ruim)
 			\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -186,11 +170,6 @@
 	\begin{bf}
 	\begin{center}
 		\begin{chronology}[10]{1955}{2010}{12cm}[\textwidth]
-			\event[1955]{1965}{1955-1965}
-			\event[1970]{1990}{1970-1990}
-			\event[1990]{2006}{1990-2006}
-			\event{2006}{2006}
-			\event[2006]{2010}{2016-2010}
 			\color{lightgreen}
 				\event{2006}{2006}
 		\end{chronology}
@@ -200,17 +179,17 @@
 \end{frame}
 
 \begin{frame}[allowframebreaks]
-	\frametitle{(2006) Precipitação}
+	\frametitle{Precipitação}
 	\begin{itemize}
-		\item Grandes empresas (\it{Google, Amazon, eBay, etc\dots})
+		\item Grandes players (\it{Google, Amazon, eBay, etc\dots})
 			\begin{itemize}
-				\item Criaram \it{data centers} com centenas/milhares de servers de alta qualidade no mundo inteiro
-				\item Por causa dos prejuízos decidiram começar a alugar essas máquinas
+				\item Próprio \it{data center}
+				\item Centenas/milhares de servers de alta qualidade no mundo inteiro
+				\item Começar a alugar essas máquinas
 			\end{itemize}
-		\item 2006 - "Cloud Computing" foi introduzino no mundo como forma de aluguel de poder computacional
-		\item A Amazon chamou essa divisão de Amazon Web Services (AWS)
-		\item A AWS foi a primeira de muitos provedores de cloud
-		\item Depois de 50 anos o sonho de John McCharty foi realizado
+		\item 2006 - "Cloud Computing" introduzino como forma de aluguel de poder computacional
+		\item AWS - primeira provedora de cloud
+		\item Sonho de John McCharty foi realizado depois de 50 anos
 	\end{itemize}
 \end{frame}
 
@@ -225,11 +204,6 @@
 	\begin{bf}
 	\begin{center}
 		\begin{chronology}[10]{1955}{2010}{12cm}[\textwidth]
-			\event[1955]{1965}{1955-1965}
-			\event[1970]{1990}{1970-1990}
-			\event[1990]{2006}{1990-2006}
-			\event{2006}{2006}
-			\event[2006]{2010}{2016-2010}
 			\color{lightgreen}
 				\event[2006]{2010}{2016-2010}
 		\end{chronology}
@@ -239,10 +213,10 @@
 \end{frame}
 
 \begin{frame}[allowframebreaks]
-	\frametitle{(2006-2010) Primeiros dias da computação em nuvem}
+	\frametitle{Primeiros dias da computação em nuvem}
 	\begin{itemize}
 		\item Por 6 anos a AWS estabeleceu seu monopólio na área de nuvem
-		\item A computação em nuvem permitiu que as empresa pudessem dar um foco maior no desenvolvimento
+		\item Computação em nuvem $\rightarrow$ empresa focam no desenvolvimento
 			\begin{itemize}
 				\item Os dados são criptografados e seguros
 				\item Dados são armazenados com redundância em nuvem
@@ -254,7 +228,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{(2006-2010) Primeiros dias da computação em nuvem}
+	\frametitle{Primeiros dias da computação em nuvem}
 	\begin{figure}[htpb]
 	\begin{center}
 	\begin{tiny}

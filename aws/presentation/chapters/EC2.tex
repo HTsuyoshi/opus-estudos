@@ -3,7 +3,8 @@
 \begin{frame}
 	\frametitle{EC2}
 	\begin{itemize}
-		\item Oferece instâncias onde podemos escolher: Processador, Sistema Operacional, Armazenamento, Rede
+		\item Oferece instâncias
+		\item Podemos escolher: Processador, SO, Armazenamento, Redes, etc\dots
 		\begin{figure}[htpb]
 		\begin{center}
 		\begin{tikzpicture}[scale=1, transform shape]
@@ -40,7 +41,7 @@
 		\caption{Tipo das instâncias}
 		\label{fig:}
 		\end{figure}
- 		\item São para propósito geral, podem ser usadas em: Web/App servers, Enterprise apps, Gaming servers, caching Fleets, Analytics applications, Dev/Test Environments, etc\dots
+ 		\item São de uso geral: Web/App servers, Gaming servers, Dev/Test Environments, etc\dots
 	\end{itemize}
 \end{frame}
 
@@ -49,8 +50,14 @@
 \begin{frame}
 	\frametitle{Instâncias de propósito geral}
 	\begin{itemize}
-		\item \textbf{Instâncias M5}: Um equilíbrio entre memória, poder computacional e velocidade de rede. Proporção de memória para vCPU é de 4:1
-		\item \textbf{Instâncias T3}: Tem uma linha base de performace da CPU e tem a possibilidade de passar a linha base. Usado para workloads que não usam a CPU constantemente.
+		\item \textbf{Instâncias M5}: Equilíbrio entre memória, poder computacional e velocidade de rede
+			\begin{itemize}
+				\item Proporção de memória para vCPU é de 4:1
+			\end{itemize}
+		\item \textbf{Instâncias T3}: Tem uma linha base de performace da CPU e tem a possibilidade de passar a linha base (acumulando crédito ou pagando)
+			\begin{itemize}
+				\item Usado para workloads que não usam a CPU constantemente.
+			\end{itemize}
 		\item \textbf{Instâncias A1}: Workloads que precisam escalar em múltiplos cores, rodar instruções ARM, etc\dots
 	\end{itemize}
 \end{frame}
@@ -58,41 +65,56 @@
 \begin{frame}
 	\frametitle{Instâncias Memory-intensive workloads}
 	\begin{itemize}
-		\item Usado para: Banco de dados de alta performace, Análise de Big Data, Cache de memória, etc\dots
-		\item \textbf{R5 Instances}: Usado para workloads que processam data sets grandes em memória. Proporção de memória para vCPU é de 8:1
+		\item Uso em: Banco de dados de alta performace, Análise de Big Data, Cache de memória, etc\dots
+		\item \textbf{R5 Instances}: Workloads que processam data sets grandes em memória
+			\begin{itemize}
+				\item Proporção de memória para vCPU é de 8:1
+			\end{itemize}
 		\item \textbf{X1/X1e Instances}: Proporção de memória para vCPU é de 16:1 e 32:1
-		\item \textbf{High memory instances}: Certificado para rodar SAP HANA. Possui 6 até 24 TB de memória
+		\item \textbf{High memory instances}: Certificado para rodar SAP HANA
+			\begin{itemize}
+				\item Possui 6 até 24 TB de memória
+			\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Instâncias Compute-intensive workloads}
 	\begin{itemize}
-		\item Usado para: High-perf computing (HPC), Multiplayer Gaming, Video encoding, etc\dots
-		\item \textbf{C5 Instances}: Alta performace por um preço baixo. Proporção de memória para vCPU é 2:1
-		\item \textbf{z1d Instances}: ALta performace em uma única thread. Processador mais rápido em nuvem de 4.0 GHz. Proporção de memória para vCPU é de 8:1
+		\item Uso em: High-perf computing (HPC), Multiplayer Gaming, Video encoding, etc\dots
+		\item \textbf{C5 Instances}: Alta performace por um preço baixo
+			\begin{itemize}
+				\item Proporção de memória para vCPU é 2:1
+			\end{itemize}
+		\item \textbf{z1d Instances}: ALta performace em uma única thread. Processador mais rápido em nuvem de 4.0 GHz
+			\begin{itemize}
+				\item Proporção de memória para vCPU é de 8:1
+			\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Instâncias Storage-intensive workloads}
 	\begin{itemize}
-		\item Usado para:
+		\item Uso em:
 			\begin{itemize}
-				\item Alta operações de I/O. Ex: High-perf databases, Real-time analytics, No SQL databases, etc\dots
-				\item Muito armazenamento. Ex: Big Data, Kafka, HDFS, Log processing\dots
+				\item Alta operações de I/O. Ex: High-perf databases, No SQL databases, etc\dots
+				\item Muito armazenamento. Ex: Big Data, Kafka, Log processing\dots
 			\end{itemize}
-		\item \textbf{Instâncias I3/I3en}: Otimizadas para operações de I/O com pouca latencia
+		\item \textbf{Instâncias I3/I3en}: Otimizadas para operações de I/O com pouca latência
 		\item \textbf{Instâncias D2}: Custo baixo por armazenamento e suporta alta taxas de transferências
-		\item \textbf{Instâncias H1}: Aplicações de custo baixo que usam altas transferências de dadso e adesso sequencial para grandes Data Sets. Mais vCPUS e memória por TB que o D2
+		\item \textbf{Instâncias H1}: Aplicações de custo baixo que usam altas transferências de dados e acesso sequencial para grandes Data Sets.
+			\begin{itemize}
+				\item Mais vCPUS e memória por TB que o D2
+			\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Workloads de computação acelerada}
 	\begin{itemize}
-		\item Usado para: Machine learning (PLN, Reconhecimento de imagem e vídeo, etc\dots), HPC (Dinamica dos flúidos, Química computacional, etc\dots), Gráficos (Codificação de vídeo, Modelação 3D e renderização, etc\dots)
-		\item Podem ser usados:
+		\item Uso em: Machine learning, HPC, Gráficos, etc\dots)
+		\hfill
 			\begin{figure}[htpb]
 				\centering
 				\includegraphics[width=0.8\textwidth]{ec2-comp-acc}
@@ -104,10 +126,13 @@
 \begin{frame}
 	\frametitle{Instâncias de computação acelerada}
 	\begin{itemize}
-		\item \textbf{Instâncias P2/P3}:  GPU para casos como: deep learning training, HPC, etc\dots
-		\item \textbf{Instâncias G3/G4}: GPU para workloads como renderização 3D, codificação de vídeo, etc\dots
-		\item \textbf{Instâncias F1}: FPGAs programáveis para processamento de imagem, computação financeira, etc\dots
-		\item \textbf{Instâncias Inf1}: Alta performace e custo baixo para machine learning. Integração com ML frameworks (TensorFlow, PyTorch, etc\dots)
+		\item \textbf{Instâncias P2/P3}: GPU (deep learning training, HPC, etc\dots)
+		\item \textbf{Instâncias G3/G4}: GPU (renderização 3D, codificação de vídeo, etc\dots)
+		\item \textbf{Instâncias F1}: FPGAs programáveis (processamento de imagem, computação financeira, etc\dots)
+		\item \textbf{Instâncias Inf1}: Alta performace e custo baixo para machine learning
+			\begin{itemize}
+				\item Integração com ML frameworks (TensorFlow, PyTorch, etc\dots)
+			\end{itemize}
 	\end{itemize}
 \end{frame}
 

@@ -7,9 +7,9 @@
 		\item Boas práticas:
 			\begin{itemize}
 				\item Habilitar MFA
-				\item Criar um usuário padrão para cada pessoa do time e dar permissões (Não usar o \textbf{root})
-				\item Usar grupos para atribuir permissões
-				\item Aplicar uma política de senhas do IAM
+				\item Não usar o \textbf{root}
+				\item Grupos para atribuir permissões
+				\item Política de senhas do IAM
 			\end{itemize}
 		\item OBS: É universal, funciona em todas as regiões
 	\end{itemize}
@@ -21,16 +21,14 @@
 	\frametitle{IAM - Users}
 	\begin{itemize}
 		\item \textbf{Programmatic access}
-		\item Enables an access key ID and secret access key for the AWS API, CLI, SDK, and other development tools.
-		\begin{itemize}
-			\item Instalar o CLI para ter acesso ao AWS
-			\item Dar acesso de um bucket para uma aplicação
-		\end{itemize}
-		\item \textit{AWS Management Console access}
-		\item Enables a password that allows users to sign-in to the AWS Management Console.
-		\begin{itemize}
-			\item Precisa dar permissão para esse usuário
-		\end{itemize}
+		\item Ativa acesso por key ID e secret access key:
+			\begin{itemize}
+				\item AWS API
+				\item CLI
+				\item SDK
+			\end{itemize}
+		\item \textbf{AWS Management Console access}
+		\item Interface web
 	\end{itemize}
 \end{frame}
 
@@ -39,37 +37,31 @@
 \begin{frame}
 	\frametitle{IAM - Tags}
 	\begin{itemize}
-		\item Servem para a gente identificar serviços
-		\item É possível fazer um relatório de faturamento baseado em \textit{Tags}
-		\item \textbf{OBS}: É possível ter até 50 tags por serviço
+		\item Identificar serviços
+		\item Relatório de faturamento baseado em \textit{Tags}
+		\item \textbf{OBS}: Até 50 tags por serviço
 	\end{itemize}
 \end{frame}
 
 \subsection{Policies}
 
-\begin{frame}
-	\frametitle{IAM - Políticas Pt.1}
+\begin{frame}[allowframebreaks]
+	\frametitle{IAM - Políticas}
 	\begin{itemize}
-		\item É uma boa prática criar grupos com permissões para os usuários. E não colocar permissões diretamente no usuário
-		\item Permissões mais específicas são mais fortes (Permissão de usuário prevalece contra permissão de grupo)
-		\item \href{https://docs.aws.amazon.com/pt_br/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html}{Políticas de senha}
+		\item Criar grupos com permissões para os usuários
+		\item Não usar permissões diretamente nos usuários
+		\item Permissões mais específicas são mais fortes
 			\begin{itemize}
-				\item Exigir que o usuário use senhas fortes
-				\item Expiração de senhas
-				\item Impedir reutilização de senhas
-				\item Etc\dots
+				\item Permissão de usuário prevalece contra permissão de grupo)
 			\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\frametitle{IAM - Políticas Pt.2}
-	\begin{itemize}
+		\item \href{https://docs.aws.amazon.com/pt_br/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html}{Políticas de senha}
+		\framebreak
 		\item Políticas de acesso
 			\begin{itemize}
-				\item As políticas podem ser definidas por um arquivo Json
-				\item Pode ser usado políticas prontas ou criar políticas específicas
-				\item Então as políticas podem ser atribuídas em usuários/grupos
+				\item As políticas definidas por um arquivo Json
+				\item Existem olíticas prontas
+				\item Criar políticas customizadas
+				\item Políticas podem ser atribuídas em usuários/grupos
 			\end{itemize}
 	\end{itemize}
 \end{frame}
