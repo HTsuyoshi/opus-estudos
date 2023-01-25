@@ -20,14 +20,14 @@ Projeto da Opus Software para aprender um pouco mais sobre AWS
 
 Estudando usando esse [repositorio](https://github.com/ahmedtariq01/Cloud-DevOps-Learning-Resources/tree/main/AWS%20Learning)
 
-- [ ] AWS IAM.pdf
+- [x] AWS IAM.pdf
 	- [x] TODO List 1
 	- [x] TODO List 2
-	- [ ] TODO List 3
-	- [ ] TODO List 4
+	- [x] TODO List 3
+	- [x] TODO List 4
 - [ ] AWS Archietecting.pdf
 - [ ] AWS Concepts.pdf
-- [ ] AWS EC2 Foundations.pdf
+- [x] AWS EC2 Foundations.pdf
 - [ ] AWS Elastic Load Balancer.pdf
 - [ ] AWS Guidance for large Migrations.pdf
 - [ ] AWS Security Service.pdf

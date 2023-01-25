@@ -93,26 +93,28 @@
 	\begin{itemize}
 		\item Usado para: Machine learning (PLN, Reconhecimento de imagem e vídeo, etc\dots), HPC (Dinamica dos flúidos, Química computacional, etc\dots), Gráficos (Codificação de vídeo, Modelação 3D e renderização, etc\dots)
 		\item Podem ser usados:
-			\begin{itemize}
-				\item CPU
-				\item GPU
-				\item FPGA
-				\item ASICs
-			\end{itemize}
+			\begin{figure}[htpb]
+				\centering
+				\includegraphics[width=0.8\textwidth]{ec2-comp-acc}
+				\caption{CPU vs GPU vs FPGA vs ASCIs\cite{CDOLR}}
+			\end{figure}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Instâncias de computação acelerada}
 	\begin{itemize}
-		\item Usado para:
-			\begin{itemize}
-				\item Alta operações de I/O. Ex: High-perf databases, Real-time analytics, No SQL databases, etc\dots
-				\item Muito armazenamento. Ex: Big Data, Kafka, HDFS, Log processing\dots
-			\end{itemize}
-		\item \textbf{Instâncias I3/I3en}: Otimizadas para operações de I/O com pouca latencia
-		\item \textbf{Instâncias D2}: Custo baixo por armazenamento e suporta alta taxas de transferências
-		\item \textbf{Instâncias H1}: Aplicações de custo baixo que usam altas transferências de dadso e adesso sequencial para grandes Data Sets. Mais vCPUS e memória por TB que o D2
+		\item \textbf{Instâncias P2/P3}:  GPU para casos como: deep learning training, HPC, etc\dots
+		\item \textbf{Instâncias G3/G4}: GPU para workloads como renderização 3D, codificação de vídeo, etc\dots
+		\item \textbf{Instâncias F1}: FPGAs programáveis para processamento de imagem, computação financeira, etc\dots
+		\item \textbf{Instâncias Inf1}: Alta performace e custo baixo para machine learning. Integração com ML frameworks (TensorFlow, PyTorch, etc\dots)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Instâncias Bare Metal}
+	\begin{itemize}
+		\item Feito para workloads que não são virtualizados ou precisam de tipos específicos de hypervisors ou tem licenças que restrigem o uso de virtualização
 	\end{itemize}
 \end{frame}
 
@@ -139,10 +141,25 @@
 	\end{itemize}
 \end{frame}
 
+\subsection{EBS}
+
+\begin{frame}
+	\frametitle{Amazon EBS}
+	\begin{itemize}
+		\item Blocos de armazenamento como serviço
+		\item Escolher o armazenamento e computar baseado no seu workload
+		\item Pode colocar ou retirar de uma instância
+		\item Volumes magnéticos ou baseados em SSD
+		\item Suportam snapshots de um bloco modificado
+		\item Dados criptografados por padrão em volumes EBS
+		\item Fast Snapshot Restore (FSR)
+		\item Rede mais otimizada para EBS em instâncias C5/C5d, M5/M5d, R5/R5d
+	\end{itemize}
+\end{frame}
+
 \subsection{Security Group}
 
 \subsection{Autoscaling groups}
-\subsection{EBS}
 
 \subsection{Elastic IP}
 
