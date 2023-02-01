@@ -184,20 +184,105 @@
 
 \subsection{Security Group}
 
+\begin{frame}
+	\frametitle{Security Group}
+	\begin{itemize}
+		\item Firwall virtual para controlar a entrada e saída de tráfego em instâncias EC2
+	\end{itemize}
+\end{frame}
+
 \subsection{Autoscaling groups}
+
+\begin{frame}
+	\frametitle{Autoscaling groups}
+	\begin{itemize}
+		\item Permite escalar horizontalmente as instâncias EC2
+		\item O amazon EC2 auto scaling garante que o seu grupo vai ter a quantidade desejada de instâncias
+		\item É possível configurar o Auto Scaling group para aumentar a capacidade em um dia e horário específico
+		\item O dynamic scaling define como escalar os recursos dependendo da mudança da demanda
+		\item É possível usar o CloudWatch para aumentar o número de servers usando algum parâmetro definido
+		\item Health checks
+	\end{itemize}
+\end{frame}
 
 \subsection{Elastic IP}
 
 \subsection{Load Balancers}
 
 \begin{frame}
-	\frametitle{Load Balancers}
+	\frametitle{Classic Load Balancer}
 	\begin{itemize}
-		\item Classic
-		\item alb
-		\item nlb
-		\item gateway
+		\item Suporte para EC2-Classic
+		\item Suporte para TCP e SSL
+		\item Suporte para sticky sessions usando cookies gerados pela aplicação
+		\item Redireciona as requisições para instâncias registradas
+		\item Tem health-checks
 	\end{itemize}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Application Load Balancer}
+	\begin{itemize}
+		\item Funciona na camada de aplicação do modelo OSI (HTTP, HTTPS, gRPC)
+		\item É possível adicionar regras para poder redirectionar as requisições de forma mais precisa
+		\item Health checks podem ser feitos em grupos de instâncias
+		\item Benefícios em relação ao clb:
+			\begin{itemize}
+				\item Path conditions (URL)
+				\item Host conditions (Host field in http header)
+				\item HTTP header conditions
+				\item Multiplas aplicações em um EC2 (Bom para mircoserviços)
+			\end{itemize}
+	\end{itemize}
+\end{frame}
 
+\begin{frame}
+	\frametitle{Netowrk Load Balancer}
+	\begin{itemize}
+		\item Funciona na camada de rede (TCP, UDP, TLS)
+		\item Foward TCP traffic
+		\item High performance
+		\item Support static / Elastic IP
+		\item Latency 100 ms (400 ms ALB)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Gateway Load Balancer}
+	\begin{itemize}
+		\item Gateway + Load Balancer
+			\begin{itemize}
+				\item Next-hop in route table
+				\item NO packet rewrite
+			\end{itemize}
+		\item Layer 3 load balancer
+			\begin{itemize}
+				\item Provide horizontal scale to appliances
+				\item Fault tolerance for appliances
+				\item Insert services transparently
+				\item Share across differente VPCs and accounts
+				\item Provide appliance as a service
+			\end{itemize}
+		\item get package of IP and use to part of appliance
+		\item Thirt party appliance
+		\item Simplify applicance deployment
+		\item Conectar VPCs diferentes:
+			\begin{itemize}
+				\item Fazer appliance ou segurança
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Comparação}
+	\begin{table}[htpb]
+		\centering
+		\caption{Fonte\footnote{\href{https://aws.amazon.com/pt/elasticloadbalancing/features/\#Product_comparisons}{Comparação dos load balancers}}}
+	
+		\begin{tabular}{|c|c|}
+			\hline
+			a & a \\
+			\hline \hline
+		\end{tabular}
+	\end{table}
+\end{frame}

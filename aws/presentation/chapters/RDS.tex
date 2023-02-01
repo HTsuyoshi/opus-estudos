@@ -1,10 +1,72 @@
-\section{RDS}
+\section{Relational Database Service (RDS)}
 
-\subsection{a}
+\subsection{R}
 
-\begin{frame}
-	\frametitle{RDS}
+\begin{frame}[allowframebreaks]
+	\frametitle{Amazon Relational Database Service (RDS)}
 	\begin{itemize}
-		\item Facilita o uso de banco de dados (Escalabilidade, etc\dots)
+		\item Banco de dados relacional gerenciado pela AWS, facilita:
+			\begin{itemize}
+				\item Hardware provisioning
+				\item Setup
+				\item Patching
+				\item Backups
+			\end{itemize}
+		\item Fácil de administrar
+			\begin{itemize}
+				\item Fácil de instânciar e pronto para uso em poucos cliques
+				\item Possível escolher Poder computacional e memória
+					\begin{itemize}
+						\item Standard (General purpose)
+						\item Memory Optimized (Memory intensive application)
+						\item Burstable performance (Burst CPU usage)
+					\end{itemize}
+				\item Automatic patching
+				\item Recomendações de melhores práticas (Engines, Armazenmento, Tipos de instâncias, Redes, etc\dots)
+			\end{itemize}
+		\item Alta Escalabilidade
+			\begin{itemize}
+				\item Verticalmente (vCPU, Armazenamento e Mem)
+				\item Réplicas de leitura
+			\end{itemize}
+		\item Disponível e durável
+			\begin{itemize}
+				\item Replica os dados em múltiplas instâncias
+				\item Snapshots: Feito por usuários e armazenados em buckets
+				\item Backups automáticos: São feitos automaticamentes em buckets
+				\item Point-in-time recovery: Possível recuperar seus dados em pouco tempo
+				\item Host replacement: Substituição automática em caso de falha de hardware
+				\item Multi-AZ Deployments: É possível criar réplicas em vários AZs
+			\end{itemize}
+		\item Performace
+			\begin{itemize}
+				\item Magnetic Storage (Compatibilidade)
+				\item Armazenamento de propósito geral (SSD): Burst de 3000 IOs (Broad range of database workloads)
+				\item IOPs provisionado (SSD): Operações de IO constantes (OLTP Database workloads)
+			\end{itemize}
+		\item Segurança
+			\begin{itemize}
+				\item Controle de acesso de rede (VPCs + IPsec VPN)
+				\item Encryption at rest e Encryption at transit
+			\end{itemize}
+	\end{itemize}
+	\framebreak
+	\begin{itemize}
+		\item Disponibiliza
+			\begin{multicols}{2}
+			\begin{itemize}
+				\item Amazon Aurora
+				\item PostgreSQL
+				\item MySQL
+				\columnbreak
+				\item MariaDB
+				\item Oracle
+				\item SQL Server
+			\end{itemize}
+			\end{multicols}
+		\item AWS Database Migration Service
+			\begin{itemize}
+				\item Migra bancos de dados existentes para o Amazon RDS
+			\end{itemize}
 	\end{itemize}
 \end{frame}

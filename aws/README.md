@@ -36,9 +36,10 @@ Estudando usando esse [repositorio](https://github.com/ahmedtariq01/Cloud-DevOps
 - [ ] AWS Sketch Book.pdf
 - [ ] AWS Solution Archietect.pdf
 - [ ] AWS Solution Architect Professional.pdf
-- [ ] AWS Subnets.pdf
+- [x] AWS Subnets.pdf
 - [ ] AWS System Administration.pdf
-- [ ] AWS VPC for Beginners.pdf
+- [x] AWS VPC for Beginners.pdf
+	- [ ] VPC exercise
 - [ ] AWS VPC.pdf
 - [ ] AWS Virtual Private Cloud.pdf
 - [ ] AWS Web Services Tutorials.pdf

@@ -1,4 +1,7 @@
-main.pdf: ./main.tex ./chapters/* ref.bib
+DIRECTORIES='docker' 'kubernetes' 'aws' 'terraform'
+LATEX_FILES='beamercolorthemeDarkConsole.sty' 'beamerthemeDarkConsole.sty' 'kmbeamer_color.sty' 'kmbeamer_common.sty' 'svgcolor.sty'
+
+main.pdf: ./main.tex ./chapters/*
 	docker run --rm -it --user="$$(id -u):$$(id -g)" --net=none -v "$$(pwd):/tmp" leplusorg/latex latexmk -outdir=/tmp -pdf /tmp/$<
 
 .PHONY: 'clean'
@@ -7,11 +10,12 @@ clean:
 
 .PHONY: 'setup'
 setup:
-	@ln -s $$(pwd)/Makefile ./docker/presentation/Makefile 2>&- || \
-		echo 'Error while creating docker/presentation/Makefile'
-	@ln -s $$(pwd)/Makefile ./kubernetes/presentation/Makefile 2>&- || \
-		echo 'Error while creating kubernetes/presentation/Makefile'
-	@ln -s $$(pwd)/Makefile ./aws/presentation/Makefile 2>&- || \
-		echo 'Error while creating aws/presentation/Makefile'
-	@ln -s $$(pwd)/Makefile ./terraform/presentation/Makefile 2>&- || \
-		echo 'Error while creating terraform/presentation/Makefile'
+	@for dir in $(DIRECTORIES); do \
+		for f in $(LATEX_FILES); do \
+			ln -s $$(pwd)/latex_theme/$$f ./$$dir/presentation/$$f 2>&- || \
+				echo "Error while creating ./$$dir/presentation/$$f"; \
+		done; \
+		ln -s $$(pwd)/Makefile ./$$dir/presentation/Makefile 2>&- || \
+		echo "Error while creating ./$$dir/presentation/Makefile"; \
+	done
+

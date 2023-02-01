@@ -10,14 +10,14 @@
 \usetikzlibrary{calc}
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks=true,
-    linkcolor=whiteee,
-    filecolor=gold,
-    urlcolor=gold,
+	colorlinks=true,
+	linkcolor=whiteee,
+	filecolor=gold,
+	urlcolor=gold,
 	citecolor=gold,
-    pdftitle={Overleaf Example},
-    pdfpagemode=FullScreen,
-    }
+	pdftitle={Overleaf Example},
+	pdfpagemode=FullScreen,
+}
 \usepackage{graphicx}
 \usepackage{chronology}
 
@@ -42,14 +42,15 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Índice}
-\begin{multicols}{2}
+
+\begin{frame}[allowframebreaks]
+\frametitle{Índice}
   \tableofcontents
-\end{multicols}
 \end{frame}
 
 %\setbeamercovered{transparent}
 
+\include{./chapters/Tikz.tex}
 \include{./chapters/History.tex}
 \include{./chapters/Conceito.tex}
 \include{./chapters/CloudVs.tex}
