@@ -1,22 +1,24 @@
 \section{S3}
 
 \begin{frame}[allowframebreaks]
-	\frametitle{Amazon S3}
+	\frametitle{Amazon S3 (Simple Store Service)}
 	\begin{itemize}
-		\item Amazon Simple Store Service
 		\item Armazena objetos:
 			\begin{itemize}
 				\item Dados
 				\item Metadados (Pares chave-valor)
 			\end{itemize}
+		\item Pode hostear sites estáticos
 		\item Cada objeto tem um identificador único (Global)
 		\item Pode habilitar versionamento
-		\item Objetos não são deletados (são marcados como deletado)
+			\begin{itemize}
+				\item Objetos não são deletados (são marcados como deletado)
+			\end{itemize}
 	\end{itemize}
 	\begin{figure}[htpb]
 	\begin{center}
 	\begin{tikzpicture}[scale=1, transform shape]
-		\node at (0,-1.5) {\scriptsize http://\textbf{bucket}.S3.<region>.amazonaws.com/\textbf{Xorg.0.log}};
+		\node at (0,-1.5) {\scriptsize http://\textbf{bucket}.S3.<region>.amazonaws.com/log/\textbf{Xorg.0.log}};
 		\bucket{-1.5}{0}{0.3}{\tiny bucket}
 		\file{1.5}{-0.3}{0.3}{\tiny log/Xorg.0.log}
 		\draw[stealth-] (-1,-0.3) -- (1,-0.3);

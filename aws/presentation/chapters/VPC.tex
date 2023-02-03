@@ -78,25 +78,27 @@
 		\item Cobrança por hora de uso e quantidade em GBs de dados processados
 	\end{itemize}
 	\framebreak
+	\begin{scriptsize}
 	\begin{table}[htpb]
 		\centering
 		\caption{VPC NAT Gateway Vs NAT Instances on amazon EC2}
-		\begin{tabular}{|c|c|c|}
+		\begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|}
 			\hline
-			& VPC NAT Gateway & NAT Instance \\
+			& VPC NAT Gateway & Instância NAT  \\
 			\hline \hline
-			Availability & Highly available by default & Use script to manage failover \\
+			Disponibilidade & Alta disponibilidade por padrão & Usa scripts para gerenciar falhas \\
 			\hline
-			Bandwidth & Bursts to 10 Gbps & Based on bandwidth of instance type \\
+			Banda larga & Bursts de 10 Gbps & Se baseia na banda larga da instância \\
 			\hline
-			Maintenance & Managed by AWS & Managed by you \\
+			Manutenção & Feito pela AWS & Feito por você \\
 			\hline
-			Security & NACLs & Security groups and NACLs \\
+			Segurança & NACLs & Security groups e NACLs \\
 			\hline
-			Port forwarding & Not supported & Supported \\
+			Redirecionamento de portas & Não suportado & Suportado \\
 			\hline
 		\end{tabular}
 	\end{table}
+	\end{scriptsize}
 \end{frame}
 \begin{frame}
 	\frametitle{Internet Gateway}
@@ -117,7 +119,7 @@
 		\item Apenas uma route table por subnet
 		\item Boa prática:
 			\begin{itemize}
-				\item User route tables customizadas para cada subnet roteamento mais granularizado para os destinos
+				\item Usar route tables customizadas para cada subnet roteamento mais granularizado para os destinos
 			\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -149,13 +151,13 @@
 	\begin{itemize}
 		\item Regra de segurança da rede (Como se fosse um \textit{firewall})
 		\item Regras de liberação e negação
-		\item Stateless: o tráfego de retorno deve ser explicitamente permitido pelas regras
+		\item Stateless: o tráfego de retorno deve ser explicitamente permitido pelas regras. Não mantém registro da conexão
 		\item Aplica a todas as instâncias nas sub-redes
 		\item São Firewalls virtuais opcionais que controlam a entrada e a saída e uma subnet
-		\item stateless: Allow all incoming/outgoing traffic by default and use stateless rules to allow or deny traffic. "Stateless rules” inspect all inbound and outbound traffic and do not keep track of connections.
+		\framebreak
 		\item Cada regra vai ter uma prioridade
 		\item É bom deixar um espaço entre cada regra para possíveis regras futuras (Ex: deixar 10 espaços entre cada regra)
-		\item \textbf{OBS}: É bom liberar portas efêmeras (1024-65535). São usadas para comunicações de saída através do protocolo de rede TCP/IP
+		\item \textbf{OBS}: Liberar portas efêmeras (1024-65535). Usadas para comunicações de saída através do protocolo de rede TCP/IP
 	\end{itemize}
 \end{frame}
 
@@ -234,30 +236,5 @@
 					\end{itemize}
 				\item \href{https://aws.amazon.com/blogs/networking-and-content-delivery/vpc-sharing-key-considerations-and-best-practices/}{VPC Sharing Best Pratices}
 			\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Extra}
-	\begin{itemize}
-		\item Grande parte dos serviços da AWS não usam VPC
-			\begin{itemize}
-				\item Para esses serviços a VPC não consegue trazer nenum isolamento fora AAAAAAAAAAAAAAAA
-				\item O tráfico de rede entre regiões da AWS atravessam a rede global da AWS por padrão
-				\item Amazon S3 e DynamoDB oferecem VPC endpoints para conectar  sem atravessar a internet pública
-			\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Directing Traffic To Your VPC}
-	\begin{itemize}
-		\item To enable access to or from the Internet for instances in a VPC subnet, you must:
-		\item Attach an Internet gateway to your VPC
-		\item Ensure that your subnet's route table points to the Internet gateway
-		\item Ensure that instances in your subnet have public IP addresses or
-Elastic IP addresses
-		\item  Ensure that your NACLs and security groups allow the relevant
-traffic to flow to and from your instance
 	\end{itemize}
 \end{frame}

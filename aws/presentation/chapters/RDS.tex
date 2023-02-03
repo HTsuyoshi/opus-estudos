@@ -1,29 +1,30 @@
 \section{Relational Database Service (RDS)}
 
-\subsection{R}
-
 \begin{frame}[allowframebreaks]
 	\frametitle{Amazon Relational Database Service (RDS)}
 	\begin{itemize}
 		\item Banco de dados relacional gerenciado pela AWS, facilita:
 			\begin{itemize}
-				\item Hardware provisioning
-				\item Setup
-				\item Patching
-				\item Backups
+				\begin{multicols}{2}
+					\item Provisinamento de hardware
+					\item Setup
+					\columnbreak
+					\item Patching
+					\item Backups
+				\end{multicols}
 			\end{itemize}
 		\item Fácil de administrar
 			\begin{itemize}
-				\item Fácil de instânciar e pronto para uso em poucos cliques
+				\item Fácil de instânciar e pronto em poucos cliques
 				\item Possível escolher Poder computacional e memória
 					\begin{itemize}
 						\item Standard (General purpose)
 						\item Memory Optimized (Memory intensive application)
 						\item Burstable performance (Burst CPU usage)
 					\end{itemize}
-				\item Automatic patching
 				\item Recomendações de melhores práticas (Engines, Armazenmento, Tipos de instâncias, Redes, etc\dots)
 			\end{itemize}
+		\framebreak
 		\item Alta Escalabilidade
 			\begin{itemize}
 				\item Verticalmente (vCPU, Armazenamento e Mem)
@@ -38,6 +39,7 @@
 				\item Host replacement: Substituição automática em caso de falha de hardware
 				\item Multi-AZ Deployments: É possível criar réplicas em vários AZs
 			\end{itemize}
+		\framebreak
 		\item Performace
 			\begin{itemize}
 				\item Magnetic Storage (Compatibilidade)

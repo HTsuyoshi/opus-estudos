@@ -65,7 +65,7 @@
 \begin{frame}
 	\frametitle{Instâncias Memory-intensive workloads}
 	\begin{itemize}
-		\item Uso em: Banco de dados de alta performace, Análise de Big Data, Cache de memória, etc\dots
+		\item Banco de dados de alta performace, Análise de Big Data, Cache de memória, etc\dots
 		\item \textbf{R5 Instances}: Workloads que processam data sets grandes em memória
 			\begin{itemize}
 				\item Proporção de memória para vCPU é de 8:1
@@ -81,7 +81,7 @@
 \begin{frame}
 	\frametitle{Instâncias Compute-intensive workloads}
 	\begin{itemize}
-		\item Uso em: High-perf computing (HPC), Multiplayer Gaming, Video encoding, etc\dots
+		\item High-perf computing (HPC), Multiplayer Gaming, Video encoding, etc\dots
 		\item \textbf{C5 Instances}: Alta performace por um preço baixo
 			\begin{itemize}
 				\item Proporção de memória para vCPU é 2:1
@@ -113,7 +113,7 @@
 \begin{frame}
 	\frametitle{Workloads de computação acelerada}
 	\begin{itemize}
-		\item Uso em: Machine learning, HPC, Gráficos, etc\dots)
+		\item Machine learning, HPC, Gráficos, etc\dots)
 		\hfill
 			\begin{figure}[htpb]
 				\centering
@@ -196,16 +196,31 @@
 \begin{frame}
 	\frametitle{Autoscaling groups}
 	\begin{itemize}
-		\item Permite escalar horizontalmente as instâncias EC2
-		\item O amazon EC2 auto scaling garante que o seu grupo vai ter a quantidade desejada de instâncias
-		\item É possível configurar o Auto Scaling group para aumentar a capacidade em um dia e horário específico
-		\item O dynamic scaling define como escalar os recursos dependendo da mudança da demanda
-		\item É possível usar o CloudWatch para aumentar o número de servers usando algum parâmetro definido
+		\item Escalar horizontalmente instâncias EC2
+		\item Garante que o seu grupo vai ter a quantidade desejada de instâncias
+		\item Pode aumentar a capacidade em um dia e horário específico
+		\item Dynamic scaling define como escalar os recursos dependendo da mudança da demanda
+		\item Pode usar o CloudWatch para aumentar o número de servers usando algum parâmetro definido
 		\item Health checks
 	\end{itemize}
 \end{frame}
 
 \subsection{Elastic IP}
+
+\begin{frame}
+	\frametitle{Elastic IP}
+	\begin{itemize}
+		\item Elastic IP é um endereço IPv4 público
+		\item Elastic IP é alocado para a conta da AWS e será seu até que você o libere
+		\item Mascarar a falha de uma instância ou software (remapeia rapidamente o endereço para outra instância na conta)
+		\item É possível especificar o endereço IP elástico em um registro DNS para o seu domínio
+		\item Cobrança:
+			\begin{itemize}
+				\item Por hora quando um Elastic IP não está associado a uma instância em execução/encerrada ou a uma interface de rede não anexada
+				\item Será cobrado por qualquer endereço IP elástico adicional associado a uma instância
+			\end{itemize}
+	\end{itemize}
+\end{frame}
 
 \subsection{Load Balancers}
 

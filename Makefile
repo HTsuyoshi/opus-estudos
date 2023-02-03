@@ -12,7 +12,7 @@ clean:
 setup:
 	@for dir in $(DIRECTORIES); do \
 		for f in $(LATEX_FILES); do \
-			ln -s $$(pwd)/latex_theme/$$f ./$$dir/presentation/$$f 2>&- || \
+			cp $$(pwd)/latex_theme/$$f ./$$dir/presentation/$$f 2>&- || \
 				echo "Error while creating ./$$dir/presentation/$$f"; \
 		done; \
 		ln -s $$(pwd)/Makefile ./$$dir/presentation/Makefile 2>&- || \

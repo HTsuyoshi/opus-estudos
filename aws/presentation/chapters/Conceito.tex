@@ -71,3 +71,56 @@
 		\item A utilização de recursos pode ser monitorada, controlada e informada, gerando transparência tanto para o fornecedor como para o consumidor do serviço utilizado
 	\end{itemize}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Primeiros dias da computação em nuvem}
+	\begin{figure}[htpb]
+	\begin{center}
+	\begin{tiny}
+	\begin{tikzpicture}[scale=1, transform shape]
+		\node (A) at (0,4) {\normalsize On-Site};
+		\node (A1) at ($(A) - (0,0.6)$)  [draw,thick,minimum width=75,minimum height=15] {Applicação};
+		\node (A2) at ($(A1) - (0,0.6)$) [draw,thick,minimum width=75,minimum height=15] {Data};
+		\node (A3) at ($(A2) - (0,0.6)$) [draw,thick,minimum width=75,minimum height=15] {Runtime};
+		\node (A4) at ($(A3) - (0,0.6)$) [draw,thick,minimum width=75,minimum height=15] {Middleware};
+		\node (A5) at ($(A4) - (0,0.6)$) [draw,thick,minimum width=75,minimum height=15] {O/S};
+		\node (A6) at ($(A5) - (0,0.6)$) [draw,thick,minimum width=75,minimum height=15] {Virtualization};
+		\node (A7) at ($(A6) - (0,0.6)$) [draw,thick,minimum width=75,minimum height=15] {Servers};
+		\node (A8) at ($(A7) - (0,0.6)$) [draw,thick,minimum width=75,minimum height=15] {Storage};
+		\node (A9) at ($(A8) - (0,0.6)$) [draw,thick,minimum width=75,minimum height=15] {Networking};
+		\node (B) at (3,4) {\normalsize IaaS};
+		\node (B1) at ($(B) - (0,0.6)$)  [draw,thick,minimum width=75,minimum height=15] {Applicação};
+		\node (B2) at ($(B1) - (0,0.6)$) [draw,thick,minimum width=75,minimum height=15] {Data};
+		\node (B3) at ($(B2) - (0,0.6)$) [draw,thick,minimum width=75,minimum height=15] {Runtime};
+		\node (B4) at ($(B3) - (0,0.6)$) [draw,thick,minimum width=75,minimum height=15] {Middleware};
+		\node (B5) at ($(B4) - (0,0.6)$) [draw,thick,minimum width=75,minimum height=15] {O/S};
+		\node (B6) at ($(B5) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Virtualization};
+		\node (B7) at ($(B6) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Servers};
+		\node (B8) at ($(B7) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Storage};
+		\node (B9) at ($(B8) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Networking};
+		\node (C) at (6,4) {\normalsize PaaS};
+		\node (C1) at ($(C) - (0,0.6)$)  [draw,thick,minimum width=75,minimum height=15] {Applicação};
+		\node (C2) at ($(C1) - (0,0.6)$) [draw,thick,minimum width=75,minimum height=15] {Data};
+		\node (C3) at ($(C2) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Runtime};
+		\node (C4) at ($(C3) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Middleware};
+		\node (C5) at ($(C4) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {O/S};
+		\node (C6) at ($(C5) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Virtualization};
+		\node (C7) at ($(C6) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Servers};
+		\node (C8) at ($(C7) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Storage};
+		\node (C9) at ($(C8) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Networking};
+		\node (D) at (9,4) {\normalsize SaaS};
+		\node (D1) at ($(D) - (0,0.6)$)  [lightgreen,draw,thick,minimum width=75,minimum height=15] {Applicação};
+		\node (D2) at ($(D1) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Data};
+		\node (D3) at ($(D2) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Runtime};
+		\node (D4) at ($(D3) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Middleware};
+		\node (D5) at ($(D4) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {O/S};
+		\node (D6) at ($(D5) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Virtualization};
+		\node (D7) at ($(D6) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Servers};
+		\node (D8) at ($(D7) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Storage};
+		\node (D9) at ($(D8) - (0,0.6)$) [lightgreen,draw,thick,minimum width=75,minimum height=15] {Networking};
+	\end{tikzpicture}
+	\end{tiny}
+	\end{center}
+	\caption{Imagem retirado do site da redhat\footnote{\href{https://www.redhat.com/cms/managed-files/iaas-paas-saas-diagram5.1-1638x1046.png}{RedHat IaaS, PaaS e SaaS}}}
+	\end{figure}
+\end{frame}
