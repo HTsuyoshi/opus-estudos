@@ -4,21 +4,23 @@ Projeto da Opus Software para aprender um pouco mais sobre AWS
 
 ## Tópicos de estudo
 
-- Cloud (história, conceito, 5 características de NIST, grandes players)
-- Cloud vs Virtualização
-- Cloud vs Virtual hostings/VPS
-- AWS (história/origem, formas de acesso: console, sdk, cli)
+- [x] Cloud (história, conceito, 5 características de NIST, grandes players)
+- [x] Cloud vs Virtualização
+- [x] Cloud vs Virtual hostings/VPS
+- [x] AWS (história/origem, formas de acesso: console, sdk, cli)
 - Recursos (conceito e prática):
-	- VPC (VPC, subnets, nat gateway, internet gateway, nacl, rede pública, rede privada)
+	- [x] VPC (VPC, subnets, nat gateway, internet gateway, nacl, rede pública, rede privada)
 	- EC2 (Security Group, AMI, EBS, Elastic IP, Load Balancers (classic, alb, nlb, gateway, diferenças e caso de uso), autoscaling groups, tipos de instâncias)
 	- RDS (Tipos, Parameter groups, Snapshots)
-	- S3
-	- CloudWatch
-	- IAM (usuários, grupos, roles, policies)
+	- [x] S3
+	- [x] CloudWatch
+	- [x] IAM (usuários, grupos, roles, policies)
 
 ## Tópicos extras
 
-Estudando usando esse [repositorio](https://github.com/ahmedtariq01/Cloud-DevOps-Learning-Resources/tree/main/AWS%20Learning)
+#### Cloud-DevOps-Learning-Resources
+
+Tópicos gerais de aws [cloud-devops-learning-resources](https://github.com/ahmedtariq01/Cloud-DevOps-Learning-Resources/tree/main/AWS%20Learning)
 
 - [x] AWS IAM.pdf
 	- [x] TODO List 1
@@ -50,3 +52,21 @@ Estudando usando esse [repositorio](https://github.com/ahmedtariq01/Cloud-DevOps
 - [ ] Mastering AWS Security.pdf
 - [ ] Overview of Amazon Services.pdf
 - [ ] SaaS Architecture Fundamentals AWS Whitepaper.pdf
+
+#### Cloud Goat
+
+Segurança em cloud [cloudgoat](https://github.com/RhinoSecurityLabs/cloudgoat)
+
+- [ ] cicd
+- [x] cloud\_breach\_s3
+- [ ] codebuild\_secrets
+- [ ] detection\_evasion
+- [ ] ec2\_ssrf
+- [ ] ecs\_efs\_attack
+- [ ] ecs\_takeover
+- [x] iam\_privesc\_by\_attachment
+- [x] iam\_privesc\_by\_rollback
+- [x] lambda\_privesc
+- [ ] rce\_web\_app
+- [x] vulnerable\_lambda
+
