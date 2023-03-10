@@ -16,7 +16,17 @@ Projeto da Opus Software para aprender um pouco mais sobre AWS
 	- [x] CloudWatch
 	- [x] IAM (usuários, grupos, roles, policies)
 
+## Projeto prático
+
+Draw.io: [link](https://drive.google.com/file/d/1Zkdv--fkMsnyStiCrcpuelHKwxh6l14Q/view?usp=sharing)
+
+Site estático: [link](https://github.com/EACH-inTheShell/site2)
+
 ## Tópicos extras
+
+#### Cloud Quest
+
+- [x] Free tier
 
 #### Cloud-DevOps-Learning-Resources
 
@@ -69,4 +79,3 @@ Segurança em cloud [cloudgoat](https://github.com/RhinoSecurityLabs/cloudgoat)
 - [x] lambda\_privesc
 - [ ] rce\_web\_app
 - [x] vulnerable\_lambda
-
