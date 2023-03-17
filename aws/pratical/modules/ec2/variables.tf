@@ -55,12 +55,17 @@ variable "amazon_linux" {
   type        = string
 }
 
-variable "public_subnet_a_id" {
+variable "public_subnet_ctfssi_a_id" {
   description = "Subnet"
   type        = string
 }
 
-variable "public_subnet_b_id" {
+variable "public_subnet_challs_a_id" {
+  description = "Subnet"
+  type        = string
+}
+
+variable "public_subnet_challs_b_id" {
   description = "Subnet"
   type        = string
 }

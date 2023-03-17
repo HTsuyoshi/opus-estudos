@@ -1,3 +1,75 @@
+resource "aws_cloudwatch_metric_alarm" "scale_up_alarm" {
+  alarm_name          = "chall_2023_alarm_scale_up"
+  alarm_description   = "asg-scale-up-cpu-alarm"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = "2"
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/EC2"
+  period              = "120"
+  statistic           = "Average"
+  threshold           = "80"
+  dimensions = {
+    "AutoScalingGroupName" = var.autoscaling_group_name
+  }
+  actions_enabled = true
+  alarm_actions   = [var.autoscaling_policy_scale_up_arn]
+  depends_on = [var.autoscaling_group_name, var.autoscaling_policy_scale_up_arn]
+}
+
+resource "aws_cloudwatch_metric_alarm" "scale_down_alarm" {
+  alarm_name          = "chall_2023_alarm_scale_down"
+  alarm_description   = "asg-scale-up-cpu-alarm"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = "2"
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/EC2"
+  period              = "120"
+  statistic           = "Average"
+  threshold           = "50"
+  dimensions = {
+    "AutoScalingGroupName" = var.autoscaling_group_name
+  }
+  actions_enabled = true
+  alarm_actions   = [var.autoscaling_policy_scale_down_arn]
+  depends_on = [var.autoscaling_group_name, var.autoscaling_policy_scale_down_arn]
+}
+
+# Arrumar
+#resource "aws_cloudwatch_event_rule" "restart_monthly" {
+#  name                = "restart_monthly"
+#  description         = "Restart EC2 instance monthly at 8 AM UTC"
+#  schedule_expression = "cron(0 8 1 * ? *)"
+#}
+#
+#resource "aws_cloudwatch_event_rule" "restart_test" {
+#  name                = "restart_test"
+#  description         = "Restart EC2 instance monthly at 0 AM UTC"
+#  schedule_expression = "cron(0/1 * * * ? *)"
+#}
+
+#resource "aws_cloudwatch_event_target" "restart_ctfssi_2021_a" {
+#  target_id = "restart_ctfssi_2021_a"
+#  rule      = aws_cloudwatch_event_rule.restart_test.name
+#  arn       = var.ctfssi_2021_a_arn
+#  input = jsonencode({
+#    "instance-id": var.ctfssi_2021_a_arn,
+#    "type": "reboot"
+#  })
+#  depends_on = [var.ctfssi_2021_a_arn]
+#}
+#
+#resource "aws_cloudwatch_event_target" "restart_ctfssi_2022_a" {
+#  target_id = "restart_ctfssi_2022_a"
+#  rule      = aws_cloudwatch_event_rule.restart_test.name
+#  arn       = var.ctfssi_2022_a_arn
+#  input = jsonencode({
+#    "instance-id": var.ctfssi_2022_a_arn,
+#    "type": "reboot"
+#  })
+#  depends_on = [var.ctfssi_2022_a_arn]
+#}
+
+# Desisti
 #resource "aws_cloudwatch_metric_alarm" "ctfssi_2021_idle_ec2_alarm" {
 #  alarm_name          = "networking-alarm"
 #  comparison_operator = "LessThanOrEqualToThreshold"
