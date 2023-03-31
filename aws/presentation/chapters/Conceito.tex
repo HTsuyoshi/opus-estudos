@@ -1,5 +1,30 @@
 \section{Conceito}
 
+\subsection{Cloud X Virtualização}
+
+\begin{frame}
+	\frametitle{Virtualização}
+	\begin{itemize}
+		\item Criação de infraestruturas virtuais a partir de uma estrutura física
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Cloud}
+	\begin{itemize}
+		\item Conceito que reúne vários \textit{softwares} e utiliza de virtualização
+		\item Possui algumas características específicas:
+			\begin{itemize}
+				\item Autoserviço sob demanda
+				\item Amplo acesso a rede
+				\item Pool de recursos
+				\item Rápida elaticidade
+				\item Serviços mensuráveis
+			\end{itemize}
+		\item \textbf{Colocation}: alugar determinado espaço de um Data Center (refrigeração, instalação elétrica e segurança). No entanto, utiliza seu próprio equipamento. \footnote{\href{https://vivomeunegocio.com.br/conteudos-gerais/expandir/cloud-colocation-data-center}{Colocation}}
+	\end{itemize}
+\end{frame}
+
 \subsection{NIST}
 
 \begin{frame}
@@ -124,3 +149,143 @@
 	\caption{Imagem retirado do site da redhat\footnote{\href{https://www.redhat.com/cms/managed-files/iaas-paas-saas-diagram5.1-1638x1046.png}{RedHat IaaS, PaaS e SaaS}}}
 	\end{figure}
 \end{frame}
+
+\subsection{Tipos de nuvem}
+
+\begin{frame}
+	\frametitle{Tipos de nuvem}
+	\begin{itemize}
+		\item \textbf{Infraestrutura como Serviço (Iaas)}
+		\item \textbf{Software como Serviço (SaaS)}
+		\item \textbf{Plataforma como Serviço (PaaS)}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{IaaS - Infrastructure as a Service}
+	\begin{itemize}
+		\item O recurso fornecido ao consumidor é provisionar:
+			\begin{itemize}
+				\item Processamento
+				\item Armazenamento
+				\item Comunicação de rede
+				\item Outros recursos de computação funcamentais nos quais o consumidor pode instalar e executar softwares em geral, incluindo sistemas operaionais e aplicativos
+				\item Possivelmente um controle limitado de alguns componentes de rede (\textit{firewall})
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{PaaS - Plataform as a Service}
+	\begin{itemize}
+		\item O recurso fornecido ao consumidor é instalar na infraestrutura na nuvem aplicativos criados ou adiquiridos pelo consumidor
+		\item O consumidor tem controle sobre as aplicações instaladas e possívelmente configuraçoes de hospedagem de aplicações
+		\item O consumidor não gerencia nem controla a infraestrutura na nuvem subjacente (Rede, servidores, sistemas operacionais, armazenamento ou mesmo recursos individuais da aplicação, com a possível exeção de configurações limitadas por usuário)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{SaaS - Software as a Service}
+	\begin{itemize}
+		\item O recurso fornecido ao consumidor é o uso de aplicções do fornecedor executando em uma infraestrutura na nuvem
+		\item As aplicações podem ser acessadas por vários dispositivos clientes através de interfaces leves ou ricas
+		\item O consumidor não gerencia nem controla a infraestrutura na nuvem subjacente (Rede, servidores, sistemas operacionais, armazenamento ou mesmo recursos individuais da aplicação, com a possível exeção de configurações limitadas por usuário)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Exemplos}
+	\begin{tiny}
+	\begin{table}[ht]
+		\centering
+		\begin{tabular}{|p{1cm}|p{5cm}|p{4cm}|}
+		\hline
+			Tipo & Serviço & Exemplos \\
+		\hline
+		\hline
+		  \multirow{3}{*}{IaaS}
+			& Rede virtualizada & AWS VPC, Azura Virtual Network \\
+			& Armazenamento de dados & AWS S3, Google cloud storage \\
+			& Servidores Virtuais & AWS EC2, Azure Virtual Machines \\
+			\hline
+		  \multirow{2}{*}{PaaS}
+			& Infraestrutura para desenvolvimento, implantação e execução de aplicativos & Heroku, Google App Engine \\
+			& Plataforma testes e gerenciamento de aplicações & AWS Elastic Beanstalk \\
+			\hline
+		  \multirow{3}{*}{SaaS}
+			& Armazenamento Dados & DropBox, Google Drive \\
+			& Editor de textos e planilha & Gsuite e Office 365 \\
+			& SIstema de Gestão de banco de dados & AWS RDS, Google Cloud SQL \\
+		\hline
+		\end{tabular}
+		\caption{Exemplos de serviços}
+	\end{table}
+	\end{tiny}
+\end{frame}
+
+\subsection{Modelos de implementação de nuvem}
+
+\begin{frame}
+	\frametitle{Modelos de implementação de nuvem}
+	\begin{itemize}
+		\item Nuvem pública
+		\item Nuvem privada
+		\item Nuvem híbrida
+		\item Nuvem comunitária
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Nuvem pública}
+	\begin{itemize}
+		\item Provisionada para uso aberto ao público em geral
+		\item Sua propriedade, gerenciamento e operação podem ser de:
+			\begin{itemize}
+				\item Uma empresa
+				\item Uma instituição acadêmica
+				\item Uma organização do governo
+				\item Ou uma combinação mista
+			\end{itemize}
+		\item Fica nas instalações do fornecedor
+	\item \textbf{OBS}: Criar uma estrutura na Amazon e configurar usando VPN ou conexão direta continua sendo uma nuvem pública
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Nuvem privada}
+	\begin{itemize}
+		\item Provisionada para uso exclusivo por uma únic organização composta de diversos consumidores
+		\item A sua propriedade, gerenciamento de operação podem ser de:
+			\begin{itemize}
+				\item A própria organização
+				\item Terceiros
+				\item Combinação mista
+			\end{itemize}
+		\item Pode estar dentro ou fora das instalações da organização
+		\item Nuvem privada não é organização e não precisa estar instalada localmente
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Nuvem comunitária}
+	\begin{itemize}
+		\item Provisionada para uso exclusivo por uma determinada comunidade de consumidores de organizações que têm interesses em comum (missão, requisitos de segurança, políticas, observância de regulamentações)
+		\item A sua propriedade, gerenciamento e operação podem ser de:
+			\begin{itemize}
+				\item Uma organização
+				\item Mais de uma organizações da comunidade
+				\item Terceiros
+				\item Combinação mista
+			\end{itemize}
+		\item Pode estar dentro ou fora das instalações das organizações participantes
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Nuvem híbrida}
+	\begin{itemize}
+		\item Composição de duas ou mais infraestruturas na nuvem (\textbf{privadas}, \textbf{comunitárias} ou \textbf{públicas}) que permanecem entidades distintas
+		\item São interligadas por tecnoogia padronizada ou proprietária que permite a comunicação de dados e portabilidade de aplicações (Transferencia de processamento para a nuvem para balanceamento de carga entre nuvens)
+	\end{itemize}
+\end{frame}
+

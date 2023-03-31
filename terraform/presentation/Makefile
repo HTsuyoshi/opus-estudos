@@ -1,1 +1,0 @@
-/home/tsuyoshi/repos/opus-estudos/Makefile

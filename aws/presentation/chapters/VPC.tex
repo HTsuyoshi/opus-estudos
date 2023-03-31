@@ -14,12 +14,6 @@
 				\item Podem ser configuradas para se comunicarem
 			\end{itemize}
 		\item \textbf{VPC wizard} tem algumas configurações pré-definidas de VPC
-		\item Lembrar de verificar e configurar:
-		\begin{itemize}
-			\item DHCP options set
-			\item DNS resolution
-			\item DNS hostname
-		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -61,8 +55,8 @@
 		\item Subnets são aplicadas em AZs
 		\item Subnet:
 			\begin{itemize}
-				\item Pública: recursos que não devem ser acessíveis pela internet
-				\item Privada: recursos que devem ser acessíveis pela internet
+				\item Privada: recursos que não devem ser acessíveis pela internet
+				\item Pública: recursos que devem ser acessíveis pela internet
 			\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -70,7 +64,7 @@
 \begin{frame}[allowframebreaks]
 	\frametitle{NAT Gateway}
 	\begin{itemize}
-		\item Instâncias dentro de subnets privadas podem conectar com serviços fora da VPC, mas instâncias de fora não podem iniciar ocnexões com essas instâncias
+		\item Instâncias dentro de subnets privadas podem conectar com serviços fora da VPC, mas instâncias de fora não podem iniciar conexões com essas instâncias
 			\begin{itemize}
 				\item Public: Instâncias em subnets privadas podem conectar com a internet
 				\item Private: Instâncias em subnets privadas podem conectar com outros VPCs
@@ -81,7 +75,7 @@
 	\begin{scriptsize}
 	\begin{table}[htpb]
 		\centering
-		\caption{VPC NAT Gateway Vs NAT Instances on amazon EC2}
+		\caption{VPC NAT Gateway Vs NAT Instances on amazon EC2\footnote{\href{https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-comparison.html}{Comparison}}}
 		\begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|}
 			\hline
 			& VPC NAT Gateway & Instância NAT  \\
@@ -100,6 +94,7 @@
 	\end{table}
 	\end{scriptsize}
 \end{frame}
+
 \begin{frame}
 	\frametitle{Internet Gateway}
 	\begin{itemize}
@@ -110,8 +105,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Route table}
+\begin{frame} \frametitle{Route table}
 	\begin{itemize}
 		\item Determina para onde o tráfico de rede é roteado
 		\item Associa as \textbf{subnets}
@@ -153,7 +147,6 @@
 		\item Regras de liberação e negação
 		\item Stateless: o tráfego de retorno deve ser explicitamente permitido pelas regras. Não mantém registro da conexão
 		\item Aplica a todas as instâncias nas sub-redes
-		\item São Firewalls virtuais opcionais que controlam a entrada e a saída e uma subnet
 		\framebreak
 		\item Cada regra vai ter uma prioridade
 		\item É bom deixar um espaço entre cada regra para possíveis regras futuras (Ex: deixar 10 espaços entre cada regra)
@@ -165,7 +158,6 @@
 	\frametitle{Amazon VPC Flow Logs}
 	\begin{itemize}
 		\item Captura detalhes do tráfico na VPC (Aceito e recusado)
-		\item Pode ser habilitado para PVCs, subnets e ENIs
 		\item Uso em:
 			\begin{itemize}
 				\item Troubleshoot de conexões
@@ -212,7 +204,7 @@
 				\item Evitar alocar /16 endereços IP padrão para todas as subnets
 				\item Alguns recursos precisam de IPs livres 
 					\begin{itemize}
-						\item Ex: Load balancer precisa de 8 IPs livres)
+						\item Ex: Load balancer precisa de 8 IPs livres
 					\end{itemize}
 				\item IPAM (VPC IP Address Manager)\footnote{\href{https://aws.amazon.com/blogs/aws/network-address-management-and-auditing-at-scale-with-amazon-vpc-ip-address-manager/}{Network Address Management and Auditing at Scale with Amazon VPC IP Address Manager}} para gerenciar os IPs nas redes
 					\begin{itemize}

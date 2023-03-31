@@ -1,0 +1,61 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {1}{História}{4}{0}{1}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {1}{1}{Linha do tempo}{5}{0}{1}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {2}{Conceito}{18}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {2}{1}{Cloud X Virtualização}{18}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {2}{2}{NIST}{20}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {2}{3}{Tipos de nuvem}{28}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {2}{4}{Modelos de implementação de nuvem}{33}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {3}{AWS}{38}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {3}{1}{Origem}{38}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {3}{2}{Formas de acesso}{40}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {4}{Introdução}{41}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {5}{Virtual Private Cloud}{44}{0}{5}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {6}{EC2}{61}{0}{6}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {6}{1}{Tipo de instâncias}{62}{0}{6}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {6}{2}{Amazon Machine Image (AMI)}{69}{0}{6}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {6}{3}{EBS}{70}{0}{6}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {6}{4}{Security Group}{71}{0}{6}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {6}{5}{Autoscaling groups}{72}{0}{6}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {6}{6}{Elastic IP}{73}{0}{6}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {6}{7}{Load Balancers}{74}{0}{6}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {7}{Relational Database Service (RDS)}{79}{0}{7}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {8}{S3}{83}{0}{8}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {9}{Cloud Watch}{87}{0}{9}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {10}{IAM}{88}{0}{10}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {10}{1}{Usuários}{89}{0}{10}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {10}{2}{Tags}{90}{0}{10}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {10}{3}{Policies}{91}{0}{10}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {10}{4}{Roles}{93}{0}{10}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {10}{5}{Relatórios}{94}{0}{10}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {11}{IAM Identify Center}{95}{0}{11}

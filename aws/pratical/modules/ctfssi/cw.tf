@@ -1,39 +1,3 @@
-resource "aws_cloudwatch_metric_alarm" "scale_up_alarm" {
-  alarm_name          = "chall_2023_alarm_scale_up"
-  alarm_description   = "asg-scale-up-cpu-alarm"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = "2"
-  metric_name         = "CPUUtilization"
-  namespace           = "AWS/EC2"
-  period              = "120"
-  statistic           = "Average"
-  threshold           = "80"
-  dimensions = {
-    "AutoScalingGroupName" = var.autoscaling_group_name
-  }
-  actions_enabled = true
-  alarm_actions   = [var.autoscaling_policy_scale_up_arn]
-  depends_on = [var.autoscaling_group_name, var.autoscaling_policy_scale_up_arn]
-}
-
-resource "aws_cloudwatch_metric_alarm" "scale_down_alarm" {
-  alarm_name          = "chall_2023_alarm_scale_down"
-  alarm_description   = "asg-scale-up-cpu-alarm"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = "2"
-  metric_name         = "CPUUtilization"
-  namespace           = "AWS/EC2"
-  period              = "120"
-  statistic           = "Average"
-  threshold           = "50"
-  dimensions = {
-    "AutoScalingGroupName" = var.autoscaling_group_name
-  }
-  actions_enabled = true
-  alarm_actions   = [var.autoscaling_policy_scale_down_arn]
-  depends_on = [var.autoscaling_group_name, var.autoscaling_policy_scale_down_arn]
-}
-
 # Arrumar
 #resource "aws_cloudwatch_event_rule" "restart_monthly" {
 #  name                = "restart_monthly"
@@ -68,6 +32,16 @@ resource "aws_cloudwatch_metric_alarm" "scale_down_alarm" {
 #  })
 #  depends_on = [var.ctfssi_2022_a_arn]
 #}
+
+
+
+
+
+
+
+
+
+
 
 # Desisti
 #resource "aws_cloudwatch_metric_alarm" "ctfssi_2021_idle_ec2_alarm" {

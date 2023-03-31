@@ -1,110 +1,3 @@
-# AWS KeyPair
-
-resource "aws_key_pair" "auth" {
-  key_name   = "key"
-  public_key = file("~/.ssh/ec2_aws.pub")
-}
-
-# CTF-SSI security groups
-
-resource "aws_security_group" "ctfssi_sg" {
-  name        = "ctfssi_sg"
-  description = "security group"
-  vpc_id      = var.vpc_id
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "TLS from VPC"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
-# CTF-SSI Instances
-
-resource "aws_spot_instance_request" "ctfssi_2021_a" {
-  instance_type          = var.spot_ec2["ctfssi"].instance_type
-  spot_price             = var.spot_ec2["ctfssi"].spot_price
-  ami                    = var.amazon_linux
-  key_name               = aws_key_pair.auth.id
-  vpc_security_group_ids = [aws_security_group.ctfssi_sg.id]
-  subnet_id              = var.public_subnet_ctfssi_a_id
-  user_data              = var.ctfssi_2021_user_data
-
-  root_block_device {
-    volume_type = var.spot_ec2["ctfssi"].volume_type
-    volume_size = var.spot_ec2["ctfssi"].volume_size
-  }
-
-  depends_on = [var.public_subnet_ctfssi_a_id, var.ctfssi_2021_user_data]
-
-  tags = {
-    Name      = "CTF-SSI 2021"
-    Terraform = "true"
-    Created   = timestamp()
-  }
-}
-
-resource "aws_spot_instance_request" "ctfssi_2022_a" {
-  instance_type          = var.spot_ec2["ctfssi"].instance_type
-  spot_price             = var.spot_ec2["ctfssi"].spot_price
-  ami                    = var.amazon_linux
-  key_name               = aws_key_pair.auth.id
-  vpc_security_group_ids = [aws_security_group.ctfssi_sg.id]
-  subnet_id              = var.public_subnet_ctfssi_a_id
-  user_data              = var.ctfssi_2022_user_data
-
-  root_block_device {
-    volume_type = var.spot_ec2["ctfssi"].volume_type
-    volume_size = var.spot_ec2["ctfssi"].volume_size
-  }
-
-  depends_on = [var.public_subnet_ctfssi_a_id, var.ctfssi_2022_user_data]
-
-  tags = {
-    Name      = "CTF-SSI 2022"
-    Terraform = "true"
-    Created   = timestamp()
-  }
-}
-
-resource "aws_instance" "ctfssi_2023_a" {
-  instance_type          = var.ec2["ctfssi"].instance_type
-  ami                    = var.amazon_linux
-  key_name               = aws_key_pair.auth.id
-  vpc_security_group_ids = [aws_security_group.ctfssi_sg.id]
-  subnet_id              = var.public_subnet_ctfssi_a_id
-  user_data              = var.ctfssi_2023_user_data
-
-  root_block_device {
-    volume_type = var.spot_ec2["ctfssi"].volume_type
-    volume_size = var.spot_ec2["ctfssi"].volume_size
-  }
-
-  depends_on = [var.public_subnet_ctfssi_a_id, var.ctfssi_2023_user_data]
-
-  tags = {
-    Name      = "CTF-SSI 2023"
-    Terraform = "true"
-    Created   = timestamp()
-  }
-}
-
 # 2021 Challenges security group
 
 resource "aws_security_group" "challs_sg" {
@@ -120,8 +13,8 @@ resource "aws_security_group" "challs_sg" {
   }
 
   ingress {
-    from_port   = 8000
-    to_port     = 8000
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -138,10 +31,11 @@ resource "aws_spot_instance_request" "challs_2021_a" {
   instance_type          = var.spot_ec2["challs"].instance_type
   spot_price             = var.spot_ec2["challs"].spot_price
   ami                    = var.amazon_linux
-  key_name               = aws_key_pair.auth.id
+  key_name               = var.ec2_keypair_id
   vpc_security_group_ids = [aws_security_group.challs_sg.id]
   subnet_id              = var.public_subnet_challs_a_id
   user_data              = var.challs_2021_user_data
+  wait_for_fulfillment = true
 
   root_block_device {
     volume_type = var.spot_ec2["challs"].volume_type
@@ -163,10 +57,11 @@ resource "aws_spot_instance_request" "challs_2022_a" {
   instance_type          = var.spot_ec2["challs"].instance_type
   spot_price             = var.spot_ec2["challs"].spot_price
   ami                    = var.amazon_linux
-  key_name               = aws_key_pair.auth.id
+  key_name               = var.ec2_keypair_id
   vpc_security_group_ids = [aws_security_group.challs_sg.id]
   subnet_id              = var.public_subnet_challs_a_id
   user_data              = var.challs_2021_user_data
+  wait_for_fulfillment = true
 
   root_block_device {
     volume_type = var.spot_ec2["challs"].volume_type
@@ -188,7 +83,7 @@ resource "aws_launch_template" "challs_2023_template" {
   name_prefix   = "challs_2023"
   image_id      = var.amazon_linux
   instance_type = var.ec2["challs"].instance_type
-  key_name      = aws_key_pair.auth.id
+  key_name      = var.ec2_keypair_id
   user_data     = base64encode(var.challs_2021_user_data)
 
   network_interfaces {
@@ -208,8 +103,8 @@ resource "aws_launch_template" "challs_2023_template" {
 
 resource "aws_autoscaling_group" "challs_2023_autoscaling" {
   name                = "chall_2023_autoscaling"
-  max_size            = 3
-  min_size            = 1
+  max_size            = 4
+  min_size            = 2
   vpc_zone_identifier = [var.public_subnet_challs_a_id, var.public_subnet_challs_b_id]
 
   health_check_grace_period = 300
@@ -221,7 +116,7 @@ resource "aws_autoscaling_group" "challs_2023_autoscaling" {
   }
 
   timeouts {
-    delete = "5m"
+    delete = "1m"
   }
 
   depends_on = [var.public_subnet_challs_a_id, var.public_subnet_challs_b_id]
@@ -244,7 +139,7 @@ resource "aws_autoscaling_policy" "scale_up" {
   autoscaling_group_name = aws_autoscaling_group.challs_2023_autoscaling.name
   adjustment_type        = "ChangeInCapacity"
   scaling_adjustment     = "1"
-  cooldown               = "300"
+  cooldown               = "60"
   policy_type            = "SimpleScaling"
 }
 
@@ -253,7 +148,7 @@ resource "aws_autoscaling_policy" "scale_down" {
   autoscaling_group_name = aws_autoscaling_group.challs_2023_autoscaling.name
   adjustment_type        = "ChangeInCapacity"
   scaling_adjustment     = "-1"
-  cooldown               = "300"
+  cooldown               = "60"
   policy_type            = "SimpleScaling"
 }
 
@@ -277,25 +172,25 @@ resource "aws_lb" "challs_2023_load_balancer" {
 }
 
 resource "aws_lb_target_group" "challs_2023" {
-  name_prefix      = "http"
-  port             = 80
-  protocol         = "TCP"
-  target_type      = "instance"
-  vpc_id           = var.vpc_id
+  name_prefix = "http"
+  port        = 80
+  protocol    = "TCP"
+  target_type = "instance"
+  vpc_id      = var.vpc_id
 
   health_check {
-    port = 8000
+    port = 80
   }
 }
 
 resource "aws_autoscaling_attachment" "challs_2023" {
   autoscaling_group_name = aws_autoscaling_group.challs_2023_autoscaling.name
-  lb_target_group_arn   = aws_lb_target_group.challs_2023.arn
+  lb_target_group_arn    = aws_lb_target_group.challs_2023.arn
 }
 
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.challs_2023_load_balancer.arn
-  port              = 8000
+  port              = 80
   protocol          = "TCP"
 
   default_action {

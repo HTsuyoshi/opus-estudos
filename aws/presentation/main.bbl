@@ -1,0 +1,150 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{SimsonTCI}{online}{}
+      \name{author}{1}{}{%
+        {{hash=f7ae1c1e91c1c29835e2ff7e98908fa7}{%
+           family={Garfinkel},
+           familyi={G\bibinitperiod},
+           given={Simson},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{f7ae1c1e91c1c29835e2ff7e98908fa7}
+      \strng{fullhash}{f7ae1c1e91c1c29835e2ff7e98908fa7}
+      \strng{bibnamehash}{f7ae1c1e91c1c29835e2ff7e98908fa7}
+      \strng{authorbibnamehash}{f7ae1c1e91c1c29835e2ff7e98908fa7}
+      \strng{authornamehash}{f7ae1c1e91c1c29835e2ff7e98908fa7}
+      \strng{authorfullhash}{f7ae1c1e91c1c29835e2ff7e98908fa7}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Cloud Imperative}
+      \field{urlday}{20}
+      \field{urlmonth}{1}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.technologyreview.com/2011/10/03/190237/the-cloud-imperative/
+      \endverb
+      \verb{url}
+      \verb https://www.technologyreview.com/2011/10/03/190237/the-cloud-imperative/
+      \endverb
+    \endentry
+    \entry{CDOLR}{online}{}
+      \name{author}{1}{}{%
+        {{hash=ea357957a575df7f6b0d044a5286fa3c}{%
+           family={Kapoor},
+           familyi={K\bibinitperiod},
+           given={Chetan},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{ea357957a575df7f6b0d044a5286fa3c}
+      \strng{fullhash}{ea357957a575df7f6b0d044a5286fa3c}
+      \strng{bibnamehash}{ea357957a575df7f6b0d044a5286fa3c}
+      \strng{authorbibnamehash}{ea357957a575df7f6b0d044a5286fa3c}
+      \strng{authornamehash}{ea357957a575df7f6b0d044a5286fa3c}
+      \strng{authorfullhash}{ea357957a575df7f6b0d044a5286fa3c}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{AWS re:Innvet}
+      \field{urlday}{20}
+      \field{urlmonth}{1}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/ahmedtariq01/Cloud-DevOps-Learning-Resources/blob/main/AWS%20Learning/AWS%20EC2%20Foundations.pdf
+      \endverb
+      \verb{url}
+      \verb https://github.com/ahmedtariq01/Cloud-DevOps-Learning-Resources/blob/main/AWS%20Learning/AWS%20EC2%20Foundations.pdf
+      \endverb
+    \endentry
+    \entry{FrisbyMcgibney}{online}{}
+      \name{author}{2}{}{%
+        {{hash=bc2c19f158321f7d43ee53e13e51fb0f}{%
+           family={R.},
+           familyi={R\bibinitperiod},
+           given={Frisby},
+           giveni={F\bibinitperiod}}}%
+        {{hash=a0877d9e394d1db9ce76affbf874b9f0}{%
+           family={J.},
+           familyi={J\bibinitperiod},
+           given={Mcgibney},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{5be412f3a4e489b2d776b65ac7ffe19f}
+      \strng{fullhash}{5be412f3a4e489b2d776b65ac7ffe19f}
+      \strng{bibnamehash}{5be412f3a4e489b2d776b65ac7ffe19f}
+      \strng{authorbibnamehash}{5be412f3a4e489b2d776b65ac7ffe19f}
+      \strng{authornamehash}{5be412f3a4e489b2d776b65ac7ffe19f}
+      \strng{authorfullhash}{5be412f3a4e489b2d776b65ac7ffe19f}
+      \field{sortinit}{R}
+      \field{sortinithash}{b9c68a358aea118dfa887b6e902414a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{AWS Web Services - Virtual Private Cloud (VPC)}
+      \field{urlday}{20}
+      \field{urlmonth}{1}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/ahmedtariq01/Cloud-DevOps-Learning-Resources/blob/main/AWS%20Learning/AWS%20VPC%20for%20Beginners.pdf
+      \endverb
+      \verb{url}
+      \verb https://github.com/ahmedtariq01/Cloud-DevOps-Learning-Resources/blob/main/AWS%20Learning/AWS%20VPC%20for%20Beginners.pdf
+      \endverb
+    \endentry
+    \entry{CCHistory}{online}{}
+      \name{author}{1}{}{%
+        {{hash=64a2a18c4edccf2923e42b04fe8f6a81}{%
+           family={Sanghvi},
+           familyi={S\bibinitperiod},
+           given={Ankit\bibnamedelima R},
+           giveni={A\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{64a2a18c4edccf2923e42b04fe8f6a81}
+      \strng{fullhash}{64a2a18c4edccf2923e42b04fe8f6a81}
+      \strng{bibnamehash}{64a2a18c4edccf2923e42b04fe8f6a81}
+      \strng{authorbibnamehash}{64a2a18c4edccf2923e42b04fe8f6a81}
+      \strng{authornamehash}{64a2a18c4edccf2923e42b04fe8f6a81}
+      \strng{authorfullhash}{64a2a18c4edccf2923e42b04fe8f6a81}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{History of Cloud Computing}
+      \field{urlday}{20}
+      \field{urlmonth}{1}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.cohesive.so/blog/the-history-of-cloud-computing
+      \endverb
+      \verb{url}
+      \verb https://www.cohesive.so/blog/the-history-of-cloud-computing
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

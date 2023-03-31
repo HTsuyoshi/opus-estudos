@@ -1,3 +1,4 @@
+
 # CTF-SSI 2023 Database security groups
 
 resource "aws_security_group" "ctfssi_2023_db_sg" {

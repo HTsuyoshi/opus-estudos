@@ -34,21 +34,20 @@ variable "postgres" {
   }
 }
 
+variable "vpc_id" {
+  description = "ID of the VPC where the EC2 instance will be launched"
+  type        = string
+}
+
+variable "aws_db_subnet_group_name" {
+  description = "Name of the database subnet group"
+  type        = string
+}
+
 variable "db_credentials" {
-  description = "ID of the VPC where the RDS instance will be launched"
   type = object({
     db_name     = string
     db_username = string
     db_password = string
   })
-}
-
-variable "vpc_id" {
-  description = "ID of the VPC where the RDS instance will be launched"
-  type        = string
-}
-
-variable "aws_db_subnet_group_name" {
-  description = "ID of the VPC where the RDS instance will be launched"
-  type        = string
 }

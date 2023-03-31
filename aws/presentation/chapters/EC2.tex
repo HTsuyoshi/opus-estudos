@@ -113,7 +113,7 @@
 \begin{frame}
 	\frametitle{Workloads de computação acelerada}
 	\begin{itemize}
-		\item Machine learning, HPC, Gráficos, etc\dots)
+		\item Machine learning, HPC, Gráficos, etc\dots
 		\hfill
 			\begin{figure}[htpb]
 				\centering
@@ -267,37 +267,47 @@
 	\begin{itemize}
 		\item Gateway + Load Balancer
 			\begin{itemize}
-				\item Next-hop in route table
 				\item NO packet rewrite
 			\end{itemize}
 		\item Layer 3 load balancer
 			\begin{itemize}
-				\item Provide horizontal scale to appliances
-				\item Fault tolerance for appliances
-				\item Insert services transparently
-				\item Share across differente VPCs and accounts
-				\item Provide appliance as a service
+				\item Escalabilidade horizontal para appliances
+				\item Tolerancia de falhas para appliances
+				\item Transparencia de inserção de serviços
+				\item Possível comparilhar em diferentes VPCs e contas
+				\item Appliance as Service
 			\end{itemize}
-		\item get package of IP and use to part of appliance
-		\item Thirt party appliance
-		\item Simplify applicance deployment
+		\item Appliance de terceiros
+		\item Simplifica o deployment de appliance
 		\item Conectar VPCs diferentes:
 			\begin{itemize}
-				\item Fazer appliance ou segurança
+				\item Fazer appliance ou segurança (Firewall)
 			\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Comparação}
+	\begin{tiny}
 	\begin{table}[htpb]
 		\centering
 		\caption{Fonte\footnote{\href{https://aws.amazon.com/pt/elasticloadbalancing/features/\#Product_comparisons}{Comparação dos load balancers}}}
 	
-		\begin{tabular}{|c|c|}
+		\begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 			\hline
-			a & a \\
+			Recurso & Application Load Balancer & Network Load Balancer & Gateway Load Balancer & Classic Load Balancer \\
 			\hline \hline
+			Tipo de balanceador de carga & Camada 7 & Camada 4 & Gateway da camada 3 + Balanceamento de carga da camada 4 & Camadas 4/7 \\
+			\hline
+			Tipo de destino & IP, instância, Lambda & IP, instância, balanceador de carga da aplicação & IP, instância & \\
+			\hline
+			Encerra fluxo / comportamento de proxy & Sim & Sim & Não & Sim \\
+			\hline
+			Listeners do protocolo & HTTP, HTTPS, gRPC & TCP, UDP, TLS & IP & TCP, SSL/TLS, HTTP, HTTPS \\
+			\hline
+			Acessível via & VIP & VIP & Entrada da tabela de rotas & \\
+			\hline
 		\end{tabular}
 	\end{table}
+	\end{tiny}
 \end{frame}
