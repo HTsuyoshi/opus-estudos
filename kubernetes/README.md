@@ -31,7 +31,6 @@ Tópicos de Estudo:
 ## Pastas
 
 A pasta `./pratical/final` contém o projeto final desenvolvido
-
 A pasta `./presentation` contém o pdf desenvolvido para explicar o projeto e a arquitetura do projeto
 
 ## Setup
